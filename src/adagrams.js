@@ -1,7 +1,6 @@
 export const drawLetters = () => {
   // Implement this method for wave 1
 };
-var veggies = carrots
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
