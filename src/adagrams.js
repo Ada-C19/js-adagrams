@@ -27,6 +27,34 @@ const letterPool = {
   Y: 2,
   Z: 1,
 };
+const scoreValues = {
+    'A': 1, 
+    'B': 3, 
+    'C': 3, 
+    'D': 2, 
+    'E': 1, 
+    'F': 4, 
+    'G': 2, 
+    'H': 4, 
+    'I': 1, 
+    'J': 8, 
+    'K': 5, 
+    'L': 1, 
+    'M': 3, 
+    'N': 1, 
+    'O': 1, 
+    'P': 3, 
+    'Q': 10, 
+    'R': 1, 
+    'S': 1, 
+    'T': 1, 
+    'U': 1, 
+    'V': 4, 
+    'W': 4, 
+    'X': 8, 
+    'Y': 4, 
+    'Z': 10
+}
 
 function generateRandomLetter() {
   const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
@@ -86,10 +114,55 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return true
 };
 
-// export const scoreWord = (word) => {
-//   // Implement this method for wave 3
-// };
+export const scoreWord = (word) => {
+  const WordUpper = word.toUpperCase();
+  const wordLength = word.length
+  let totalScore = 0
+  for (const letter of WordUpper) {
+    if (letter in scoreValues) {
+      totalScore += scoreValues[letter]
+    }
+  }
+  if (wordLength > 6) {
+    totalScore += 8
+  }
+  return totalScore
+};
 
-// export const highestScoreFrom = (words) => {
-//   // Implement this method for wave 4
-// };
+// * returns true if list1 ranks higher than list2
+const higherThan = (list1,list2) => {
+  const scoreWord1 = list1[1];
+  const scoreWord2 = list2[1];
+  if (scoreWord1 === scoreWord2) {
+    const lengthWord1 = list1[0].length;
+    const lengthWord2 = list2[0].length;
+    
+    if (lengthWord1 === 10  && lengthWord2 !== 10) {
+      return true;
+    }
+    else if (lengthWord2 === 10 && lengthWord1 !== 10) {
+      return false;
+    }
+    return lengthWord1 < lengthWord2;
+  }
+  return scoreWord1 > scoreWord2;
+}
+
+export const highestScoreFrom = (words) => {
+  let bestWord = null
+  for (const word of words) {
+    let currentWord = [word, scoreWord(word)]
+    console.log(currentWord)
+    if (bestWord === null || higherThan(currentWord, bestWord)) {
+      bestWord = currentWord
+    }
+  }
+  const correct = {
+          word: bestWord[0],
+          score: bestWord[1],
+  };
+  console.log(correct)
+  return correct
+};
+
+
