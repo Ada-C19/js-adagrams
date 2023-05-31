@@ -78,7 +78,14 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  let letter = input.toUpperCase();
+  
+  for (let char of letter) {
+    if (!lettersInHand.includes(char)){
+    return true;
+  } else (input != lettersInHand)
+    return false;
+  }
 };
 
 export const scoreWord = (word) => {
@@ -88,3 +95,26 @@ export const scoreWord = (word) => {
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
 };
+
+/*def uses_available_letters(word, letter_bank):
+word = word.upper()
+for char in word:
+    if char in letter_bank and word.count(char) == letter_bank.count(char):
+        result = True
+    else:
+        result = False
+return result /*
+
+/*def uses_available_letters(word, letter_bank):
+
+    # use upper to account for lowercase
+    word = word.upper()
+
+    # loop; if letter is not in bank or quantity is wrong, return false
+    for letter in word:
+        if letter not in letter_bank:
+            return False
+        elif word.count(letter) > letter_bank.count(letter):
+            return False
+        
+    return True*/
