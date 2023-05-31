@@ -33,8 +33,8 @@ function generateRandomLetter() {
 
   return alphabet[Math.floor(Math.random() * alphabet.length)]
 }
-
-function countOccurrences(array, element) {
+// turn into function expressions
+const countOccurrences =  function (array, element) {
   let count = 0
   for (let i = 0; i < array.length; i++){
     if (array[i] === element) {
@@ -43,10 +43,9 @@ function countOccurrences(array, element) {
   }
   return count
 }
-
+// turn into function expressions
 function checkForValues(object, valueOccurernces, letter) {
   if (object[letter] >= valueOccurernces) {
-    console.log(true)
       return true
   }
   else {
@@ -59,9 +58,8 @@ export const drawLetters = () => {
   while (handList.length < letterHand) {
       const randomLetter = generateRandomLetter();
       handList.push(randomLetter);
-    const valueInArray = countOccurrences(handList, randomLetter)
-    console.log(valueInArray)
-    const valueEnoughTimes = checkForValues(letterPool, valueInArray, randomLetter)
+      const valueInArray = countOccurrences(handList, randomLetter)   
+      const valueEnoughTimes = checkForValues(letterPool, valueInArray, randomLetter)
     
       if (valueEnoughTimes === true) { continue; }
       else {
@@ -72,9 +70,21 @@ export const drawLetters = () => {
 };
 
 
-// export const usesAvailableLetters = (input, lettersInHand) => {
-//   // Implement this method for wave 2
-// };
+export const usesAvailableLetters = (input, lettersInHand) => {
+  const upperWord = input.toUpperCase()
+  for (const letter of upperWord) {
+    if (!lettersInHand.includes(letter)) {
+      return false
+    }
+    else if (
+      countOccurrences(upperWord, letter) > countOccurrences(lettersInHand, letter)
+    ) {
+      return false
+    }
+    else { continue; }
+  }
+  return true
+};
 
 // export const scoreWord = (word) => {
 //   // Implement this method for wave 3
