@@ -46,9 +46,9 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  let word_array = Array.from(input);
+  let wordArray = Array.from(input);
   
-  for (const letter of word_array) {
+  for (const letter of wordArray) {
     let index = lettersInHand.indexOf(letter);
     if (index === -1) {
       return false;
@@ -63,7 +63,34 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  const scores = {
+    "AEIOULNRST": 1, 
+    "DG": 2, 
+    "BCMP": 3,
+    "FHVWY": 4,
+    "K": 5, 
+    "JX": 8,
+    "QZ": 10 
+  }
+  const wordUpper = word.toUpperCase()
+  const wordArray = Array.from(wordUpper);
+
+  let sum = 0;
+
+  for (const letter of wordArray) {
+    for (const item in scores) {
+      if (item.includes(letter)) {
+        sum += scores[item];
+      }
+    }
+  }
+
+  if (word.length > 6) {
+    sum += 8;
+  }
+
+  return sum;
+
 };
 
 export const highestScoreFrom = (words) => {
