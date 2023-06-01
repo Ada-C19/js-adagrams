@@ -3,7 +3,7 @@ import {
   usesAvailableLetters,
   scoreWord,
   highestScoreFrom,
-} from "adagrams";
+} from 'adagrams';
 
 const LETTER_POOL = {
   A: 9,
@@ -34,7 +34,7 @@ const LETTER_POOL = {
   Z: 1,
 };
 
-describe("Adagrams", () => {
+describe('Adagrams', () => {
   describe("drawLetters", () => {
     it("draws ten letters from the letter pool", () => {
       const drawn = drawLetters();
