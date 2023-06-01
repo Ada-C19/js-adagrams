@@ -64,17 +64,44 @@ const letterScores = {A:1, B:3, C:3, D:2, E:1, F:4, G:2, H:4, I:1, J:8, K:5,
 export const scoreWord = (word) => {
   // Implement this method for wave 3
   let score = 0;
-  const WORD = word.toUpperCase() 
+  const WORD = word.toUpperCase();
   for (let letter of WORD){
     score += letterScores[letter];
   }
 
   if (word.length>=7){
-    score +=8
+    score +=8;
   }
-  return score 
+  return score ;
 };
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
-};
+  let winningWord = {word:"pp" , score:0};
+  let score = 0;
+  let len = 0;
+  for (let word of words){
+    // console.log(word.length)
+    // console.log(winningWord);
+    score = scoreWord(word);
+    len = word.length
+    if (score >winningWord.score){
+      winningWord.score= score;
+      winningWord.word = word;
+      if (len===10){
+        return winningWord
+      }
+    }else if (score===winningWord.score){
+      console.log(word.length, word, "winning", winningWord.word.length, winningWord.word)
+      if (len===10){
+        winningWord.score= score;
+        winningWord.word = word;
+        return winningWord
+      }else if (len<winningWord.word.length){
+        winningWord.score= score;
+        winningWord.word = word;
+      }
+    }
+  }
+  return winningWord;
+}
