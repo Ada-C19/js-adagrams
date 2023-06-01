@@ -27,13 +27,12 @@ const LETTER_POOL = {
   Z: 1,
 };
 
-let newList = []
-for(let key in LETTER_POOL) {
-    newList = newList.concat(Array(LETTER_POOL[key]).fill(key))
-}
-
 
 export const drawLetters = () => {
+  let newList = []
+  for(let key in LETTER_POOL) {
+    newList = newList.concat(Array(LETTER_POOL[key]).fill(key))
+  }
   let result = []
   for (let i = 0; i<10; i++){
     let randomIndex = Math.floor(Math.random()*newList.length);
@@ -44,7 +43,17 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  let correctLetters = true;
+  for(let char of input){
+    let charIndex = lettersInHand.indexOf(char) ;
+    if(charIndex !== -1){
+      lettersInHand.splice(charIndex, 1)
+    }
+    else{
+      correctLetters = false;
+  }
+  }
+  return correctLetters;
 };
 
 export const scoreWord = (word) => {
