@@ -75,9 +75,23 @@ const letterPool = {
   return hand;
 };
 
-export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
-};
+
+// Wave 02
+  export const usesAvailableLetters = (input, lettersInHand) => {
+    const lettersInHandCopy = [...lettersInHand];
+  
+    for (let letter of input.toUpperCase()) {
+      if (lettersInHandCopy.includes(letter)) {
+        const letterIndex = lettersInHandCopy.indexOf(letter);
+        lettersInHandCopy.splice(letterIndex, 1);
+      } 
+      else {
+        return false;
+      }
+    }
+    return true;
+  };
+
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
