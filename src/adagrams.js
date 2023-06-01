@@ -102,9 +102,53 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 };
 
-// export const scoreWord = (word) => {
-  
-// };
+export const scoreWord = (word) => {
+  let pointsTotal = 0;
+  const wordUpper = word.toUpperCase();
+  const SCORE_CHART = {
+    "A": 1,
+    "E": 1, 
+    "I": 1,
+    "O": 1,
+    "U": 1,
+    "L": 1,
+    "N": 1,
+    "R": 1,
+    "S": 1,
+    "T": 1,
+    "D": 2,
+    "G": 2,
+    "B": 3,
+    "C": 3,
+    "M": 3,
+    "P": 3,
+    "F": 4,
+    "H": 4,
+    "V": 4,
+    "W": 4,
+    "Y": 4,
+    "K": 5,
+    "J": 8,
+    "X": 8,
+    "Q": 10,
+    "Z": 10,
+}
+  // Check if the string is empty
+  if (word.trim().length === 0) {
+    return 0;
+  }
+
+  // Add up the points by looking up each letter in word in the SCORE_CHART dict
+  for (const letter of wordUpper) {
+    pointsTotal += SCORE_CHART[letter];
+  }
+
+  if (wordUpper.length > 6) {
+    pointsTotal += 8;
+  }
+
+  return pointsTotal;
+};
 
 // export const highestScoreFrom = (words) => {
 //   // Implement this method for wave 4
@@ -112,8 +156,9 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 // console.log(drawLetters());
 // console.log(countLetterFrequency("DOG"));
-console.log(usesAvailableLetters("DIAE", [
-  'A', 'A', 'A', 'A',
-  'D', 'I', 'A', 'I',
-  'E', 'I'
-] ));
+// console.log(usesAvailableLetters("DIAE", [
+//   'A', 'A', 'A', 'A',
+//   'D', 'I', 'A', 'I',
+//   'E', 'I'
+// ] ));
+console.log(scoreWord("dog"))
