@@ -78,16 +78,28 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  let letter = input.toUpperCase();
+  input = input.toUpperCase();
   
-  for (let char of letter) {
-    if (!lettersInHand.includes(char)){
-    return true;
-  } else (input != lettersInHand)
-    return false;
+  for (const char of input) {
+    if (letterCount(lettersInHand, char) <
+        letterCount(input, char)) {
+          return false;
+      }
   }
+  return true;
 };
 
+const letterCount = (lettersInHand, letter) => {
+  let count = 0; 
+
+  for (const l of lettersInHand) {
+    if (l === letter) {
+      count += 1;
+    }
+  }
+  return count;
+};
+//for of loop for counting occurences in word and hand using helper function
 export const scoreWord = (word) => {
   // Implement this method for wave 3
 };
