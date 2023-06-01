@@ -1,22 +1,27 @@
-const drawLetters = () => {
+export const drawLetters = () => {
 
   // Generate an array of all the letters
   let letters = generateLetters();
 
   // Shuffle the letters
   letters = shuffleLetters(letters);
-  
-  // Get the last 10 letters in the shuffled array
-  
-  
-  
+
+  // The last 10 letters in the shuffled array will be the hand
+  const hand = [];
+  const len = letters.length
+
+  for (let i = len - 1; i >= len - 10; i--) {
+    hand.push(letters[i]);
+  }
+
+  return hand;
 };
 
 // Helper functions:
 
 const generateLetters = () => {
   // Add all letters however many times they should appear to a new array
-  
+
   const LETTER_POOL = {
     'A': 9, 
     'B': 2, 
