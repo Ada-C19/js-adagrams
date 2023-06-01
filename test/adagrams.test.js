@@ -1,9 +1,13 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable jest/expect-expect */
+/* eslint-disable jest/no-disabled-tests */
+/* eslint-disable quotes */
 import {
   drawLetters,
   usesAvailableLetters,
   scoreWord,
   highestScoreFrom,
-} from "adagrams";
+} from 'adagrams';
 
 const LETTER_POOL = {
   A: 9,
@@ -34,15 +38,15 @@ const LETTER_POOL = {
   Z: 1,
 };
 
-describe("Adagrams", () => {
-  describe("drawLetters", () => {
-    it("draws ten letters from the letter pool", () => {
+describe('Adagrams', () => {
+  describe('drawLetters', () => {
+    it('draws ten letters from the letter pool', () => {
       const drawn = drawLetters();
 
       expect(drawn).toHaveLength(10);
     });
 
-    it("returns an array, and each item is a single-letter string", () => {
+    it('returns an array, and each item is a single-letter string', () => {
       const drawn = drawLetters();
 
       expect(Array.isArray(drawn)).toBe(true);
@@ -51,27 +55,27 @@ describe("Adagrams", () => {
       });
     });
 
-    it("does not draw a letter too many times", () => {
+    it('does not draw a letter too many times', () => {
       for (let i = 0; i < 1000; i++) {
         const drawn = drawLetters();
-        const letter_freq = {};
+        const letterFreq = {};
         for (let letter of drawn) {
-          if (letter in letter_freq) {
-            letter_freq[letter] += 1;
+          if (letter in letterFreq) {
+            letterFreq[letter] += 1;
           } else {
-            letter_freq[letter] = 1;
+            letterFreq[letter] = 1;
           }
         }
 
         for (let letter of drawn) {
-          expect(letter_freq[letter]).toBeLessThanOrEqual(LETTER_POOL[letter]);
+          expect(letterFreq[letter]).toBeLessThanOrEqual(LETTER_POOL[letter]);
         }
       }
     });
   });
 
-  describe("usesAvailableLetters", () => {
-    it("returns true if the submitted letters are valid against the drawn letters", () => {
+  describe('usesAvailableLetters', () => {
+    it('returns true if the submitted letters are valid against the drawn letters', () => {
       const drawn = ["D", "O", "G", "X", "X", "X", "X", "X", "X", "X"];
       const word = "DOG";
 
