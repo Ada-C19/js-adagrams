@@ -40,6 +40,19 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 export const scoreWord = (word) => {
   // Implement this method for wave 3
+  word = word.toUpperCase();
+  let score = 0;
+
+  for (let letter of word) {
+    let letterValue = VALUE_OF_LETTERS[letter]
+    score += letterValue;
+  }
+  if (word.length > 6 && word.length < 11) {
+    score += 8;
+  }
+  return score;
+};
+
 
 
 export const highestScoreFrom = (words) => {
