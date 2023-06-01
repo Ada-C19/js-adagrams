@@ -50,28 +50,23 @@ return hand;
 };
 
 
+export const usesAvailableLetters = (input, lettersInHand) => {
+  const word = input.toUpperCase();
+  const letterCount = [];
 
+  for (const letter of word) {
+    letterCount.push(letter);
 
+    if (!lettersInHand.includes(letter)) {
+      return false;
+      
+      } else if (letterCount.filter(y => y === letter).length > (lettersInHand.filter(x => x === letter).length)) {
+        return false;
+      }
+}
+return true;
+};
 
-
-
-
-
-// export const usesAvailableLetters = (input, lettersInHand) => {
-//   const word = input.toUpperCase();
-
-//   for (const letter of word) {
-
-//     if (!lettersInHand.includes(letter)) {
-//       return false;
-//   //  } else if (lettersInHand === text.split("")) {}
-
-// }
-// }
-// return true;
-// };
-
-    // } else if (word.match(/{letter}/).length > (lettersInHand.filter(x => x === letter).length)) {
     //   return false;
 
 
