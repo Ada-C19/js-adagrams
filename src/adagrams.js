@@ -1,24 +1,4 @@
-export const drawLetters = () => {
-
-  // Generate an array of all the letters
-  let letters = generateLetters();
-
-  // Shuffle the letters
-  letters = shuffleLetters(letters);
-
-  // The last 10 letters in the shuffled array will be the hand
-  const hand = [];
-  const len = letters.length
-
-  for (let i = len - 1; i >= len - 10; i--) {
-    hand.push(letters[i]);
-  }
-
-  return hand;
-};
-
 // Helper functions:
-
 const generateLetters = () => {
   // Add all letters however many times they should appear to a new array
 
@@ -66,9 +46,28 @@ const shuffleLetters = (letters) => {
   return letters.sort( () => Math.random()-0.5);
 }
 
-// export const usesAvailableLetters = (input, lettersInHand) => {
-//   // Implement this method for wave 2
-// };
+export const drawLetters = () => {
+
+  // Generate an array of all the letters
+  let letters = generateLetters();
+
+  // Shuffle the letters
+  letters = shuffleLetters(letters);
+
+  // The last 10 letters in the shuffled array will be the hand
+  const hand = [];
+  const len = letters.length
+
+  for (let i = len - 1; i >= len - 10; i--) {
+    hand.push(letters[i]);
+  }
+
+  return hand;
+};
+
+export const usesAvailableLetters = (input, lettersInHand) => {
+
+};
 
 // export const scoreWord = (word) => {
 //   // Implement this method for wave 3
@@ -78,4 +77,4 @@ const shuffleLetters = (letters) => {
 //   // Implement this method for wave 4
 // };
 
-console.log(drawLetters());
+// console.log(drawLetters());
