@@ -46,7 +46,7 @@ const shuffleLetters = (letters) => {
   return letters.sort( () => Math.random()-0.5);
 }
 
-export const drawLetters = () => {
+const drawLetters = () => {
 
   // Generate an array of all the letters
   let letters = generateLetters();
@@ -65,9 +65,22 @@ export const drawLetters = () => {
   return hand;
 };
 
-export const usesAvailableLetters = (input, lettersInHand) => {
+const countLetterFrequency = (sequence) => {
+  const letterFrequency = {};
 
+  for (const letter of sequence) {
+    if (letter in letterFrequency) {
+      letterFrequency[letter] += 1;
+    } else {
+      letterFrequency[letter] = 1;
+    }
+  }
+  return letterFrequency;
 };
+
+// export const usesAvailableLetters = (input, lettersInHand) => {
+
+// };
 
 // export const scoreWord = (word) => {
 //   // Implement this method for wave 3
@@ -78,3 +91,4 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 // };
 
 // console.log(drawLetters());
+console.log(countLetterFrequency("DOG"));
