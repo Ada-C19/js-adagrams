@@ -75,7 +75,6 @@ const letterPool = {
   return hand;
 };
 
-
 // Wave 02
   export const usesAvailableLetters = (input, lettersInHand) => {
     const lettersInHandCopy = [...lettersInHand];
@@ -94,8 +93,24 @@ const letterPool = {
 
 
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  let score = 0;
+  for (let letter of word.toUpperCase()) {
+    score += letterScore[letter];
+  }
+  if (word.length >=7 && word.length <=10) {
+    score += 8;
+  }
+  return score;
 };
+
+
+// score = 0
+// for letter in word.upper():
+//     score += letter_score[letter]
+
+// if len(word) >= 7 and len(word) <= 10:
+//     return score + 8
+// return score
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
