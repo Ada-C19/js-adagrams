@@ -64,11 +64,12 @@ return hand;
 
 //     if (!lettersInHand.includes(letter)) {
 //       return false;
-//    } else if (lettersInHand === text.split("")) {}
-//    return true;
-// };
-// }
+//   //  } else if (lettersInHand === text.split("")) {}
 
+// }
+// }
+// return true;
+// };
 
     // } else if (word.match(/{letter}/).length > (lettersInHand.filter(x => x === letter).length)) {
     //   return false;
@@ -116,7 +117,6 @@ for (const letter of word) {
     score += lettersAndScores[letter]
   }
 
-
 if (word.length >= 7) {
   score += 8;
   }
@@ -125,5 +125,25 @@ if (word.length >= 7) {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  let winningScore = 0;
+  let winningWord = '';
+
+  for (const word of words) {
+    const score = scoreWord(word);
+    if (score > winningScore) {
+      winningScore = score;
+      winningWord = word;
+    } else if (winningScore === score) {
+      let prevWordLen = winningWord.length;
+      let currentWordLen = word.length;
+        if (currentWordLen === 10 && prevWordLen < 10) {
+          winningWord = word;
+        } else if (prevWordLen != 10 && currentWordLen < prevWordLen) {
+          winningWord = word;
+        }
+    } 
+  } 
+  const resultDict = {"score": winningScore, "word": winningWord};
+  return resultDict;
+
 };
