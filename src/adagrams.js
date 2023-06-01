@@ -46,7 +46,7 @@ const shuffleLetters = (letters) => {
   return letters.sort( () => Math.random()-0.5);
 }
 
-const drawLetters = () => {
+export const drawLetters = () => {
 
   // Generate an array of all the letters
   let letters = generateLetters();
@@ -78,9 +78,27 @@ const countLetterFrequency = (sequence) => {
   return letterFrequency;
 };
 
-// export const usesAvailableLetters = (input, lettersInHand) => {
+export const usesAvailableLetters = (input, lettersInHand) => {
+  // Iterate through the letters in the input to check if they're in lettersInHand
+  for (const letter of input) {
+    if (!lettersInHand.includes(letter)) {
+      return false;
+    }
+  }
 
-// };
+  // Check how many times a letter occurs in the input and lettersInHand
+  const frequencyWord = countLetterFrequency(input);
+  const frequencyHand = countLetterFrequency(lettersInHand);
+
+  // Compare the word frequency in the input and lettersInHand
+  for (const letter of input) {
+    if (frequencyWord[letter] > frequencyHand[letter]) {
+      return false;
+    }
+  }
+  return true;
+
+};
 
 // export const scoreWord = (word) => {
 //   // Implement this method for wave 3
@@ -91,4 +109,9 @@ const countLetterFrequency = (sequence) => {
 // };
 
 // console.log(drawLetters());
-console.log(countLetterFrequency("DOG"));
+// console.log(countLetterFrequency("DOG"));
+console.log(usesAvailableLetters("DIAE", [
+  'A', 'A', 'A', 'A',
+  'D', 'I', 'A', 'I',
+  'E', 'I'
+] ));
