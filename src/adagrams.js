@@ -24,6 +24,23 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
+  // Ensure function is case insensitive
+  const word = input.toUpperCase()
+  
+  // Loop through each char in word to check presence in hand
+  for (const char of word) {
+    if (! lettersInHand.includes(char)) {
+      return false;
+    }
+    // Update hand to reflect available letters remaining
+    for (const idx in lettersInHand) {
+      if (lettersInHand[idx] === char) {
+        lettersInHand.splice(idx, 1);
+        break;
+      }
+    }
+  }
+  return true;
 };
 
 export const scoreWord = (word) => {
