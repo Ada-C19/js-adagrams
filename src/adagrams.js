@@ -1,3 +1,4 @@
+import { LETTER_POOL, VALUE_OF_LETTERS } from "./gameConstants";
 export const drawLetters = () => {
   // Implement this method for wave 1
   const poolOfLetters = {
@@ -8,7 +9,7 @@ export const drawLetters = () => {
   };
 
   const playerLetters = [];
-  const keys = Object.keys(poolOfLetters);
+  const keys = Object.keys(LETTER_POOL);
   const keysLength = keys.length;
 
   while (playerLetters.length < 10) {
@@ -25,12 +26,21 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
+  const inputLetters = input.toUpperCase().split('');
+  for (let letter of inputLetters) {
+    if (!lettersInHand.includes(letter)) {
+      return false;
+    }
+
+    lettersInHand.splice(lettersInHand.indexOf(letter), 1);
+  }
+
+  return true;
 
 };
 export const scoreWord = (word) => {
   // Implement this method for wave 3
 
-};
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
