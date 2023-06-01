@@ -74,12 +74,78 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
+  const handHash = {};
+  let hashInput = {};
+  let valid = []
+
+  for (const letter of lettersInHand){handHash[letter] = handHash[letter] ? handHash[letter] + 1 : 1;
+  }
+
+  for (const letter of input){
+    if (letter in handHash){
+    hashInput[letter] = hashInput[letter]? hashInput[letter] + 1 : 1;
+    }if (hashInput[letter] <= handHash[letter]){
+      valid.push(letter)
+      }
+  }  
+  if  (valid.length == input.length){
+    return true;
+  }else{
+    return false;
+  }
+
+}; 
+
+const wordInfo = (word) => {
+  let wordInfoDict = {}
+  if (word.length == 0){
+    return 0;
+  }
+  const input = word.toUpperCase()
+  let wordHash = {};
+  let counter = word.length > 6 ? 8 : 0;
+
+  for (const letter of input){
+
+    wordHash[letter] = wordHash[letter]? (wordHash[letter] + letterScore[letter])  : letterScore[letter];
+  }
+  for (const key in wordHash) {
+    counter += wordHash[key];
+  }wordInfoDict['word'] = word;
+  wordInfoDict['score'] = counter; 
+  return wordInfoDict; 
+
 };
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
+  if (word.length == 0){
+    return 0;
+  }
+  let results = wordInfo(word); 
+  return results['score']; 
 };
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  let winningScore = {}
+  let allInfo = []
+  let scores = []
+  let allBest = [] 
+  for (const word of words){
+    if(word.length == 10){
+      return wordInfo(word);
+    }
+      let amnt = scoreWord(word);
+      scores.push(amnt)
+    }
+
+    const winner = Math.max(...scores);
+    const word_sort = words.sort((a,b) => a.length - b.length);
+
+    for (const word of word_sort){
+      let word_dict = wordInfo(word); 
+      if (word_dict.score == winner){
+        allBest.push(word_dict)};
+    } return allBest[0]; 
 };
