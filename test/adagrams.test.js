@@ -94,6 +94,22 @@ describe("Adagrams", () => {
       const isValid = usesAvailableLetters(word, drawn);
       expect(isValid).toBe(false);
     });
+
+    it("returns false when word length exceeds number of drawn letters", () => {
+      const drawn = ["B", "E", "R", "Y"];
+      const word = "BERRY";
+
+      const isValid = usesAvailableLetters(word, drawn);
+      expect(isValid).toBe(false);
+    });
+
+    it("returns true with lowercase letters in word", () => {
+      const drawn = ["X", "X", "X", "X", "X", "X", "X", "D", "O", "G"];
+      const word = "dogx";
+
+      const isValid = usesAvailableLetters(word, drawn);
+      expect(isValid).toBe(true);
+    });
   });
 
   describe("scoreWord", () => {
