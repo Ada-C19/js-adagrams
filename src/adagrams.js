@@ -134,7 +134,7 @@ export const scoreWord = (word) => {
     "Z": 10,
 }
   // Check if the string is empty
-  if (word.trim().length === 0) {
+  if (wordUpper.trim().length === 0) {
     return 0;
   }
 
@@ -150,15 +150,60 @@ export const scoreWord = (word) => {
   return pointsTotal;
 };
 
-// export const highestScoreFrom = (words) => {
-//   // Implement this method for wave 4
-// };
+export const highestScoreFrom = (words) => {
+  const wordMap = {};
 
-// console.log(drawLetters());
-// console.log(countLetterFrequency("DOG"));
-// console.log(usesAvailableLetters("DIAE", [
-//   'A', 'A', 'A', 'A',
-//   'D', 'I', 'A', 'I',
-//   'E', 'I'
-// ] ));
-console.log(scoreWord("dog"))
+  for (const word of words) {
+    // Check if word isn't in the wordMap already, add its length and score to the map
+    if (!(word in wordMap)) {
+      wordMap[word] = [word.length, scoreWord(word)]
+    }
+  }
+
+  // Get an array of arrays with the lenghts and scores of each word
+  const lenScores = Object.values(wordMap);
+  const scores = [];
+
+  // Get just the scores and add them to the scores array
+  for (let i = 0; i < lenScores.length; i++) {
+    scores.push(lenScores[i][1]);
+  }
+
+  // Find the highest score 
+  const highestScore = Math.max(...scores);
+
+  // Find the lengths of words with the the highest score 
+  const lengthsWithHighestScores = [];
+
+  for (const lenScore of lenScores) {
+    if (lenScore[1] === highestScore) {
+      lengthsWithHighestScores.push(lenScore[0]);
+    }
+  }
+
+  // Find the shortest word length with the highest score
+  const shortestHighest = Math.min(...lengthsWithHighestScores);
+  const winner = {
+    'score': null,
+    'word': null,
+  };
+
+  for (const word in wordMap) {
+    const lenScore = wordMap[word];
+    const length = lenScore[0];
+    const score = lenScore[1];
+
+    if (score === highestScore && length === 10) {
+      winner['score'] = score;
+      winner['word'] = word;
+      return winner;
+    }
+
+    if (score === highestScore && length === shortestHighest) {
+      winner['score'] = highestScore;
+      winner['word'] = word;
+    }
+  }
+
+  return winner;
+};
