@@ -93,7 +93,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   const frequencyHand = countLetterFrequency(lettersInHand);
 
   // Compare the word frequency in the input and lettersInHand
-  for (const letter of input) {
+  for (const letter of input.toUpperCase()) {
     if (frequencyWord[letter] > frequencyHand[letter]) {
       return false;
     }
@@ -103,7 +103,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 // export const scoreWord = (word) => {
-//   // Implement this method for wave 3
+  
 // };
 
 // export const highestScoreFrom = (words) => {
