@@ -1,5 +1,5 @@
 export const drawLetters = () => {
-  const LETTER_POOL = {
+  const LETTERPOOL = {
     'A': 9, 
     'B': 2, 
     'C': 2, 
@@ -26,9 +26,9 @@ export const drawLetters = () => {
     'X': 1, 
     'Y': 2, 
     'Z': 1
-}
+};
 
-let pool = {...LETTER_POOL};
+let pool = {...LETTERPOOL};
 let hand = [];
 
 for (let i = 0; i < 10; i++) {
@@ -57,12 +57,21 @@ return hand;
 
 
 
-export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
-};
+// export const usesAvailableLetters = (input, lettersInHand) => {
+//   const word = input.toUpperCase();
+
+//   for (const letter of word) {
+
+//     if (!lettersInHand.includes(letter)) {
+//       return false;
+//    } else if (lettersInHand === text.split("")) {}
+//    return true;
+// };
+// }
 
 
-
+    // } else if (word.match(/{letter}/).length > (lettersInHand.filter(x => x === letter).length)) {
+    //   return false;
 
 
 
@@ -71,7 +80,48 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  const lettersAndScores = {
+    'A': 1, 
+    'B': 3, 
+    'C': 3, 
+    'D': 2, 
+    'E': 1, 
+    'F': 4, 
+    'G': 2, 
+    'H': 4, 
+    'I': 1, 
+    'J': 8, 
+    'K': 5, 
+    'L': 1, 
+    'M': 3, 
+    'N': 1, 
+    'O': 1, 
+    'P': 3, 
+    'Q': 10, 
+    'R': 1, 
+    'S': 1, 
+    'T': 1, 
+    'U': 1, 
+    'V': 4, 
+    'W': 4, 
+    'X': 8, 
+    'Y': 4, 
+    'Z': 10
+};
+
+word = word.toUpperCase();
+let score = 0;
+
+for (const letter of word) {
+    score += lettersAndScores[letter]
+  }
+
+
+if (word.length >= 7) {
+  score += 8;
+  }
+
+  return score
 };
 
 export const highestScoreFrom = (words) => {
