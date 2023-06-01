@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable jest/expect-expect */
-/* eslint-disable jest/no-disabled-tests */
 /* eslint-disable quotes */
 import {
   drawLetters,

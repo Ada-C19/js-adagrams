@@ -35,12 +35,10 @@ export const drawLetters = () => {
   while (tenLetters.length < 10) {
     const keys = Object.keys(LETTER_POOL)
     let randomLetter = keys[Math.floor(Math.random() * keys.length)];
-    tenLetters.push(randomLetter); 
-    return tenLetters 
-  }
-    
-    
-  }
+    tenLetters.push(randomLetter);  
+    }
+  return tenLetters;
+}
 
 
 
