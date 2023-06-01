@@ -46,6 +46,20 @@ const shuffleLetters = (letters) => {
   return letters.sort( () => Math.random()-0.5);
 }
 
+const countLetterFrequency = (sequence) => {
+  const letterFrequency = {};
+
+  for (const letter of sequence) {
+    if (letter in letterFrequency) {
+      letterFrequency[letter] += 1;
+    } else {
+      letterFrequency[letter] = 1;
+    }
+  }
+  return letterFrequency;
+};
+
+
 export const drawLetters = () => {
 
   // Generate an array of all the letters
@@ -65,18 +79,6 @@ export const drawLetters = () => {
   return hand;
 };
 
-const countLetterFrequency = (sequence) => {
-  const letterFrequency = {};
-
-  for (const letter of sequence) {
-    if (letter in letterFrequency) {
-      letterFrequency[letter] += 1;
-    } else {
-      letterFrequency[letter] = 1;
-    }
-  }
-  return letterFrequency;
-};
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Iterate through the letters in the input to check if they're in lettersInHand
