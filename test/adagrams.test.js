@@ -134,22 +134,24 @@ describe('Adagrams', () => {
     });
   });
 
-  describe.skip("highestScoreFrom", () => {
-    it("returns a hash that contains the word and score of best word in an array", () => {
-      const words = ["X", "XX", "XXX", "XXXX"];
-      const correct = { word: "XXXX", score: scoreWord("XXXX") };
+  describe('highestScoreFrom', () => {
+    it('returns a hash that contains the word and score of best word in an array', () => {
+      const words = ['X', 'XX', 'XXX', 'XXXX'];
+      const correct = { word: 'XXXX', score: scoreWord('XXXX') };
 
       expect(highestScoreFrom(words)).toEqual(correct);
     });
 
-    it("accurately finds best scoring word even if not sorted", () => {
-      const words = ["XXX", "XXXX", "X", "XX"];
-      const correct = { word: "XXXX", score: scoreWord("XXXX") };
+    it('accurately finds best scoring word even if not sorted', () => {
+      const words = ['XXX', 'XXXX', 'X', 'XX'];
+      const correct = { word: 'XXXX', score: scoreWord('XXXX') };
 
-      throw "Complete test by adding an assertion";
+      //throw 'Complete test by adding an assertion';
+      const highestScoreResult = highestScoreFrom(words);
+      expect(highestScoreResult).toEqual(correct);
     });
 
-    describe("in case of tied score", () => {
+    describe('in case of tied score', () => {
       const expectTie = (words) => {
         const scores = words.map((word) => scoreWord(word));
         const highScore = scores.reduce((h, s) => (h < s ? s : h), 0);
@@ -159,11 +161,11 @@ describe('Adagrams', () => {
         expect(tiedWords.length).toBeGreaterThan(1);
       };
 
-      it("selects the word with 10 letters", () => {
-        const words = ["AAAAAAAAAA", "BBBBBB"];
+      it('selects the word with 10 letters', () => {
+        const words = ['AAAAAAAAAA', 'BBBBBB'];
         const correct = {
-          word: "AAAAAAAAAA",
-          score: scoreWord("AAAAAAAAAA"),
+          word: 'AAAAAAAAAA',
+          score: scoreWord('AAAAAAAAAA'),
         };
         expectTie(words);
 
@@ -171,24 +173,24 @@ describe('Adagrams', () => {
         expect(highestScoreFrom(words.reverse())).toEqual(correct);
       });
 
-      it("selects the word with fewer letters when neither are 10 letters", () => {
-        const words = ["MMMM", "WWW"];
-        const correct = { word: "WWW", score: scoreWord("WWW") };
+      it('selects the word with fewer letters when neither are 10 letters', () => {
+        const words = ['MMMM', 'WWW'];
+        const correct = { word: 'WWW', score: scoreWord('WWW') };
         expectTie(words);
 
         expect(highestScoreFrom(words)).toEqual(correct);
         expect(highestScoreFrom(words.reverse())).toEqual(correct);
       });
 
-      it("selects the first word when both have same length", () => {
-        const words = ["AAAAAAAAAA", "EEEEEEEEEE"];
+      it('selects the first word when both have same length', () => {
+        const words = ['AAAAAAAAAA', 'EEEEEEEEEE'];
         const first = {
-          word: "AAAAAAAAAA",
-          score: scoreWord("AAAAAAAAAA"),
+          word: 'AAAAAAAAAA',
+          score: scoreWord('AAAAAAAAAA'),
         };
         const second = {
-          word: "EEEEEEEEEE",
-          score: scoreWord("EEEEEEEEEE"),
+          word: 'EEEEEEEEEE',
+          score: scoreWord('EEEEEEEEEE'),
         };
         expectTie(words);
 
