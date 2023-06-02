@@ -70,26 +70,26 @@ describe('Adagrams', () => {
     });
   });
 
-  describe("usesAvailableLetters", () => {
-    it("returns true if the submitted letters are valid against the drawn letters", () => {
-      const drawn = ["D", "O", "G", "X", "X", "X", "X", "X", "X", "X"];
-      const word = "DOG";
+  describe('usesAvailableLetters"', () => {
+    it('returns true if the submitted letters are valid against the drawn letters', () => {
+      const drawn = ['D', 'O', 'G', 'X', 'X', 'X', 'X', 'X', 'X', 'X'];
+      const word = 'DOG';
 
       const isValid = usesAvailableLetters(word, drawn);
       expect(isValid).toBe(true);
     });
 
-    it("returns false when word contains letters not in the drawn letters", () => {
-      const drawn = ["D", "O", "X", "X", "X", "X", "X", "X", "X", "X"];
-      const word = "DOG";
+    it('returns false when word contains letters not in the drawn letters', () => {
+      const drawn = ['D', 'O', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'];
+      const word = 'DOG';
 
       const isValid = usesAvailableLetters(word, drawn);
       expect(isValid).toBe(false);
     });
 
-    it("returns false when word contains repeated letters more than in the drawn letters", () => {
-      const drawn = ["D", "O", "G", "X", "X", "X", "X", "X", "X", "X"];
-      const word = "GOOD";
+    it('returns false when word contains repeated letters more than in the drawn letters', () => {
+      const drawn = ['D', 'O', 'G', 'X', 'X', 'X', 'X', 'X', 'X', 'X'];
+      const word = 'GOOD';
 
       const isValid = usesAvailableLetters(word, drawn);
       expect(isValid).toBe(false);
