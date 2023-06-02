@@ -60,7 +60,6 @@ const createMap = (x) => {
 };
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
-  //creating a frequency map helpter fn
   let word = input.toUpperCase();
   let wordFreq = createMap(input);
   let lettersInHandFreq = createMap(lettersInHand);
