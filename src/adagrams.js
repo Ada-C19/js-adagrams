@@ -92,7 +92,7 @@ export const scoreWord = (word) => {
   
   for (let letter of word.toUpperCase()) {
     for (let [k,v] of Object.entries(scoreChart)) {
-      if (letter == k) {
+      if (letter === k) {
         score += v;
       }
     }
@@ -106,5 +106,55 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  const result = { word: '', score: 0 };
+  const wordsAndScores = {};
+  let highestScore = 0;
+  let ties = 0;
+
+  for (let word of words) {
+    wordsAndScores[word] = scoreWord(word);
+  }
+  
+  for (let [k,v] of Object.entries(wordsAndScores)) {
+    if (v > highestScore) {
+      highestScore = v;
+    } else if (v === highestScore) {
+      ties++;
+    }
+  }
+
+  if (ties === 0) {
+    for (let [k,v] of Object.entries(wordsAndScores)) {
+      if (v === highestScore) {
+        result['word'] = k;
+        result['score'] = v;
+        return result;
+      }
+    }
+  } else {
+    const tiedWords = [];
+    for (let [k,v] of Object.entries(wordsAndScores)) {
+      tiedWords.push(k);
+    }
+    for (let tiedWord of tiedWords) {
+      if (tiedWord.length === 10) {
+        result['word'] = tiedWord;
+        result['score'] = wordsAndScores[tiedWord];
+        return result;
+      }
+    }
+
+    let shortestLength = 10;
+    let shortestWord = '';
+
+    for (let i = 0; i < tiedWords.length; i++) {
+      if (tiedWords[i].length < shortestLength) {
+        shortestLength = tiedWords[i].length;
+        shortestWord = tiedWords[i];
+      }
+    }
+    result['word'] = shortestWord;
+    result['score'] = wordsAndScores[shortestWord];
+    return result;
+  }
 };
