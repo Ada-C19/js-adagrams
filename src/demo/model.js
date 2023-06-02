@@ -53,7 +53,7 @@ class Model {
 
     // Initialize player history for this round
     this.config.players.forEach((player) => {
-      this.plays[player][this.round - 1] = [];
+      this.plays[player][this.round-1] = [];
     });
 
     return { gameOver, winner: null };
