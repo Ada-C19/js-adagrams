@@ -57,23 +57,27 @@ export const highestScoreFrom = (words) => {
     let score = scoreWord(word);
     scoreList.push(score);
   }
-  const higestScore = Math.max(scoreList);
+  const higestScore = Math.max(...scoreList);
   let highestWord;
+  let tenWordWin = false;
   for(let word of words){
     if(scoreWord(word)=== higestScore && word.length === 10){
         highestWord = word;
+        tenWordWin = true;
+        break;
     }
-    else{
-      let sortedWords = words.sort((x,y) => x.length-y.length)
+  }
+  if(!tenWordWin){
+    let sortedWords = words.sort((x,y) => x.length-y.length);
       for (let word of sortedWords){
         if(scoreWord(word)=== higestScore){
           highestWord = word;
           break;
         }
       }
-    }
-  }
+  } 
   let maxWordObj = {}
-  maxWordObj[highestWord] = higestScore;
+  maxWordObj['word'] = highestWord;
+  maxWordObj['score'] = higestScore
   return maxWordObj;
 };
