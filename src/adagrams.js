@@ -61,7 +61,6 @@ function generateRandomLetter() {
 
   return alphabet[Math.floor(Math.random() * alphabet.length)]
 }
-// turn into function expressions
 const countOccurrences =  function (array, element) {
   let count = 0
   for (let i = 0; i < array.length; i++){
@@ -152,7 +151,6 @@ export const highestScoreFrom = (words) => {
   let bestWord = null
   for (const word of words) {
     let currentWord = [word, scoreWord(word)]
-    console.log(currentWord)
     if (bestWord === null || higherThan(currentWord, bestWord)) {
       bestWord = currentWord
     }
@@ -161,8 +159,10 @@ export const highestScoreFrom = (words) => {
           word: bestWord[0],
           score: bestWord[1],
   };
-  console.log(correct)
   return correct
 };
 
 
+const doubleNumber = num => num + num;
+const doubleNumber1 = (num) => num + num;
+const doubleNumber2 = (num) => { return num + num };
