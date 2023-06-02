@@ -42,23 +42,76 @@ export const drawLetters = () => {
   return handOfCards;
 };
 
-// export const usesAvailableLetters = (input, lettersInHand) => {
-//   // Implement this method for wave 2
-//   for (letter of lettersInHand) {
-//     if (!(letter in input)) {
-//       // return false;
-//       console.log('hello');
-//     } else if (letter in lettersInHand) {
-//       let index = lettersInHand.indexOf(letter);
-//       lettersInHand.splice(index, 1);
-//     }
-//   }
-// };
+export const usesAvailableLetters = (input, lettersInHand) => {
+  //   // Implement this method for wave 2
+  for (const letter of input) {
+    const upperLetter = letter.toUpperCase();
+
+    if (!(lettersInHand.includes(upperLetter))) {
+      return false;
+
+    }else {
+      let index = lettersInHand.indexOf(upperLetter);
+
+      lettersInHand.splice(index, 1);
+      // console.log(`yes in word: ${upperLetter}`);
+  }return true;
+}
+};
+
+export const scoreWord = (word) => {
+    // Implement this method for wave 3
+  const scoreChart = {
+    'A': 1,
+    'E': 1,
+    'I': 1,
+    'O': 1,
+    'U': 1,
+    'L': 1,
+    'N': 1, 
+    'R': 1,
+    'S': 1,
+    'T': 1,
+    'D': 2,
+    'G': 2,
+    'B': 3,
+    'C': 3,
+    'M': 3, 
+    'P': 3,
+    'F': 4,
+    'H': 4,
+    'V': 4,
+    'W': 4,
+    'Y': 4,
+    'K': 5,
+    'J': 8,
+    'X': 8,
+    'Q': 10,
+    'Z': 10
+  };
+
+  let score = 0; 
+
+  if (word.length === 0) {
+    return score;
+  }
+  
+  if (word.length >= 7 && word.length <11) {
+    score += 8;
+  }
+  for (const letter of word) {
+    const letterUpper = letter.toUpperCase();
+    score += scoreChart[letterUpper];
+    }
+
+  return score;
+  };
 
 
-// export const scoreWord = (word) => {
-//   // Implement this method for wave 3
-// };
+console.log(scoreWord("whimsy"))
+  // A: 1,
+  // DOG: 5,
+  // WHIMSY: 17,
 
 // export const highestScoreFrom = (words) => {
 //   // Implement this method for wave 4
