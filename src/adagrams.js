@@ -26,12 +26,12 @@ const letterPool = {
   'Y': 2, 
   'Z': 1
 }
-//fn to create a letter_pile:
+
 export const drawLetters = () => {
   // Implement this method for wave 1
   let pool = {...letterPool};
   let hand = [];
-  
+
   while (hand.length < 10) {
   const letters = Object.keys(letterPool);
   const letter = letters[Math.floor(Math.random() * letters.length)];
@@ -42,13 +42,37 @@ export const drawLetters = () => {
   } else {
     delete pool[letter];
 }
-
 }
 return hand;
 };
+// helper fn frequency map
+const createMap = (x) => {
+  const freqMap = {};
+  for (let char of x) {
+    if (freqMap[char] !== undefined) {
+      freqMap[char] += 1
 
+    } else {
+      freqMap[char] = 1
+    }
+  }
+  return freqMap;
+};
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
+  //creating a frequency map helpter fn
+  let word = input.toUpperCase();
+  let wordFreq = createMap(input);
+  let lettersInHandFreq = createMap(lettersInHand);
+  let result = false;
+  for (let char of word) {
+    if (lettersInHand.includes(char) && wordFreq[char] <= lettersInHandFreq[char]) {
+      result = true
+    } else {
+      return false
+    }
+  }
+  return result
 };
 
 export const scoreWord = (word) => {
