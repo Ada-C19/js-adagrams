@@ -48,8 +48,8 @@ export const drawLetters = () => {
 
   //loop through letters using the random function and adds elem to the list and removes the elem from the letter_box
   for (let index = 0; index < 10; index++) {
-    const random = Math.floor(Math.random())
-    const element = letters[index];
+    const random = Math.floor(Math.random() * letter_box.length);
+    const element = letter_box[random];
     letter_list.push(element);
     letter_box.splice(random, 1);
     
