@@ -3,6 +3,7 @@ import {
   usesAvailableLetters,
   scoreWord,
   highestScoreFrom,
+  Adagrams
 } from "adagrams";
 
 const Real = {
@@ -12,7 +13,7 @@ const Real = {
   highestScoreFrom,
 };
 
-const Stub = {
+export class AdagramsStub {
   drawLetters() {
     const defaultLetters = ["H", "E", "L", "L", "O", "W", "O", "R", "L", "D"];
 
@@ -21,7 +22,7 @@ const Stub = {
     }
 
     return defaultLetters;
-  },
+  }
 
   usesAvailableLetters(input, lettersInHand) {
     if (typeof Real.usesAvailableLetters === "function") {
@@ -29,7 +30,7 @@ const Stub = {
     }
 
     return true;
-  },
+  }
 
   scoreWord(word) {
     if (typeof Real.scoreWord === "function") {
@@ -37,7 +38,7 @@ const Stub = {
     }
 
     return -1;
-  },
+  }
 
   highestScoreFrom(words) {
     if (typeof Real.highestScoreFrom === "function") {
@@ -50,7 +51,5 @@ const Stub = {
       word: words[0],
       score: Stub.scoreWord(words[0]),
     };
-  },
+  }
 };
-
-export default Stub;
