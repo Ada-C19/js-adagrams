@@ -44,7 +44,7 @@ export const drawLetters = () => {
   }
 
   //holds the 10 letters
-  let letter_list = [];
+  let letterList = [];
 
   //loop through letters using the random function and adds elem to the list and removes the elem from the letter_box
   for (let index = 0; index < 10; index++) {
@@ -54,12 +54,24 @@ export const drawLetters = () => {
     letter_box.splice(random, 1);
     
   }
-  return letter_list;
+  return letterList;
   
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+
+  const letterFrequency = {};
+
+  for (let index = 0; index < lettersInHand.length; index++) {
+    const element = lettersInHand[index].toLowerCase();
+    //gets the current value, if doesnt exist, return 0, if it exists add 1 to the current value
+    letterFrequency[element] = (letterFrequency[element] || 0) + 1;
+  }
+
+
+  
+  return true;
+  
 };
 
 export const scoreWord = (word) => {
