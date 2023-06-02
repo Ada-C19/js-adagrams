@@ -96,14 +96,14 @@ describe('Adagrams', () => {
     });
   });
 
-  describe("scoreWord", () => {
+  describe('scoreWord', () => {
     const expectScores = (wordScores) => {
       Object.entries(wordScores).forEach(([word, score]) => {
         expect(scoreWord(word)).toBe(score);
       });
     };
 
-    it("returns an accurate numerical score according to the score chart", () => {
+    it('returns an accurate numerical score according to the score chart', () => {
       expectScores({
         A: 1,
         DOG: 5,
@@ -111,7 +111,7 @@ describe('Adagrams', () => {
       });
     });
 
-    it("returns a score regardless of the input case", () => {
+    it('returns a score regardless of the input case', () => {
       expectScores({
         a: 1,
         dog: 5,
@@ -120,10 +120,11 @@ describe('Adagrams', () => {
     });
 
     it("returns a score of 0 if given an empty input", () => {
-      throw "Complete test";
+      //throw "Complete test";
+      expectScores({'':0})
     });
 
-    it("adds an extra 8 points if word is 7 or more characters long", () => {
+    it('adds an extra 8 points if word is 7 or more characters long', () => {
       expectScores({
         XXXXXXX: 64,
         XXXXXXXX: 72,
