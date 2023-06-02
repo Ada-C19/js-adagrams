@@ -45,9 +45,23 @@ function getRandomLetter() {
   return letters[randomIndex];
 };
 
-// export const usesAvailableLetters = (input, lettersInHand) => {
-// //Implement this method for wave 2
-// };
+export const usesAvailableLetters = (input, lettersInHand) => {
+  const bank = [...lettersInHand];
+  const inputLetters = input.toUpperCase().split('');
+
+  for (let i = 0; i < inputLetters.length; i++) {
+    const letter = inputLetters[i];
+    const index = bank.indexOf(letter);
+
+    if (index !== -1) {
+      bank.splice(index, 1);
+    } else {
+      return false;
+    }
+  }
+
+  return true;
+};
 
 // export const scoreWord = (word) => {
 //   // Implement this method for wave 3
