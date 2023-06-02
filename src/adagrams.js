@@ -33,13 +33,13 @@ const letters = {
 export const drawLetters = () => {
 
   //holds letters to draw
-  let letter_box = [];
+  let letterBox = [];
 
 
   for (let letter in letters) {
     let freq = letters[letter];
     for (let index = 0; index < freq; index++) {
-      letter_box.push(letter)
+      letterBox.push(letter);
     }
   }
 
@@ -48,10 +48,10 @@ export const drawLetters = () => {
 
   //loop through letters using the random function and adds elem to the list and removes the elem from the letter_box
   for (let index = 0; index < 10; index++) {
-    const random = Math.floor(Math.random() * letter_box.length);
-    const element = letter_box[random];
-    letter_list.push(element);
-    letter_box.splice(random, 1);
+    const random = Math.floor(Math.random() * letterBox.length);
+    const element = letterBox[random];
+    letterList.push(element);
+    letterBox.splice(random, 1);
     
   }
   return letterList;
@@ -66,6 +66,20 @@ export const usesAvailableLetters = (input, lettersInHand) => {
     const element = lettersInHand[index].toLowerCase();
     //gets the current value, if doesnt exist, return 0, if it exists add 1 to the current value
     letterFrequency[element] = (letterFrequency[element] || 0) + 1;
+  }
+
+  
+  for (let index = 0; index < input.length; index++) {
+    const element = input[index].toLowerCase();
+    if (!letterFrequency[element]) {
+      return false;
+      
+    }
+    //keep track of available letters
+    else {
+      letterFrequency[element] -= 1;
+    }
+    
   }
 
 
