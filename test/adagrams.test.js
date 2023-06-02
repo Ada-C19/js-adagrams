@@ -121,8 +121,7 @@ describe("Adagrams", () => {
     });
 
     it("returns a score of 0 if given an empty input", () => {
-      // throw "Complete test";
-      // expectScores( {null:0});
+
       expect(scoreWord(null)).toBe(0);
     });
 
@@ -149,8 +148,6 @@ describe("Adagrams", () => {
       const correct = { word: "XXXX", score: scoreWord("XXXX") };
 
       expect(highestScoreFrom(words)).toEqual(correct);
-
-      // throw "Complete test by adding an assertion";
     });
 
     describe("in case of tied score", () => {

@@ -8,7 +8,7 @@ const letterScores = {A:1, B:3, C:3, D:2, E:1, F:4, G:2, H:4, I:1, J:8, K:5,
 
 
 
-let letterPool = ()=>{
+const letterPool = ()=>{
   let letters = [];
   for (let letter in letterDict){
     let num = letterDict[letter];
@@ -18,31 +18,27 @@ let letterPool = ()=>{
   }
   return letters;
   // console.log(letters)
-}
+};
 
 
 
 export const drawLetters = () => {
-  let letters=letterPool()
-  let lettersForTurn = []
+  const letters=letterPool()
+  const lettersForTurn = []
+
   for (let i=0; i<10 ; i++){
-    if (letters.length === 1){
-      lettersForTurn.push(letters[0]);
-      letters=[];
-      return lettersForTurn;
-    }
-    let randomIndex = [Math.floor(Math.random()*letters.length)];
+    const randomIndex = [Math.floor(Math.random()*letters.length)];
     lettersForTurn.push(letters[randomIndex]);
-    letters.splice(randomIndex,randomIndex);
-    // console.log(letters);
+    letters.splice(randomIndex,1);
   }
   return lettersForTurn;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
-  let hashHandLetters= {}
+  const hashHandLetters= {}
   for (let letter of lettersInHand) {
+
     if (letter in hashHandLetters) {
       hashHandLetters[letter] += 1;
     } else {
@@ -50,6 +46,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
     }
   }
   for (let letter of input){
+
     if (letter in hashHandLetters){
       hashHandLetters[letter]-=1;
       if (hashHandLetters[letter]===0){
@@ -83,31 +80,28 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
-  let winningWord = {word:" " , score:0};
-  let score = 0;
-  let len = 0;
+  const winningWord = {word:" " , score:0};
 
   for (let word of words){
-    score = scoreWord(word);
-    len = word.length
+    let score = scoreWord(word);
+    let len = word.length
+    let winnerLen = winningWord.word.length
 
     if (score >winningWord.score){
       winningWord.score= score;
       winningWord.word = word;
-      if (len===10){
-        return winningWord
-      }
+
     }else if (score===winningWord.score){
-      if (len===10){
+
+      if (len===10 && winnerLen<10){
         winningWord.score= score;
         winningWord.word = word;
-        return winningWord
 
-      }else if (len<winningWord.word.length){
+      }else if (len<winningWord.word.length && winnerLen<10){
         winningWord.score= score;
         winningWord.word = word;
       }
     }
   }
   return winningWord;
-}
+};
