@@ -68,7 +68,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
     letterFrequency[element] = (letterFrequency[element] || 0) + 1;
   }
 
-  
+
   for (let index = 0; index < input.length; index++) {
     const element = input[index].toLowerCase();
     if (!letterFrequency[element]) {
@@ -81,15 +81,22 @@ export const usesAvailableLetters = (input, lettersInHand) => {
     }
     
   }
-
-
   
   return true;
   
 };
 
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  
+  totalScore = 0
+
+  letterSet1 = ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"];
+  letterSet2 = ["D", "G"];
+  letterSet3 = ["B", "C", "M", "P"];
+  letterSet4 = ["F", "H", "V", "W", "Y"];
+  letterSet5 = ["K"];
+  letterSet6 = ["J", "X"];
+  letterSet7 = ["Q", "Z"];
 };
 
 export const highestScoreFrom = (words) => {
