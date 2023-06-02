@@ -29,13 +29,9 @@ const letterPool = {
 //fn to create a letter_pile:
 export const drawLetters = () => {
   // Implement this method for wave 1
-  // const letterPile = Object.keys(letterPool)
-  // const hand = [];
-  
   let pool = {...letterPool};
   let hand = [];
-
-// for (let i = 0; i < 10; i++) {
+  
   while (hand.length < 10) {
   const letters = Object.keys(letterPool);
   const letter = letters[Math.floor(Math.random() * letters.length)];
@@ -43,8 +39,8 @@ export const drawLetters = () => {
   if (pool[letter] > 0) {
     hand.push(letter);
     pool[letter] -= 1;
-  // } else {
-  //   delete pool[letter];
+  } else {
+    delete pool[letter];
 }
 
 }
