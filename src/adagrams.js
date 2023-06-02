@@ -1,4 +1,4 @@
-import { LETTER_POOL } from './constants';
+import { LETTER_POOL, LETTER_POINTS } from './constants';
 
 export const drawLetters = () => {
   // Implement this method for wave 1
@@ -44,6 +44,16 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
+  word = word.toUpperCase();
+  let score = 0;
+  if (word.length >= 7 && word.length <= 10) {
+    score = 8;
+  } 
+
+  for (let i = 0; i < word.length; i++) {
+    score += LETTER_POINTS[word[i]];
+  }
+  return score;
 };
 
 export const highestScoreFrom = (words) => {
