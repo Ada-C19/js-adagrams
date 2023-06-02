@@ -1,4 +1,8 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable jest/no-disabled-tests */
 /* eslint-disable quotes */
+/* eslint-disable jest/expect-expect */
+
 import {
   drawLetters,
   usesAvailableLetters,
@@ -119,10 +123,13 @@ describe('Adagrams', () => {
         wHiMsY: 17,
       });
     });
-
+    //test to write
     it("returns a score of 0 if given an empty input", () => {
-      throw "Complete test";
+      expectScores({
+        '': 0
+      });
     });
+  
 
     it("adds an extra 8 points if word is 7 or more characters long", () => {
       expectScores({
@@ -134,7 +141,7 @@ describe('Adagrams', () => {
     });
   });
 
-  describe.skip("highestScoreFrom", () => {
+  describe("highestScoreFrom", () => {
     it("returns a hash that contains the word and score of best word in an array", () => {
       const words = ["X", "XX", "XXX", "XXXX"];
       const correct = { word: "XXXX", score: scoreWord("XXXX") };
