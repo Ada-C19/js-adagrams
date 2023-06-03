@@ -106,9 +106,39 @@ export const scoreWord = (word) => {
   }
 
   return score;
-  
+
 };
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
-};
+  let scoreList = [];
+  let dictWordScore = {};
+
+  for (let i = 0; i < words.length ; i++) {
+    const word = words[i];
+    const scoreForEachWord = scoreWord(word);
+    scoreList.push(scoreForEachWord);
+    dictWordScore[word] = scoreForEachWord;
+  }
+
+  const maxScore = Math.max(...scoreList);
+  let winningWord = null;
+  let winningScore = null;
+
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i];
+    const score = dictWordScore[word];
+
+    if(score === maxScore) {
+      if(!winningWord || word.length === 10 || (word.length < winningWord.length && winningWord.length !== 10)) {
+        winningWord = word;
+        winningScore = score;
+      }
+    }
+  }
+
+  return {
+    word: winningWord,
+    score: winningScore
+  };
+}
