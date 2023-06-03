@@ -110,8 +110,6 @@ export class Adagrams {
         countOccurrences(lettersInHand, letter)
       ) {
         return false;
-      } else {
-        continue;
       }
     }
     return true;
