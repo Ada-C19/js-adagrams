@@ -64,11 +64,25 @@ export const drawLetters = () => {
       vowelCount = vowelCount + hand.filter((x) => x === vowel).length;
     }
   }
-  console.log("HAND: ", hand);
   return hand;
 };
 
-export const usesAvailableLetters = (input, lettersInHand) => {};
+export const usesAvailableLetters = (input, lettersInHand) => {
+  for (let letter of input.toUpperCase()) {
+    // Check if the letter is in the hand
+    if (!lettersInHand.includes(letter)) {
+      return false;
+    }
+
+    // Check if there are more of the letter in the input than the hand
+    let numLetterInput = input.split("").filter((x) => x === letter).length;
+    let numLetterInHand = lettersInHand.filter((x) => x === letter).length;
+    if (numLetterInput > numLetterInHand) {
+      return false;
+    }
+  }
+  return true;
+};
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
