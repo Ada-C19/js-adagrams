@@ -97,8 +97,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 export const scoreWord = (word) => {
   let wordScore = 0;
 
-  for (let i = 0; i < word.length; i++) {
-    let letter = word[i].toUpperCase();
+  for (let letter of word.toUpperCase()) {
     wordScore += letterScore[letter];
   }
 
@@ -109,6 +108,6 @@ export const scoreWord = (word) => {
   return wordScore;
 };
 
-export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
-};
+// export const highestScoreFrom = (words) => {
+//   // Implement this method for wave 4
+// };
