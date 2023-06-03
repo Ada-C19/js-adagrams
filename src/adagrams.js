@@ -39,18 +39,21 @@ export const drawLetters = () => {
   return hand;
 };
 
+// ~~~~WAVE 2~~~~ //
+
 function getRandomLetter() {
   const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   const randomIndex = Math.floor(Math.random() * letters.length);
   return letters[randomIndex];
 };
 
+// ~~~~WAVE 3~~~~ //
+
 export const usesAvailableLetters = (input, lettersInHand) => {
   const bank = [...lettersInHand];
   const inputLetters = input.toUpperCase().split('');
 
-  for (let i = 0; i < inputLetters.length; i++) {
-    const letter = inputLetters[i];
+  for (const letter of inputLetters) {
     const index = bank.indexOf(letter);
 
     if (index !== -1) {
@@ -62,6 +65,9 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
   return true;
 };
+
+
+// ~~~~WAVE 4~~~~ //
 
 export const scoreWord = (word) => {
     const chart = {
@@ -92,9 +98,7 @@ export const scoreWord = (word) => {
       'Q': 10,
       'Z': 10
     };
-  
     let score = 0;
-    word = word.toUpperCase();
   
     for (let letter of word) {
       score += chart[letter.toUpperCase()];
@@ -107,6 +111,33 @@ export const scoreWord = (word) => {
     return score;
 };
 
-// export const highestScoreFrom = (words) => {
-//   // Implement this method for wave 4
-// };
+export const highestScoreFrom = (words) => {
+  let highestScore = 0;
+  let winningWord = "";
+
+  for (const word of words) {
+    const score = scoreWord(word);
+
+    if (score > highestScore) {
+      highestScore = score;
+      winningWord = word;
+    } else if (score === highestScore) {
+      if (winningWord.length === 10) {
+        continue;
+      }
+      if (word.length === 10) {
+        highestScore = score;
+        winningWord = word;
+      } else if (word.length < winningWord.length && winningWord.length !== 10) {
+        highestScore = score;
+        winningWord = word;
+      }
+    }
+  }
+
+  return {
+    word: winningWord,
+    score: highestScore
+  };
+};
+
