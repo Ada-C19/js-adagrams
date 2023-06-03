@@ -34,10 +34,14 @@ export const drawLetters = () => {
   while (handSelection.length < 10) {
     let newNum = Math.floor(Math.random() * (26 + 1));
     let currentLetter = letterArray[newNum];
-    if (!(currentLetter in tempLetters)) {
-      tempLetters[currentLetter] = 1;
+    if (currentLetter === undefined) {
+      continue;
     }
-    if (currentLetter in tempLetters) {
+    else if (!(currentLetter in tempLetters)) {
+      tempLetters[currentLetter] = 1;
+      handSelection.push(currentLetter);
+    }
+    else if (currentLetter in tempLetters) {
       if (tempLetters[currentLetter] < LETTER_POOL[currentLetter]) {
         tempLetters[currentLetter] += 1;
         handSelection.push(currentLetter);
