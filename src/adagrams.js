@@ -29,9 +29,9 @@ const LETTER_POOL = {
 export const drawLetters = () => {
   let letterArray = Object.keys(LETTER_POOL)
   let tempLetters = {}
-  let handSelection = []
+  let lettersInHand = []
 
-  while (handSelection.length < 10) {
+  while (lettersInHand.length < 10) {
     let newNum = Math.floor(Math.random() * (26 + 1));
     let currentLetter = letterArray[newNum];
     if (currentLetter === undefined) {
@@ -39,24 +39,49 @@ export const drawLetters = () => {
     }
     else if (!(currentLetter in tempLetters)) {
       tempLetters[currentLetter] = 1;
-      handSelection.push(currentLetter);
+      lettersInHand.push(currentLetter);
     }
     else if (currentLetter in tempLetters) {
       if (tempLetters[currentLetter] < LETTER_POOL[currentLetter]) {
         tempLetters[currentLetter] += 1;
-        handSelection.push(currentLetter);
+        lettersInHand.push(currentLetter);
       }
     }
     else {
       continue;
     }
   }
-  return handSelection
+  return lettersInHand
 };
 
-// export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
-// };
+export const usesAvailableLetters = (input, lettersInHand) => {
+  let tempLetters = {}
+  let capsInput = input.toUpperCase()
+  // let currentLetter = capsInput[0];
+  for (let i = 0; i < capsInput.length; i++) {
+    let currentLetter = capsInput[i];
+    if (!(currentLetter in lettersInHand)) {
+      return false;
+    }
+    else if (currentLetter in lettersInHand) {
+      if (!(currentLetter in tempLetters)) {
+        tempLetters[currentLetter] = 1;
+        // let currentLetter = capsInput[i];
+      }
+      else if (currentLetter in tempLetters) {
+        tempLetters[currentLetter] += 1;
+          if (tempLetters[currentLetter] <= lettersInHand[currentLetter]) {
+            continue;
+          }
+          else {
+            return false;
+          }
+        }
+      }
+    return true;
+    }
+};
+
 
 // export const scoreWord = (word) => {
   // Implement this method for wave 3
