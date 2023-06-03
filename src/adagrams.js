@@ -3,6 +3,7 @@ import { LETTER_POOL, LETTER_POINTS } from './constants';
 export const drawLetters = () => {
   // Implement this method for wave 1
   let lettersArr = [];
+
   for (const [letter, count] of Object.entries(LETTER_POOL)) {
     const newLetters = lettersArr.concat(Array(count).fill(letter));
     lettersArr = newLetters;
@@ -10,6 +11,7 @@ export const drawLetters = () => {
 
   const hand = [];
   const usedIndices = new Set();
+
   for (let i = 0; i < 10; i++) {
     const randIndex = Math.floor(Math.random() * lettersArr.length);
     if (!usedIndices.has(randIndex)) {
@@ -23,7 +25,8 @@ export const drawLetters = () => {
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
   input = input.toUpperCase();
-  const handLettersFreq = {}
+  const handLettersFreq = {};
+
   for (let i = 0; i < lettersInHand.length; i++) {
     if (lettersInHand[i] in handLettersFreq) {
       handLettersFreq[lettersInHand[i]] += 1;
@@ -46,6 +49,7 @@ export const scoreWord = (word) => {
   // Implement this method for wave 3
   word = word.toUpperCase();
   let score = 0;
+
   if (word.length >= 7 && word.length <= 10) {
     score = 8;
   } 
@@ -59,7 +63,8 @@ export const scoreWord = (word) => {
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
   const wordObj = {};
-  const matching = []
+  const matching = [];
+  
   words.forEach((word) => wordObj[word] = scoreWord(word));
   
   const maxScore = Math.max(...Object.values(wordObj));
