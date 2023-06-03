@@ -133,15 +133,18 @@ export const highestScoreFrom = (words) => {
     if (score > highScore) {
       highScore = score;
       highWord = word
-    } else if (score == highScore) {
+    } else if (score == highScore){
         if (highWord.length === 10) {
           continue
 
-        }else if (word.length === 10 || word.length < highWord.length) {
+        }else if (word.length === 10) {
           highScore = score;
           highWord = word;
-        } 
-      }
+        } else if (word.length < highWord.length) {
+          highScore = score;
+          highWord = word;
+        }
+    }
     }
     return {word: highWord, score: highScore};
 };
