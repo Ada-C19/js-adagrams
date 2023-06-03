@@ -1,4 +1,4 @@
-const LETTER_SCORE = {
+const letterScore = {
   'A': 1, 
   'B': 3,
   'C': 3, 
@@ -92,6 +92,17 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
+  word = word.toUpperCase();
+  let score = 0;
+
+  for (const letter of word) {
+    score = score + letterScore[letter]; 
+  }
+
+  if (word.length >= 7 && word.length <= lengthOfHand) {
+    score = score + 8
+  }
+  return score
 };
 
 export const highestScoreFrom = (words) => {
