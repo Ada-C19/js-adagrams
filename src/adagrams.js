@@ -9,12 +9,12 @@ export const drawLetters = () => {
   }
 
   const hand = [];
-  const usedIndices = [];
+  const usedIndices = new Set();
   for (let i = 0; i < 10; i++) {
     const randIndex = Math.floor(Math.random() * lettersArr.length);
-    if (!usedIndices.includes(randIndex)) {
+    if (!usedIndices.has(randIndex)) {
       hand.push(lettersArr[randIndex]);
-      usedIndices.push(randIndex);
+      usedIndices.add(randIndex);
     }
   }
   return hand;
@@ -58,4 +58,38 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  const wordObj = {};
+  const matching = []
+  words.forEach((word) => wordObj[word] = scoreWord(word));
+  
+  const maxScore = Math.max(...Object.values(wordObj));
+
+  for (const [word, score] of Object.entries(wordObj)) {
+    if (score === maxScore) {
+      matching.push(word);
+    }
+  }
+
+  const winningObj = {};
+  let shortest = null;
+
+  if (matching.length == 1) {
+    winningObj.word = matching[0];
+    winningObj.score = maxScore;
+    return winningObj;
+  }
+
+  for (let i = 0; i < matching.length; i++) {
+    if (matching[i].length === 10) {
+      winningObj.word = matching[i];
+      winningObj.score = maxScore;
+      return winningObj;
+    } else if (shortest === null || matching[i].length < shortest.length) {
+      shortest = matching[i];
+      winningObj.word = shortest; 
+      winningObj.score = maxScore;
+    }
+  }
+  return winningObj;
 };
+
