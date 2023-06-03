@@ -1,7 +1,8 @@
 import Model from 'demo/model';
-import Adagrams from 'demo/adagrams';
+// import Adagrams from 'demo/adagrams';
+import { Adagrams } from "../../src/adagrams";
 
-describe.skip('Game Model', () => {
+describe('Game Model', () => {
   const config = {
     players: [
       'Player A',
@@ -279,7 +280,8 @@ describe.skip('Game Model', () => {
       it('it returns the word score', () => {
         const model = getModel();
         const word = getWord(model);
-        const score = Adagrams.scoreWord(word);
+        const adagrams = new Adagrams();
+        const score = adagrams.scoreWord(word);
 
         expect(model.playWord(word)).toBe(score);
       });
@@ -301,7 +303,8 @@ describe.skip('Game Model', () => {
       it('validates word case-insensitively', () => {
         const model = getModel();
         const word = getWord(model);
-        const score = Adagrams.scoreWord(word);
+        const adagrams = new Adagrams();
+        const score = adagrams.scoreWord(word);
 
         expect(model.playWord(word.toLowerCase())).toBe(score);
       });

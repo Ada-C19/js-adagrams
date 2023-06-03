@@ -1,4 +1,4 @@
-import Adagrams from 'demo/adagrams';
+import { Adagrams } from '../adagrams';
 
 class Model {
   constructor(config) {
@@ -12,6 +12,7 @@ class Model {
     this.round = 0;
     this.currentPlayer = null;
     this.letterBank = null;
+    this.adagrams = new Adagrams();
 
     /* Plays history structure is:
         {
@@ -49,7 +50,7 @@ class Model {
     }
 
     // Draw the letter bank
-    this.letterBank = Adagrams.drawLetters();
+    this.letterBank = this.adagrams.drawLetters();
 
     // Initialize player history for this round
     this.config.players.forEach((player) => {
@@ -75,12 +76,12 @@ class Model {
 
     this._recordPlay(word);
 
-    return Adagrams.scoreWord(word);
+    return this.adagrams.scoreWord(word);
   }
 
   _valid(word, letterBank = this.letterBank) {
     if(word.length < 1) return false;
-    return Adagrams.usesAvailableLetters(word, letterBank);
+    return this.adagrams.usesAvailableLetters(word, letterBank);
   }
 
   _playerName(player) {
@@ -97,7 +98,7 @@ class Model {
       return null;
     }
 
-    return Adagrams.highestScoreFrom(plays);
+    return this.adagrams.highestScoreFrom(plays);
   }
 
   _roundWinner(round) {
@@ -109,7 +110,7 @@ class Model {
       return { player: '<NOBODY>', word: '<NONE>', score: 0 };
     }
 
-    const { word: winningWord } = Adagrams.highestScoreFrom(bestPlays.map(({ word }) => word));
+    const { word: winningWord } = this.adagrams.highestScoreFrom(bestPlays.map(({ word }) => word));
     return bestPlays.find(({ word }) => word === winningWord);
   }
 
