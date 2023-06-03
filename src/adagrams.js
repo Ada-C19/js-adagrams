@@ -101,6 +101,12 @@ export const scoreWord = (word) => {
     let letter = word[i].toUpperCase();
     wordScore += letterScore[letter];
   }
+
+  if (word.length >= 7) {
+    wordScore += 8;
+  }
+
+  return wordScore;
 };
 
 export const highestScoreFrom = (words) => {
