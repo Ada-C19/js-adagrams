@@ -27,12 +27,28 @@ export const drawLetters = () => {
   return handOfLetters
 }
 
+// Wave 2:
+export const usesAvailableLetters = (input, lettersInHand) => {
+  const wordUpper = input.toUpperCase();
+  for (let index = 0; index < wordUpper.length; ++index) {
+    if (lettersInHand.includes(wordUpper[index])) {
+      lettersInHand = lettersInHand.filter((element) => element !== wordUpper[index]);
+    } else {
+      return false;
+    }
+  }
+  return true;
+};
 
+// def uses_available_letters(word, letter_bank):
+// word_upper = word.upper()
 
-// export const usesAvailableLetters = (input, lettersInHand) => {
-//   // Implement this method for wave 2
-// };
-
+// for letter in list(word_upper):
+//   if word_upper.count(letter) == letter_bank.count(letter):
+//     result = True
+//   else:
+//   result = False
+// return result
 // export const scoreWord = (word) => {
 //   // Implement this method for wave 3
 // };
@@ -42,22 +58,9 @@ export const drawLetters = () => {
 // };
 
 /*
-def draw_letters():
-  import random
-  
-  
-  hand_of_letters = []
-  
 
-def uses_available_letters(word, letter_bank):
-  word_upper = word.upper()
 
-  for letter in list(word_upper):
-      if word_upper.count(letter) == letter_bank.count(letter):
-          result = True
-      else:
-          result = False
-  return result
+
 
 
 def score_word(word):
