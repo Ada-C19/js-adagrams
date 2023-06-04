@@ -18,8 +18,8 @@ export const drawLetters = () => {
   let result = []
   for (let i = 0; i<10; i++){
     let randomIndex = Math.floor(Math.random()*newList.length);
-    result.push(newList[randomIndex])
-    newList.splice(randomIndex, 1)
+    result.push(newList[randomIndex]);
+    newList.splice(randomIndex, 1);
   }
   return result;
 };
@@ -52,7 +52,15 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  let scoreList = []
+  // create a list of scores of each word in words using scoreWord function
+  // find the max score in the list 
+  // initialize variable tenWordwin to be false then check if a ten-letter word having
+  // the max score exists in words. if so tenWordWin becomes true and the word wins.
+  // after checking all elements in the list, if tenWordWin is still false-
+  // sort the list by length, loop through the list to find the word with max score
+  //  and return the first word the loop encounters as the max word. break.
+
+  let scoreList = [];
   for(let word of words){
     let score = scoreWord(word);
     scoreList.push(score);
@@ -78,6 +86,6 @@ export const highestScoreFrom = (words) => {
   } 
   let maxWordObj = {}
   maxWordObj['word'] = highestWord;
-  maxWordObj['score'] = higestScore
+  maxWordObj['score'] = higestScore;
   return maxWordObj;
 };
