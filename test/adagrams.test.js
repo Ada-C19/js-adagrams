@@ -3,7 +3,7 @@ import {
   usesAvailableLetters,
   scoreWord,
   highestScoreFrom,
-} from "adagrams";
+} from 'adagrams';
 
 const LETTER_POOL = {
   A: 9,
@@ -120,9 +120,10 @@ describe("Adagrams", () => {
     });
 
     it("returns a score of 0 if given an empty input", () => {
-      expectScores({
-        HELP MEEEEE!!!!!
-      });
+      // throw "Complete test";
+      const word = "";
+
+      expect(scoreWord(word)).toBe(0);
     });
 
     it("adds an extra 8 points if word is 7 or more characters long", () => {
