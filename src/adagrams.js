@@ -99,8 +99,8 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  const Scores = words.map((word) => scoreWord(word));
-  const maxScore = Math.max(...Scores);
+  const scores = words.map((word) => scoreWord(word));
+  const maxScore = Math.max(...scores);
   const maxWords = words.filter((word) => (scoreWord(word) === maxScore));
   let maxWord = maxWords[0];
   if (maxWords.length != 1) {
