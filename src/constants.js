@@ -45,3 +45,5 @@ const createLetterPool = () => {
   console.log(LETTERPOOL);
   return LETTERPOOL;
   };
+
+module.exports = {createLetterPool}
