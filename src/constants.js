@@ -32,18 +32,18 @@ const LETTERQUANTITY = {
 // -----------------------------------------
 
 const createLetterPool = () => {
-    const LETTERPOOL = [];
+  const LETTERPOOL = [];
   
-    for (letter in LETTERQUANTITY) {
-      let frequency = LETTERQUANTITY[letter]
+  for (let letter in LETTERQUANTITY) {
+    let frequency = LETTERQUANTITY[letter]
   
-      while (0 < frequency) {
-        LETTERPOOL.push(letter);
-        frequency--;
-      }
+    while (0 < frequency) {
+      LETTERPOOL.push(letter);
+      frequency--;
     }
-  console.log(LETTERPOOL);
+  }
+  // console.log(LETTERPOOL);
   return LETTERPOOL;
-  };
+};
 
-module.exports = {createLetterPool}
+export default createLetterPool;
