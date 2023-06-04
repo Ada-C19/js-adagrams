@@ -62,8 +62,9 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
-  const pointValue1 = set(["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"])
-  
+  const pointValue1 = set(["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"]);
+  const pointValue2 = set(["D", "G"]);
+
 };
 
 export const highestScoreFrom = (words) => {
