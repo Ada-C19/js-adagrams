@@ -26,44 +26,37 @@ const LETTER_POOL = {
   Y: 2,
   Z: 1,
 };
-// Need to make LETTER_POOL iterable
 
-// const letterPoolArray = Object.entries(LETTER_POOL);
+const letterPoolArray = Object.entries(LETTER_POOL);
 
-// export const drawLetters = () => {
-//   const bigList = [];
-//   for (let [letter, quantity] of letterPoolArray) {
-//     let letterAndQuantity = letter.repeat(quantity);
+export const drawLetters = () => {
+  const bigList = [];
+  for (let [letter, quantity] of letterPoolArray) {
+    let letterAndQuantity = letter.repeat(quantity);
 
-//     for (let singleChar of letterAndQuantity) {
-//       bigList.push(singleChar);
-//     }
-//   }
+    for (let singleChar of letterAndQuantity) {
+      bigList.push(singleChar);
+    }
+  }
 
-//   let drawOf10Letters = [];
-//   let counter = 0;
+  const hand = [];
+  let counter = 0;
 
-//   while (counter < 10) {
-//     const randomIndex = Math.floor(Math.random() * bigList.length);
-//     const randomLetter = bigList[randomIndex];
-//     drawOf10Letters.push(randomLetter);
-//   }
-// };
 
-// drawLetters();
-// draw_of_10_letters = []
+  while (counter < 10) {
+    const randomIndex = Math.floor(Math.random() * bigList.length);
+    const randomLetter = bigList[randomIndex];
+    hand.push(randomLetter);
 
-// while len(draw_of_10_letters) < 10:
-//     random_letter = random.choice(big_list)
-//     draw_of_10_letters.append(random_letter)
-//     big_list.remove(random_letter)
-// return draw_of_10_letters
-// draw_letters()
-
-// for letter, quantity in LETTER_POOL.items():
-//     letter_and_quantity = letter * quantity
-//     for single_char in letter_and_quantity:
-//         big_list.append(single_char)
+    const handIndex = hand.indexOf(randomLetter);
+    if(handIndex !== -1) {
+        bigList.splice(randomIndex, 1);
+      }
+    counter++;
+    
+  }
+  return hand
+};
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   
@@ -82,19 +75,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
     return true;
   };
 
-  // copy_letter_bank = letter_bank.copy()
-  // word = word.upper()
-  
-  // for letter in word:
-      // if not letter in copy_letter_bank:
-      //     print("FALSE")
-      //     return False
-  //     copy_letter_bank.remove(letter)
-  //     print("TRUE")
-  // return True
-
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
 
   const LETTER_SCORE = {
     A: 1,
@@ -143,5 +124,5 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+
 };
