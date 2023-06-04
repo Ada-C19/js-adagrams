@@ -26,6 +26,36 @@ const letterPool = {
   Y: 2,
   Z: 1,
 };
+
+const letterValues = {
+  A: 1,
+  B: 3,
+  C: 3,
+  D: 2,
+  E: 1,
+  F: 4,
+  G: 2,
+  H: 4,
+  I: 1,
+  J: 8,
+  K: 5,
+  L: 1,
+  M: 3,
+  N: 1,
+  O: 1,
+  P: 3,
+  Q: 10,
+  R: 1,
+  S: 1,
+  T: 1,
+  U: 1,
+  V: 4,
+  W: 4,
+  X: 8,
+  Y: 4,
+  Z: 10,
+};
+
 const vowels = ["A", "E", "I", "O", "U", "Y"];
 
 export const drawLetters = () => {
@@ -85,9 +115,37 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  let score = 0;
+  // if (!word) {
+  //   return score;
+  // }
+  for (let letter of word.toUpperCase()) {
+    score += letterValues[letter];
+  }
+  if (word.length > 6) {
+    score += 8;
+  }
+
+  return score;
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  // let winningWord = { word: "", score: 0 };
+  // for (let word of words) {
+  //   if (word.scoreWord() > winningWord.score) {
+  //     winningWord.word = word;
+  //     winningWord.score = word.scoreWord();
+  //   } else if (word.scoreWord() === winningWord.score) {
+  //     if (word.length === 10) {
+  //       winningWord.word = word;
+  //       winningWord.score = word.scoreWord();
+  //       return winningWord;
+  //     }
+  //     if (word.length < winningWord.word.length) {
+  //       winningWord.word = word;
+  //       winningWord.score = word.scoreWord();
+  //     }
+  //   }
+  // }
+  // return winningWord;
 };
