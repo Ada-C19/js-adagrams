@@ -39,7 +39,17 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+
+  for (let char of input) {
+    // return false if input string has a letter is not present in lettersInHand
+    if (!lettersInHand.includes(char)) {      
+      return false;
+    } else {
+      // make sure all letters from the input string have the right qty
+      lettersInHand.splice(lettersInHand.indexOf(char), 1);
+    }
+  }
+  return true;
 };
 
 export const scoreWord = (word) => {
