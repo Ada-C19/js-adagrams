@@ -26,7 +26,20 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  if (input.length > lettersInHand.length || /^[A-Za-z]*$/.test(input))
+    return false;
+  // (letter).toMatch(/^[A-Z]$/);
+
+  let letterBankDict = {};
+  for (let letter of lettersInHand) {
+    letterBankDict[letter] = (letterBankDict[letter] || 0) + 1;
+  }
+
+  for (let letter in input.toUpperCase().trim()) {
+    if (!letterBankDict[letter]) return false;
+    letterBankDict[letter] -= 1;
+  }
+  return true;
 };
 
 export const scoreWord = word => {
