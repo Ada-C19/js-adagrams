@@ -1,7 +1,7 @@
 import createLetterPool from '../src/constants.js';
 import _ from 'underscore';
 
-
+  
 export const drawLetters = () => {
   const hand = createLetterPool();
   // console.log(_.sample(hand, 10));
@@ -9,9 +9,28 @@ export const drawLetters = () => {
 };
 
 
-// export const usesAvailableLetters = (input, lettersInHand) => {
-//   // Implement this method for wave 2
-// };
+export const usesAvailableLetters = (input, lettersInHand) => {
+  const wordVerification = {};
+
+  for (let letter of lettersInHand) {
+    if (letter in wordVerification) {
+      wordVerification[letter] += 1;
+    } else {
+      wordVerification[letter] = 1;
+    }
+  }
+
+  for (let letter of input) {
+    const capitalizedLetter = letter.toUpperCase();
+
+    if (!(capitalizedLetter in wordVerification) || wordVerification[letter] == 0) {
+      return false;
+    } else {
+      wordVerification[letter] -= 1;
+    }
+  }
+  return true;
+};
 
 // export const scoreWord = (word) => {
 //   // Implement this method for wave 3
