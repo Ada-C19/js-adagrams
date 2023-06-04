@@ -26,3 +26,22 @@ const LETTERQUANTITY = {
     Y: 2,
     Z: 1,
   };
+
+// -----------------------------------------
+//              HELPER FUNCTION
+// -----------------------------------------
+
+const createLetterPool = () => {
+    const LETTERPOOL = [];
+  
+    for (letter in LETTERQUANTITY) {
+      let frequency = LETTERQUANTITY[letter]
+  
+      while (0 < frequency) {
+        LETTERPOOL.push(letter);
+        frequency--;
+      }
+    }
+  console.log(LETTERPOOL);
+  return LETTERPOOL;
+  };
