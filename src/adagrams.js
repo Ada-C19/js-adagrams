@@ -29,20 +29,17 @@ export const drawLetters = () => {
     { letter: 'Z', frequency: 1 }
   ];
 
-  const frequencyArray = [];
+  const frequencyArray = letterFrequency.flatMap(({ letter, frequency }) =>
+    Array(frequency).fill(letter)
+  );
   
-  for (const element of letterFrequency) {
-    for (let i = 0; i < element.frequency; i++){
-      frequencyArray.push(element.letter);
-    }
-  }
   const letterBank = [];
-  const seenIndex = [];
+  const seenIndex = new Set();
   while (letterBank.length < 10) {
     const randomIndex = Math.floor(Math.random() * frequencyArray.length);
-    if (!seenIndex.includes(randomIndex)) {
+    if (!seenIndex.has(randomIndex)) {
       letterBank.push(frequencyArray[randomIndex]);
-      seenIndex.push(randomIndex);
+      seenIndex.add(randomIndex);
     }
   }  
   return letterBank;
@@ -60,7 +57,6 @@ export const usesAvailableLetters = (input, lettersInHand) => {
     }
     lettersFrequency[char]--;
   }
-
   return true;
 };
 
