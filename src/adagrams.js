@@ -92,7 +92,7 @@ export const scoreWord = (word) => {
 
   let score = 0;
 
-  for (let letter of word) {
+  for (const letter of word) {
     score += scoreChart[letter.toUpperCase()];
   }
 
