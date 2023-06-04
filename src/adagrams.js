@@ -119,9 +119,9 @@ export const highestScoreFrom = (words) => {
       const score = scoreWord(word);
       if (score > winningScore) {
         winningScore = score;
-        winningWord = word;
-
-      }else if (score === winningScore) {
+        winningWord = word;   
+      }
+      else if (score === winningScore) {
         if (winningWord.length === 10) {
           continue;
         }else if (word.length === 10 || word.length < winningWord.length) {
