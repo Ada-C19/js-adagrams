@@ -101,6 +101,10 @@ export const scoreWord = (word) => {
   const casedWord = word.toUpperCase();
   //loop through the word and check if any of the letters are in sets and update the score
 
+  if (word === "") {
+    return 0;
+  }
+
   for (let letter of casedWord) {
     if (letterSet1.includes(letter)) {
       wordScore += 1;

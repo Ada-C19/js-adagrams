@@ -120,7 +120,9 @@ describe("Adagrams", () => {
     });
 
     it("returns a score of 0 if given an empty input", () => {
-      throw "Complete test";
+      const expectedScore = 0;
+      const actualScore = scoreWord("");
+      expect(actualScore).toBe(expectedScore);
     });
 
     it("adds an extra 8 points if word is 7 or more characters long", () => {
