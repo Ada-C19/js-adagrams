@@ -50,20 +50,17 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
-  const lettersInHandSet = new Set(lettersInHand);
-  const inputFrequency = {};
   const lettersFrequency = {};
-  for (let char of input) {
-    inputFrequency[char] = (inputFrequency[char] || 0) + 1;
-  }
   for (let letter of lettersInHand) {
     lettersFrequency[letter] = (lettersFrequency[letter] || 0) + 1;
   }
   for (let char of input) {
-    if (!lettersInHandSet.has(char) || inputFrequency[char] > lettersFrequency[char]) {
+    if (!lettersFrequency[char]) {
       return false;
     }
+    lettersFrequency[char]--;
   }
+
   return true;
 };
 
