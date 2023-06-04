@@ -1,4 +1,4 @@
-const LETTER_POOL = {
+export const LETTER_POOL = {
   A: 9,
   B: 2,
   C: 2,
@@ -27,7 +27,7 @@ const LETTER_POOL = {
   Z: 1,
 };
 
-const SCORE_CHART = {
+export const SCORE_CHART = {
   'A': 1,
   'B': 3,
   'C': 3,
@@ -101,16 +101,23 @@ const letterCount = (lettersInHand, letter) => {
 };
 
 export const scoreWord = (word) => {
+  if (word.length === 0){
+    return 0;
+  }
+
+  const letterPool = {...LETTER_POOL};
+
   let totalScore = 0;
 
   for (let i = 0; i < word.length; i++){
     const letter = word[i].toUpperCase();
 
-    if (letter in SCORE_CHART){
+    if (letter in SCORE_CHART && letterPool[letter]){
       totalScore += SCORE_CHART[letter];
+      letterPool[letter]--;
 
       if (word.length >= 7 && word.length <= 10){
-        totalScore += 8;
+        totalScore += 8 * word.length;
       }
     }
   }
