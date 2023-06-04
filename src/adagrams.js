@@ -67,15 +67,58 @@ export const drawLetters = () => {
   }
   
   return hand
-}
+};
 
-// export const usesAvailableLetters = (input, lettersInHand) => {
-//   // Implement this method for wave 2
-// };
+export const usesAvailableLetters = (input, lettersInHand) => {
 
-// export const scoreWord = (word) => {
-//   // Implement this method for wave 3
-// };
+  // make input case insensitive and turn it into an array
+  // so that we can use the custom count prototype on it
+  input = input.toUpperCase().split('');
+
+  // to ensure each letter is in lettersInHand and does not occur too frequently:
+  for (let letter of input) {
+    if (!(lettersInHand.indexOf(letter) !== -1) || (input.count(letter) > lettersInHand.count(letter))) {
+      return false;
+    }
+  }
+  return true;
+};
+
+export const scoreWord = (word) => {
+  // minimum required length of word to qualify for a long word bonus:
+  const bonusPointMinLength = 7;
+  // bonus points to be awarded for words that meet the bonus minimum length:
+    const bonusPoints = 8;
+
+    const letterValues = {
+      'AEIOULNRST': 1,
+      'DG': 2,
+      'BCMP': 3,
+      'FHVWY': 4,
+      'K': 5,
+      'JX': 8,
+      'QZ': 10
+  };
+
+  let score = 0
+  if (!word) {
+    return score;
+  }
+
+  word = word.toUpperCase() // make word case insensitive
+  if (word.length >= bonusPointMinLength) {
+    score += bonusPoints;
+  }
+
+  for (let letter of word) {
+    for (let tier in letterValues) {
+        if (tier.indexOf(letter) !== -1) {
+          score += letterValues[tier];
+        }
+    }
+  }
+  return score;
+};
 
 // export const highestScoreFrom = (words) => {
 //   // Implement this method for wave 4
