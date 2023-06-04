@@ -139,6 +139,12 @@ export const scoreWord = (word) => {
   
 
 export const highestScoreFrom = (words) => {
+
+  //pseudocode requirement wave 4
+  //initialize variables (maxScore, bestWord, currentScore)
+  //loop through the words and use the helper function - scoreWord to extract the score and pass it to currentScore
+    // checkpoint - if currentScore > maxScore, currentScore become the new maxScore and current word in the loop becomes the bestWord
+  
   
   let maxScore = 0;
   let bestWord = "";
