@@ -53,15 +53,16 @@ export const drawLetters = () => {
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
   const lettersInHandCopy = [...lettersInHand];
-  for (const letter in input){
-    if (lettersInHandCopy.includes(letter){
-      const index = lettersInHandCopy.indexOf(key);
-      if (index > -1){
-        lettersInHandCopy.splice(index,1)
-      }
-    }
-    return lettersInHandCopy
-  }
+  for (const letter of input){
+    if (!lettersInHandCopy.includes(letter)){
+      return false;
+    } const index = lettersInHandCopy.indexOf(letter);
+    let temp = lettersInHandCopy[lettersInHandCopy.length - 1]  
+    lettersInHandCopy[lettersInHandCopy.length - 1] = lettersInHandCopy[index];
+    lettersInHandCopy[index]=temp;
+    lettersInHandCopy.pop();
+
+  }return true;
 };
 
 export const scoreWord = (word) => {
