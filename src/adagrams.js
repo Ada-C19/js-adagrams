@@ -66,8 +66,32 @@ const LETTER_POOL = {
 //         big_list.append(single_char)
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
-};
+  
+  const copyOfLettersInHand = [...lettersInHand];
+  input = input.toUpperCase();
+  for (const letter of input) {
+    if (!copyOfLettersInHand.includes(letter)) {
+      return false; 
+    } else {
+      const index = copyOfLettersInHand.indexOf(letter);
+      if (index !== -1) {
+          copyOfLettersInHand.splice(index, 1);
+        }
+      }
+    }
+    return true;
+  };
+
+  // copy_letter_bank = letter_bank.copy()
+  // word = word.upper()
+  
+  // for letter in word:
+      // if not letter in copy_letter_bank:
+      //     print("FALSE")
+      //     return False
+  //     copy_letter_bank.remove(letter)
+  //     print("TRUE")
+  // return True
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
