@@ -52,8 +52,30 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return true;
 };
 
+const scoreChart = {
+  1: ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"],
+  2: ["D", "G"],
+  3: ["B", "C", "M", "P"],
+  4: ["F", "H", "V", "W", "Y"],
+  5: ["K"],
+  8: ["J", "X"],
+  10: ["Q", "Z"],
+};
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  let totalScore = 0;
+  // if the word length is 7,8,9, or 10, gets an additional 8 points
+  if (word.length > 6 && word.length < 11) {
+    totalScore += 8;
+  }
+  for (let i = 0; i < word.length; i++) {
+    for (const [score, letters] of Object.entries(scoreChart)) {
+      if (letters.includes(word[i].toUpperCase())) {
+        totalScore += parseInt(score);
+      }
+    }
+  }
+  return totalScore;
+
 };
 
 export const highestScoreFrom = (words) => {
