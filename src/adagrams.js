@@ -51,6 +51,11 @@ export const drawLetters = () => {
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
   const lettersInHandSet = new Set(lettersInHand);
+  for (let char of input) {
+    if (!lettersInHandSet.has(char)) {
+      return false 
+    }
+  }
 };
 
 export const scoreWord = (word) => {
