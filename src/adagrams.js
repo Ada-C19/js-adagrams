@@ -96,10 +96,11 @@ export const scoreWord = (word) => {
   if (word.length === 0) {
     return score;
   }
-  
+
   if (word.length >= 7 && word.length <11) {
     score += 8;
   }
+
   for (const letter of word) {
     const letterUpper = letter.toUpperCase();
     score += scoreChart[letterUpper];
@@ -129,6 +130,7 @@ export const highestScoreFrom = (words) => {
         }
       }
     }
+    
     const winningObject = {
       word: winningWord,
       score: winningScore
