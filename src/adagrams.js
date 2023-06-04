@@ -60,11 +60,6 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 
-// const drawn = ["D", "O", "X", "X", "X", "X", "X", "X", "X", "X"];
-// const word = "DOG";
-
-// console.log(usesAvailableLetters(word, drawn))
-
 export const scoreWord = (word) => {
     // Implement this method for wave 3
   const scoreChart = {
