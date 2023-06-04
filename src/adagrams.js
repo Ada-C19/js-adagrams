@@ -128,9 +128,3 @@ export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
 };
 
-// def score_word(word):
-//     total_score = sum(score_chart.get(letter.upper(), 0) for letter in word)
-//     if len(word) in [7, 8, 9, 10]:
-//         total_score += 8
-//     return total_score
-    
