@@ -146,7 +146,7 @@ describe('Adagrams', () => {
       const words = ['XXX', 'XXXX', 'X', 'XX'];
       const correct = { word: 'XXXX', score: scoreWord('XXXX') };
 
-      expect(highestScoreForm(words)).toEqual(correct);
+      expect(highestScoreFrom(words)).toEqual(correct);
     });
 
     describe('in case of tied score', () => {
