@@ -47,11 +47,10 @@ export const drawLetters = () => {
   }  
   return letterBank;
 };
-  
-  
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
+  const lettersInHandSet = new Set(lettersInHand);
 };
 
 export const scoreWord = (word) => {
