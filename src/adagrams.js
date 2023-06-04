@@ -141,23 +141,41 @@ export const scoreWord = (word) => {
 export const highestScoreFrom = (words) => {
 
   //pseudocode requirement wave 4
+  
   //initialize variables (maxScore, bestWord, currentScore)
   //loop through the words and use the helper function - scoreWord to extract the score and pass it to currentScore
-    // checkpoint - if currentScore > maxScore, currentScore become the new maxScore and current word in the loop becomes the bestWord
+    // checkpoint - if currentScore > maxScore, currentScore becomes the new maxScore and current word in the loop becomes the bestWord
+    // if the currentScore === maxScore:
+          // check if the length of the word === 10 and the length of best word != 10, word becomes the bestWord
+          // if the word < the length of bestWord and the length of bestWord < 10, word becomes the new bestWord
+  
+    //finally return bestWord, and maxScore
   
   
   let maxScore = 0;
   let bestWord = "";
   let currentScore = 0;
 
+  //use helper function to get score
   for (let word of words) {
     currentScore = scoreWord(word)
 
+    //checkpoint - compare scores
     if (currentScore > maxScore) {
       maxScore = currentScore;
       bestWord = word;
     }
 
+    //if scores are tied, but if the length of bestWord is not 10, update bestWord
+    else if (currentScore === maxScore) {
+      if (word.length === 10 && bestWord.length != 10) {
+        bestWord = word;
+      }
+      //if bestWord is not a ten letter word and length is less than the current word, update best word
+      else if (word.length < bestWord.length && bestWord.length < 10) {
+        bestWord = word;
+      }
+    }
     
   }
   return { word: bestWord, score: maxScore };
