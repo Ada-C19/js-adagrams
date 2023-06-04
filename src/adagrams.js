@@ -122,19 +122,29 @@ export const highestScoreFrom = (words) => {
         winningWord = word;
 
       }else if (score === winningScore) {
-        if (word.length === 10 && winningWord.length !== 10) {
-          winningWord = word
-        } else if (winningWord.length ===10) {
+        if (winningWord.length === 10) {
           continue
-        }else if (word.length < winningWord.length) {
+        }else if (word.length === 10 || word.length < winningWord.length) {
           winningWord = word
-        }
         }
       }
-      const winningObject = {
-        word: winningWord,
-        score: winningScore
+    }
+    const winningObject = {
+      word: winningWord,
+      score: winningScore
       }
       
       return winningObject;
     };
+
+
+
+    // {
+    //   if (word.length === 10 && winningWord.length !== 10) {
+    //     winningWord = word
+    //   } else if (winningWord.length ===10) {
+    //     continue
+    //   }else if (word.length < winningWord.length) {
+    //     winningWord = word
+    //   }
+    //   }
