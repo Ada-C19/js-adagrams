@@ -88,19 +88,20 @@ export const scoreWord = (word) => {
     'X': 8, 
     'Y': 4, 
     'Z': 10
-};
+  };
 
-let score = 0;
+  let score = 0;
+  
+  for (let letter of word) {
+    score += scoreChart[letter.toUpperCase()];
+  }
+  
+  if (word.length >= 7 && word.length <= 10) {
+    score += 8; 
+  }
+  
+  return score;
 
-for (let letter of word) {
-  score += scoreChart[letter.toUpperCase()];
-}
-
-if (word.length >= 7 && word.length <= 10) {
-  score += 8; 
-}
-
-return score;
 };
 
 export const highestScoreFrom = (words) => {
