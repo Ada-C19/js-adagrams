@@ -113,6 +113,6 @@ export const highestScoreFrom = (words) => {
       }
     }
   }
-  let result = {'word' : highestWord, 'score': highestScore}
-  return result;
+  
+  return {'word' : highestWord, 'score': highestScore};
 };
