@@ -1,7 +1,10 @@
 import { LETTER_POOL, LETTER_COST } from './letter-bank-cost';
 
 export const drawLetters = () => {
-  // Implement this method for wave 1
+  let letters = [];
+  for (let [letter, count] of Object.entries(LETTER_POOL)) {
+    letters.push(letter.repeat(count));
+  }
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
