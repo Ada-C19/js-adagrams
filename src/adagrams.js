@@ -31,6 +31,7 @@ export const drawLetters = () => {
   const keys = Object.keys(letterPool);
   let letter;
   const hand = [];
+  
   while (hand.length < 10) {
     letter = keys[Math.floor(Math.random() * keys.length)];
     if (letterPool[letter] > 0) {
@@ -40,7 +41,6 @@ export const drawLetters = () => {
   }
 
   return hand;
-
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
@@ -132,5 +132,4 @@ export const highestScoreFrom = (words) => {
     word: winningWord,
     score: highestScore
   };
-
 };
