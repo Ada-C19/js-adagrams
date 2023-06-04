@@ -62,11 +62,13 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
-  const pointValue1 = set(['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T']);
-  const pointValue2 = set(['D', 'G']);
+  const pointsValue1 = set(['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T']);
+  const pointsValue2 = set(['D', 'G']);
   const pointsValue3 = set(['B', 'C', 'M', 'P']);
   const pointsValue4 = set(['F', 'H', 'V', 'W', 'Y']);
   const pointsValue5 = set(['K']);
+  const pointsValue8 = set(['J', 'X']);
+  const pointsValue10 = set(['Q', 'Z']);
 
 };
 
