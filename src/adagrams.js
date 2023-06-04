@@ -1,3 +1,15 @@
+Array.prototype.count = function(value) {
+  let count = 0;
+
+  this.forEach(item => {
+    if (item === value) {
+      count++;
+    }
+  });
+
+  return count;
+}
+
 export const drawLetters = () => {
 
   const maxLettersInHand = 10;
@@ -40,20 +52,6 @@ export const drawLetters = () => {
     }
   }
   
-  // implement a count function
-
-  Array.prototype.count = function(value) {
-    let count = 0;
-
-    this.forEach(item => {
-      if (item === value) {
-        count++;
-      }
-    });
-
-    return count;
-  }
-  
   // build the player's hand using the count function
   const hand = [];
 
@@ -71,7 +69,6 @@ export const drawLetters = () => {
   return hand
 }
 
-drawLetters()
 // export const usesAvailableLetters = (input, lettersInHand) => {
 //   // Implement this method for wave 2
 // };
