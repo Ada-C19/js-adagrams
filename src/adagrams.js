@@ -132,12 +132,13 @@ export const scoreWord = (word) => {
 export const highestScoreFrom = (words) => {
   let winningWord = { word: "", score: 0 };
   for (let word of words) {
-    let newScore = scoreWord(word);
     if (word.length === 10) {
       winningWord.word = word;
       winningWord.score = newScore;
       return winningWord;
     }
+
+    let newScore = scoreWord(word);
     if (newScore > winningWord.score) {
       winningWord.word = word;
       winningWord.score = newScore;
@@ -149,6 +150,5 @@ export const highestScoreFrom = (words) => {
     }
   }
 
-  console.log("WinningWOrd: ", winningWord);
   return winningWord;
 };
