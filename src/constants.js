@@ -75,5 +75,4 @@ const createLetterPool = () => {
   return LETTERPOOL;
 };
 
-export default createLetterPool;
-export const SCORECHART;
+module.exports = {createLetterPool, SCORECHART}

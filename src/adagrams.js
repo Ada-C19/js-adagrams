@@ -1,4 +1,4 @@
-import createLetterPool, { SCORECHART } from '../src/constants.js';
+import { createLetterPool, SCORECHART } from '../src/constants.js';
 import _ from 'underscore';
 
   
