@@ -55,31 +55,52 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  let tempLetters = {}
-  let capsInput = input.toUpperCase()
-  // let currentLetter = capsInput[0];
-  for (let i = 0; i < capsInput.length; i++) {
-    let currentLetter = capsInput[i];
-    if (!(currentLetter in lettersInHand)) {
+  let tempLetters = getLettersInHandObject(lettersInHand);
+  let inputObject = getInputObject(input);
+  for (let n = 0; n < input.length; n++) {
+    let currentLetter = input[n];
+    if (currentLetter in tempLetters) {
+      if (inputObject[currentLetter] <= tempLetters[currentLetter]) {
+        continue;
+      }
+      else {
+        return false;
+      }
+    }
+    else {
       return false;
     }
-    else if (currentLetter in lettersInHand) {
-      if (!(currentLetter in tempLetters)) {
-        tempLetters[currentLetter] = 1;
-        // let currentLetter = capsInput[i];
-      }
-      else if (currentLetter in tempLetters) {
-        tempLetters[currentLetter] += 1;
-          if (tempLetters[currentLetter] <= lettersInHand[currentLetter]) {
-            continue;
-          }
-          else {
-            return false;
-          }
-        }
-      }
-    return true;
+  }
+  return true;
+};
+
+const getLettersInHandObject = (lettersInHand) => {
+  let tempLetters = {};
+  for (let i = 0; i < lettersInHand.length; i++) {
+    let letter = lettersInHand[i];
+    if (!(letter in tempLetters)) {
+      tempLetters[letter] = 1;
     }
+    else {
+      tempLetters[letter] += 1;
+    }
+  }
+  return tempLetters;
+};
+
+const getInputObject = (input) => {
+  let capsInput = input.toUpperCase();
+  let inputObject = {}
+  for (let n = 0; n < capsInput.length; n++) {
+    let currentLetter = capsInput[n];
+    if (!(currentLetter in inputObject)) {
+      inputObject[currentLetter] = 1;
+    }
+    else {
+      inputObject[currentLetter] += 1;
+    }
+  }
+  return inputObject
 };
 
 
