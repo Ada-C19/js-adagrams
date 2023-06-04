@@ -62,13 +62,6 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
-  // const pointsValue1 = set(['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T']);
-  // const pointsValue2 = set(['D', 'G']);
-  // const pointsValue3 = set(['B', 'C', 'M', 'P']);
-  // const pointsValue4 = set(['F', 'H', 'V', 'W', 'Y']);
-  // const pointsValue5 = set(['K']);
-  // const pointsValue8 = set(['J', 'X']);
-  // const pointsValue10 = set(['Q', 'Z']);
   const pointsValue1 = new Set(['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T']);
   const pointsValue2 = new Set(['D', 'G']);
   const pointsValue3 = new Set(['B', 'C', 'M', 'P']);
@@ -98,10 +91,28 @@ export const scoreWord = (word) => {
   if (word.length >= 7 && word.length <= 10) {
     score += 8;
   }
-  return score 
+  return score; 
 
 };
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  let highestScore = 0;
+  let highestWord = '';
+
+  for (let word of words) {
+    let score = scoreWord(word);
+    if (score > highestScore) {
+      highestScore = score
+      highestWord = word 
+    } else if (score === highestScore) {
+      if (word.length === 10 && highestWord.length !== 10) {
+        highestWord = word;
+      } else if (word.length < highestWord.length && highestWord.length !== 10) {
+        highestWord = word;
+      }
+    }
+  }
+  let result = {'word' : highestWord, 'score': highestScore}
+  return result;
 };
