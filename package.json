@@ -1,6 +1,7 @@
 {
   "name": "js-adagrams",
   "version": "1.0.0",
+  "type": "module",
   "description": "JavaScript version of the Adagrams project",
   "main": "index.js",
   "scripts": {
@@ -34,6 +35,7 @@
   },
   "dependencies": {
     "core-js": "^3.8.0",
+    "underscore": "^1.13.6",
     "vorpal": "^1.12.0"
   }
 }
