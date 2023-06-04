@@ -117,26 +117,29 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
     // Implement this method for wave 4
-    let winningWord = "";
+    let winningWord = '';
     let winningScore = 0;
   
     for (const word of words) {
       const score = scoreWord(word);
       if (score > winningScore) {
         winningScore = score;
-        console.log(winningScore);
         winningWord = word;
 
       }else if (score === winningScore) {
         if (word.length === 10 && winningWord.length !== 10) {
           winningWord = word
+        } else if (winningWord.length ===10) {
+          continue
         }else if (word.length < winningWord.length) {
           winningWord = word
         }
         }
       }
-      const winningObject = {};
-      winningObject[winningWord]= winningScore;
+      const winningObject = {
+        word: winningWord,
+        score: winningScore
+      }
       
       return winningObject;
     };
@@ -209,36 +212,24 @@ export const highestScoreFrom = (words) => {
 //         winningScore = score;
 //         console.log(winningScore);
 //         winningWord = word;
-
+//         console.log(winningWord);
 //       }else if (score === winningScore) {
 //         if (word.length === 10 && winningWord.length !== 10) {
-//           winningWord = word
-//         }else if (word.length < winningWord.length) {
-//           winningWord = word
+//           winningWord = word;
+//         } else if (winningWord.length ===10) {
+//           continue
 //         }
+//         }else if (word.length < winningWord.length) {
+//           winningWord = word;
 //         }
 //       }
 //       const winningObject = {};
-//       winningObject[winningWord]= winningScore;
+//       winningObject.word = winningWord;
+//       winningObject.score = winningScore;
 
 //       return winningObject;
 //     };
    
-//     // for (const score of scores) {
-//     //   if (score === maxScore) {
-//     //     winningWords.push(score);
-//     //   }
-//     // }
-//     // if (winningWords.length === 1) {
-//     //   const winningWord = winningWords[0]
-//     // }else {
-//     //   for (const tieWord in winningWords) {
-//     //     if (tieWord.length === 10) {
-//     //       const winningWord = tieWord
-//     //     }
-//     //   }
-//     // }
-  
 
-// const words = ["AAAA", "AAA", "BBB", "BBBB", "BBBB"]
+// const words = ["AAAAAAAAAA", "BBBBBB"]
 // console.log(highestScoreFrom(words))
