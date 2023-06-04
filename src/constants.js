@@ -76,3 +76,4 @@ const createLetterPool = () => {
 };
 
 export default createLetterPool;
+export const SCORECHART;

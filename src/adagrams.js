@@ -1,4 +1,4 @@
-import createLetterPool from '../src/constants.js';
+import createLetterPool, { SCORECHART } from '../src/constants.js';
 import _ from 'underscore';
 
   
@@ -32,9 +32,9 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return true;
 };
 
-// export const scoreWord = (word) => {
-//   // Implement this method for wave 3
-// };
+export const scoreWord = (word) => {
+  // Implement this method for wave 3
+};
 
 // export const highestScoreFrom = (words) => {
 //   // Implement this method for wave 4
