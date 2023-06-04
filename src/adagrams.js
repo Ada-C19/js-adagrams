@@ -4,7 +4,6 @@ import _ from 'underscore';
   
 export const drawLetters = () => {
   const hand = createLetterPool();
-  // console.log(_.sample(hand, 10));
   return _.sample(hand, 10);
 };
 
@@ -32,8 +31,19 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return true;
 };
 
+
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  let score = 0;
+
+  for (let letter of word) {
+    const capitalizedLetter = letter.toUpperCase();
+    score += SCORECHART[capitalizedLetter];
+  }
+
+  if (word.length >= 7 && word.length <= 10) {
+    score += 8;
+  }
+  return score;
 };
 
 // export const highestScoreFrom = (words) => {
