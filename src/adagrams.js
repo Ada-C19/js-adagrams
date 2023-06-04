@@ -26,10 +26,10 @@ export const drawLetters = () => {
   'X',
   'Y', 'Y',
   'Z'
-  ]
+  ];
 
   
-  const handOfCards = [] 
+  const handOfCards = [];
   
   for (let i = 0; i < 10; i ++) {
     let randomLetter = letters[Math.floor(Math.random()*letters.length)];
@@ -123,28 +123,16 @@ export const highestScoreFrom = (words) => {
 
       }else if (score === winningScore) {
         if (winningWord.length === 10) {
-          continue
+          continue;
         }else if (word.length === 10 || word.length < winningWord.length) {
-          winningWord = word
+          winningWord = word;
         }
       }
     }
     const winningObject = {
       word: winningWord,
       score: winningScore
-      }
+      };
       
       return winningObject;
     };
-
-
-
-    // {
-    //   if (word.length === 10 && winningWord.length !== 10) {
-    //     winningWord = word
-    //   } else if (winningWord.length ===10) {
-    //     continue
-    //   }else if (word.length < winningWord.length) {
-    //     winningWord = word
-    //   }
-    //   }
