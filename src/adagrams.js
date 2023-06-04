@@ -91,19 +91,46 @@ export const scoreWord = (word) => {
   };
 
   let score = 0;
-  
+
   for (let letter of word) {
     score += scoreChart[letter.toUpperCase()];
   }
-  
+
   if (word.length >= 7 && word.length <= 10) {
     score += 8; 
   }
-  
-  return score;
 
+  return score;
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  let winningWord = "";
+  let highestScore = 0;
+
+  for (const word of words) {
+    const score = scoreWord(word);
+
+    if (word.length === 10) {
+      highestScore = score;
+      winningWord = word;
+      break;
+    }
+
+    if (score > highestScore) {
+      highestScore = score;
+      winningWord = word;
+    } else if (score === highestScore && winningWord.length != 10) {
+      if (word.length === 10) {
+        winningWord = word;
+      } else if (word.length < winningWord.length) {
+        winningWord = word;
+      }
+    }
+  }
+
+  return {
+    word: winningWord,
+    score: highestScore
+  };
+
 };
