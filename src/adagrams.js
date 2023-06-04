@@ -50,10 +50,33 @@ export const drawLetters = () => {
 
   return hand;
 };
-drawLetters()
-// export const usesAvailableLetters = (input, lettersInHand) => {
-//   // Implement this method for wave 2
-// };
+
+export const usesAvailableLetters = (input, lettersInHand) => {
+  // Implement this method for wave 2
+  const letterPool = {}
+  const inputArray = input.split('');
+  let result = true
+
+  lettersInHand.forEach((letter) => {
+    if (letter in letterPool) {
+      letterPool[letter] += 1;
+    } else {
+      letterPool[letter] = 1;
+    }
+  })
+  console.log(letterPool)
+
+  inputArray.forEach((letter) => {
+    if (letter in letterPool && letterPool[letter] > 0) {
+      letterPool[letter] -= 1;
+      console.log(letterPool)
+    } else {
+      result = false;
+    }
+  })
+
+  return result;
+};
 
 // export const scoreWord = (word) => {
 //   // Implement this method for wave 3
