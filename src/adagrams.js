@@ -88,16 +88,51 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 export const scoreWord = (word) => {
   
-  totalScore = 0
+  let wordScore = 0
 
-  letterSet1 = ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"];
-  letterSet2 = ["D", "G"];
-  letterSet3 = ["B", "C", "M", "P"];
-  letterSet4 = ["F", "H", "V", "W", "Y"];
-  letterSet5 = ["K"];
-  letterSet6 = ["J", "X"];
-  letterSet7 = ["Q", "Z"];
+  const letterSet1 = ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"];
+  const letterSet2 = ["D", "G"];
+  const letterSet3 = ["B", "C", "M", "P"];
+  const letterSet4 = ["F", "H", "V", "W", "Y"];
+  const letterSet5 = ["K"];
+  const letterSet6 = ["J", "X"];
+  const letterSet7 = ["Q", "Z"];
+
+  const casedWord = word.toUpperCase();
+  //loop through the word and check if any of the letters are in sets and update the score
+
+  for (let letter of casedWord) {
+    if (letterSet1.includes(letter)) {
+      wordScore += 1;
+    }
+    if (letterSet2.includes(letter)) {
+      wordScore += 2;
+    }
+    if (letterSet3.includes(letter)) {
+      wordScore += 3;
+    }
+    if (letterSet4.includes(letter)) {
+      wordScore += 4;
+    }
+    if (letterSet5.includes(letter)) {
+      wordScore += 5;
+    }
+    if (letterSet6.includes(letter)) {
+      wordScore += 8;
+    }
+    if (letterSet7.includes(letter)) {
+      wordScore += 10;
+    }
+  }
+
+  if (casedWord.length >= 7) {
+    wordScore += 8;
+  }
+  return wordScore;
+
 };
+
+  
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
