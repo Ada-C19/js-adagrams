@@ -47,7 +47,6 @@ export const usesAvailableLetters = (input, lettersInHand) => {
     // Implement this method for wave 2
   for (const letter of input) {
     const upperLetter = letter.toUpperCase();
-    console.log(upperLetter);
 
     if (!(lettersInHand.includes(upperLetter))) {
       return false;
@@ -130,7 +129,7 @@ export const highestScoreFrom = (words) => {
         }
       }
     }
-    
+
     const winningObject = {
       word: winningWord,
       score: winningScore
