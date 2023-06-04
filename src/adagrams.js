@@ -1,4 +1,3 @@
-// import { create } from "core-js/core/object";
 // import createLetterPool from "./constants.js";
 // const require = createLetterPool(import.meta.url);
 const _ = require('underscore');
@@ -55,9 +54,12 @@ const LETTERPOOL = [];
 //              MAIN FUNCTIONS
 // -----------------------------------------
 
-// export const drawLetters = () => {
-//   // Implement this method for wave 1
-// };
+const drawLetters = () => {
+  const hand = createLetterPool();
+  console.log(_.sample(hand, 10));
+  return _.sample(hand, 10);
+};
+
 
 // export const usesAvailableLetters = (input, lettersInHand) => {
 //   // Implement this method for wave 2
