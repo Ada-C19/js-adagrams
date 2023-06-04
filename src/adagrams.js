@@ -101,9 +101,29 @@ const letterCount = (lettersInHand, letter) => {
 };
 
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  let totalScore = 0;
+
+  for (let i = 0; i < word.length; i++){
+    const letter = word[i].toUpperCase();
+
+    if (letter in SCORE_CHART){
+      totalScore += SCORE_CHART[letter];
+
+      if (word.length >= 7 && word.length <= 10){
+        totalScore += 8;
+      }
+    }
+  }
+  return totalScore;
 };
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
 };
+
+// def score_word(word):
+//     total_score = sum(score_chart.get(letter.upper(), 0) for letter in word)
+//     if len(word) in [7, 8, 9, 10]:
+//         total_score += 8
+//     return total_score
+    
