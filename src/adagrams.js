@@ -130,22 +130,25 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // let winningWord = { word: "", score: 0 };
-  // for (let word of words) {
-  //   if (word.scoreWord() > winningWord.score) {
-  //     winningWord.word = word;
-  //     winningWord.score = word.scoreWord();
-  //   } else if (word.scoreWord() === winningWord.score) {
-  //     if (word.length === 10) {
-  //       winningWord.word = word;
-  //       winningWord.score = word.scoreWord();
-  //       return winningWord;
-  //     }
-  //     if (word.length < winningWord.word.length) {
-  //       winningWord.word = word;
-  //       winningWord.score = word.scoreWord();
-  //     }
-  //   }
-  // }
-  // return winningWord;
+  let winningWord = { word: "", score: 0 };
+  for (let word of words) {
+    let newScore = scoreWord(word);
+    if (word.length === 10) {
+      winningWord.word = word;
+      winningWord.score = newScore;
+      return winningWord;
+    }
+    if (newScore > winningWord.score) {
+      winningWord.word = word;
+      winningWord.score = newScore;
+    } else if (newScore === winningWord.score) {
+      if (word.length < winningWord.word.length) {
+        winningWord.word = word;
+        winningWord.score = newScore;
+      }
+    }
+  }
+
+  console.log("WinningWOrd: ", winningWord);
+  return winningWord;
 };
