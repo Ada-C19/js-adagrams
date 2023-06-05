@@ -124,5 +124,36 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
+  const bestWordsList = [];
+  
+  for(let word of words) {
+    word = word.toUpperCase();
+    const scoreOneWord = scoreWord(word);
+    bestWordsList.push([word, scoreOneWord]);
+  }
 
+  for(let [word, score] of bestWordsList) {
+    if(word.length === 10) {
+      return { score: score, word: word }
+    }
+  }
+
+  let topScore  = 0;
+  let bestWord = []
+
+  for(let [word, score] of bestWordsList) {
+    if(score > topScore) {
+      topScore = score;
+      bestWord = [word];
+    } else if(score === topScore) {
+      bestWord.push(word);
+    }
+    }
+  let shortWord = bestWord[0];
+  for(let word of bestWord){
+    if(shortWord.length > word.length) {
+      shortWord = word;
+  } 
+  }
+  return { score: topScore, word: shortWord };
 };
