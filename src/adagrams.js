@@ -66,6 +66,18 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
+  // if input[i] not in lettersInHand (for of loop)
+  for (let letter of input){
+    if (!lettersInHand.includes(letter)){
+      return false;
+    }
+    else {
+      lettersInHand.splice(letter, 1);
+    }
+  }
+  return true;
+  // else: pop off letters from lettersInHand
+  // return true at the end!
 };
 
 export const scoreWord = (word) => {
