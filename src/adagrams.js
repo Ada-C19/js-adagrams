@@ -83,6 +83,9 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 export const scoreWord = (word) => {
   // Implement this method for wave 3
   let total = 0;
+  if (word.length > 6){
+    total += 8;
+  }
   const wordScores = {
     A: 1,
     E: 1,
