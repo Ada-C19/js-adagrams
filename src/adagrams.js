@@ -125,27 +125,25 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-    let highScore = 0;
-    let bestWord = null;
-  
-    for (let i = 0; i < words.length; i++) {
-      const word = words[i];
-      const score = scoreWord(word);
-  
-      if (score > highScore || (score === highScore && (word.length === 10 || (bestWord && word.length < bestWord.word.length)))) {
-        highScore = score;
-        bestWord = { word, score };
-      }
+  let highScore = 0;
+  let bestWord = null;
+
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i];
+    const score = scoreWord(word);
+
+    if (score > highScore || (score === highScore && (word.length === 10 || (bestWord && (word.length < bestWord.word.length || word.length === bestWord.word.length))))) {
+      highScore = score;
+      bestWord = {word, score};
     }
-  
-    if (bestWord === null && words.length > 0) {
-      const word = words[0];
-      const score = scoreWord(word);
-      bestWord = { word, score };
-    }
-  
-    return bestWord ? bestWord : { word: '', score: 0 };
-  };
+  }
+
+  if (!bestWord) {
+    bestWord = {word: '', score: 0};
+  }
+
+  return bestWord;
+};
 
 // for (words in highScore) {
 //   let score = scoreWord(words);
