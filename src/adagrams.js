@@ -82,26 +82,34 @@ export const highestScoreFrom = (words) => {
   let highestScore = -1;
   let highestWords = [];
   let result = {};
-  let shortestWord = "";
+
+  // calculate and store highest score and append its word into array
   for (const word of words) {
-    // calculate and store highest score and append its word into array
-    if (scoreWord(word) >= highestScore) {
-      highestScore = (scoreWord(word));
+    const score = scoreWord(word);
+    if (score > highestScore) {
+      highestScore = score;
+      highestWords = [word];
+    } else if (scoreWord(word) === highestScore) {
       highestWords.push(word);
     }
-    if (highestWords.length === 1) {
-      result['score'] = highestScore;
-      result['word'] = highestWords[0]
-      return result;
-    }
+  };
+  // return the only winning word
+  if (highestWords.length === 1) {
+    result['score'] = highestScore;
+    result['word'] = highestWords[0]
+    return result;
+  } else {
+    // check if there's ten-letters word
     const lengthTen = highestWords.filter((n) => n.length === 10);
+    // if multiple ten-letters word, return the first one
     if (lengthTen.length > 0) {
       result['score'] = highestScore;
       result['word'] = lengthTen[0];
     } else {
-      shortestWord = highestWords.reduce(function(a, b){
-        return a.length <= b.length ? a : b;
-      }, "");
+      // else return the shortest one from all ties
+      let shortestWord = highestWords.reduce(function (a, b) {
+        return a.length < b.length ? a : b;
+      });
       result['score'] = highestScore;
       result['word'] = shortestWord;
     }
