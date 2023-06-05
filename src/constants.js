@@ -71,8 +71,7 @@ const createLetterPool = () => {
       frequency--;
     }
   }
-  // console.log(LETTERPOOL);
   return LETTERPOOL;
 };
 
-module.exports = {createLetterPool, SCORECHART}
+export { createLetterPool, SCORECHART} 

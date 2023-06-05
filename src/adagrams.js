@@ -60,27 +60,15 @@ export const highestScoreFrom = (words) => {
       scoreLog[winningWord] = maxScore;
       scoreLog[word] = score;
     }
-  // console.log(scoreLog);
-  // console.log(winningWord);
   }
 
   for (let [word,score] of Object.entries(scoreLog)) {
-    // console.log(word.length)
     if (word.length === 10) {
-        console.log({word: word, score: score});
-        // console.log(word, score)
         return {word: word, score: score};
     } else if (word.length < winningWord.length) {
         winningWord = word;
         maxScore = score;
     }
   }
-  // console.log(winningWord);
-  console.log({word: winningWord, score: maxScore});
   return {word: winningWord, score: maxScore};
 };
-
-// highestScoreFrom(['cat', 'family'])
-// highestScoreFrom(['AAAAAAAAAA', 'BBBBBB'])
-// highestScoreFrom(['BBBBBB', 'AAAAAAAAAA', 'C'])
-highestScoreFrom(["X", "XX", "XXX", "XXXX"])
