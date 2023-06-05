@@ -106,7 +106,6 @@ export const scoreWord = (word) => {
   }
 
   const letterPool = {...LETTER_POOL};
-
   let totalScore = 0;
 
   for (let i = 0; i < word.length; i++){
