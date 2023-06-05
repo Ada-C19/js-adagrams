@@ -82,9 +82,8 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   const lettersInHandCopy = [...lettersInHand];
-  let capitalizedWord = input.toUpperCase()
   
-  for (const letter of capitalizedWord) {
+  for (const letter of input.toUpperCase()) {
     if (lettersInHandCopy.includes(letter)) {
       lettersInHandCopy.splice(lettersInHandCopy.indexOf(letter), 1);
     } else {
