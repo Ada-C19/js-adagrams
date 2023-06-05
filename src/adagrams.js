@@ -144,16 +144,18 @@ export const highestScoreFrom = (words) => {
     for (let word of ties){
       let wordLen = word.length;
       let highLen = highestWord.length;
-      if (wordLen == highestWord.length){
-        if (word > highestWord){
-          highestWord = word;
-        }
-      }
-      else if (wordLen == 10){
+      // if (wordLen == highLen){
+      //   if (word > highestWord){
+      //     highestWord = word;
+      //   }
+      // }
+      if (wordLen != highLen) {
+      if (wordLen == 10){
         highestWord = word;
       }
       else if (highLen > wordLen && highLen != 10){
         highestWord = word;
+      }
       }
     }
   }
