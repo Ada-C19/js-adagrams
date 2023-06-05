@@ -158,4 +158,3 @@ export const highestScoreFrom = (words) => {
     return result;
   }
 };
-
