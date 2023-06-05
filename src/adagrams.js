@@ -62,7 +62,6 @@ function countLetters(dealtHand) {
   for (const element of dealtHand) {
     counter[element] = (counter[element] || 0) + 1;
   }
-
   return counter;
 }
 
@@ -73,24 +72,23 @@ const letterList = []
   while (letterList.length < 10) {
     const letterArray = Object.keys(letterPool);
     const letter = letterArray[Math.floor(Math.random() * letterArray.length)];
-
     const letterCounts = countLetters(letterList);
 
     if (!letterList.includes(letter)) {
       letterList.push(letter);
+
     } else if (letterCounts[letter] < letterPool[letter]) {
       letterList.push(letter);
     }
   }
-
   return letterList;
 }
-
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
   const handLetterCount = countLetters(lettersInHand);
   const wordLetterCount = countLetters(Array.from(input.toUpperCase()));
+
   for (const char of Object.keys(wordLetterCount)) {
     if (!handLetterCount[char] || wordLetterCount[char] > handLetterCount[char]) {
       return false
@@ -101,8 +99,45 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
+  const scores = [];
+  let total = 0;
+
+  for (let char of Array.from(word.toUpperCase())) {
+    scores.push(letterScores[char])
+
+  } if (scores.length >= 7 && scores.length <= 10) {
+    total += 8;
+
+  } for (let value of scores) {
+    total += value;
+  }
+  return total;
 };
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  const allScoresDict = {};
+
+  for (let word of words) {
+    allScoresDict[word] = scoreWord(word);
+
+  } let highestWord = [null, 0];
+
+  for (let word in allScoresDict) {
+    if (allScoresDict[word] > highestWord[1]) {
+      highestWord[0] = word;
+      highestWord[1] = allScoresDict[word];
+    }
+    else if (allScoresDict[word] === highestWord[1]) {
+      if (word.length === 10) {
+        highestWord[0] = word;
+        highestWord[1] = allScoresDict[word];
+      }
+      else if (word.length < (highestWord[0]).length) {
+        highestWord[0] = word;
+        highestWord[1] = allScoresDict[word];
+      }
+    }
+  }
+  return highestWord
 };
