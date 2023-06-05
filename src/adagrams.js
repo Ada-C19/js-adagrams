@@ -50,6 +50,15 @@ export const scoreWord = word => {
   return score;
 };
 
-export const highestScoreFrom = words => {
-  // Implement this method for wave 4
+const highestWords = words => {
+  let winners = [];
+  let score = 0;
+  for (let word of words) {
+    let wordScore = scoreWord(word);
+    if (wordScore > score) score = wordScore;
+    else if (wordScore === score) winners.push(word);
+  }
+  return winners, score;
 };
+
+export const highestScoreFrom = words => {};
