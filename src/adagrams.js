@@ -114,7 +114,6 @@ export const scoreWord = (word) => {
 
     if (letter in SCORE_CHART && letterPool[letter]){
       totalScore += SCORE_CHART[letter];
-      // letterPool[letter]--;
     }
   }
 
@@ -148,7 +147,7 @@ const isPreferredWord = (currentWord, bestWord) => {
   const bestWordLength = bestWord.length;
 
   if (currentWordLength === 10 && bestWordLength !== 10) {
-    return true; // Choose the word with 10 letters
+    return true;
   }
 
   if (bestWordLength === 10){
@@ -156,19 +155,7 @@ const isPreferredWord = (currentWord, bestWord) => {
   }
 
   if (currentWordLength < bestWordLength) {
-    return true; // Choose the word with fewer letters
+    return true;
   }
-
-  return false; // Keep the original best word
+  return false;
 };
-
-// for (words in highScore) {
-//   let score = scoreWord(words);
-//   scoredWordDict[words] = score;
-// } if (words.length === 10) {
-//   bestWord === (words, highScore);
-// } return bestWord;
-
-// let highScore = 0;
-//   let bestWord = '';
-//   let scoredWordDict = {};
