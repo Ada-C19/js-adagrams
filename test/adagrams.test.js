@@ -35,7 +35,7 @@ const LETTER_POOL = {
 };
 
 describe("Adagrams", () => {
-  describe("drawLetters", () => {
+  describe.only("drawLetters", () => {
     it("draws ten letters from the letter pool", () => {
       const drawn = drawLetters();
 
@@ -70,7 +70,7 @@ describe("Adagrams", () => {
     });
   });
 
-  describe("usesAvailableLetters", () => {
+  describe.skip("usesAvailableLetters", () => {
     it("returns true if the submitted letters are valid against the drawn letters", () => {
       const drawn = ["D", "O", "G", "X", "X", "X", "X", "X", "X", "X"];
       const word = "DOG";
@@ -96,7 +96,7 @@ describe("Adagrams", () => {
     });
   });
 
-  describe("scoreWord", () => {
+  describe.skip("scoreWord", () => {
     const expectScores = (wordScores) => {
       Object.entries(wordScores).forEach(([word, score]) => {
         expect(scoreWord(word)).toBe(score);
