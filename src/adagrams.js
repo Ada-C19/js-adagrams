@@ -58,7 +58,7 @@ export const highestScoreFrom = (words) => {
   // the max score exists in words. if so tenWordWin becomes true and the word wins.
   // after checking all elements in the list, if tenWordWin is still false-
   // sort the list by length, loop through the list to find the word with max score
-  //  and return the first word the loop encounters as the max word. break.
+  //  and return the first word the loop encounters as the max word.
 
   let scoreList = [];
   for(let word of words){
