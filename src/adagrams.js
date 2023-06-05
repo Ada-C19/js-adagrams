@@ -61,4 +61,17 @@ const highestWords = words => {
   return winners, score;
 };
 
-export const highestScoreFrom = words => {};
+export const highestScoreFrom = words => {
+  const [winners, score] = highestWords(words);
+
+  if (winners.length === 1) return winners.join(',') + score;
+
+  let winnerWord = '';
+  for (let word in winners) {
+    if (word.length == 10) return word, score;
+
+    if (!winnerWord) winnerWord = word;
+    else if (word.length < winnerWord.length) winnerWord = word;
+  }
+  return winnerWord, score;
+};
