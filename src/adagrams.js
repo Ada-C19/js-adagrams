@@ -114,13 +114,13 @@ export const scoreWord = (word) => {
 
     if (letter in SCORE_CHART && letterPool[letter]){
       totalScore += SCORE_CHART[letter];
-      letterPool[letter]--;
-
-      if (word.length >= 7 && word.length <= 10){
-        totalScore += 8 * word.length;
-      }
+      // letterPool[letter]--;
     }
   }
+
+    if ((word.length >= 7) && (word.length <= 10)){
+      totalScore += 8;
+      }
   return totalScore;
 };
 
@@ -128,21 +128,38 @@ export const highestScoreFrom = (words) => {
   let highScore = 0;
   let bestWord = null;
 
-  for (let i = 0; i < words.length; i++) {
-    const word = words[i];
-    const score = scoreWord(word);
+  for (const word of words) {
+    let score = scoreWord(word);
 
-    if (score > highScore || (score === highScore && (word.length === 10 || (bestWord && (word.length < bestWord.word.length || word.length === bestWord.word.length))))) {
+    if (score > highScore || (score === highScore && isPreferredWord(word, bestWord))){
       highScore = score;
-      bestWord = {word, score};
+      bestWord = word;
     }
   }
+    return {word: bestWord, score: highScore};
+};
 
-  if (!bestWord) {
-    bestWord = {word: '', score: 0};
+const isPreferredWord = (currentWord, bestWord) => {
+  if (bestWord === null) {
+    return true;
   }
 
-  return bestWord;
+  const currentWordLength = currentWord.length;
+  const bestWordLength = bestWord.length;
+
+  if (currentWordLength === 10 && bestWordLength !== 10) {
+    return true; // Choose the word with 10 letters
+  }
+
+  if (bestWordLength === 10){
+    return false;
+  }
+
+  if (currentWordLength < bestWordLength) {
+    return true; // Choose the word with fewer letters
+  }
+
+  return false; // Keep the original best word
 };
 
 // for (words in highScore) {
