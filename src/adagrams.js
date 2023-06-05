@@ -55,8 +55,10 @@ export const drawLetters = () => {
           index -= value;
         }
       }
-    drawnLetters.push(result);
-    count++;
+    if(!drawnLetters.includes(result)){
+      drawnLetters.push(result);
+      count++;
+  }
   }
   return drawnLetters;
 
