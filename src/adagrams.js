@@ -61,7 +61,6 @@ export const drawLetters = () => {
   let lettersDrawn = [];
   let availableLetters = [];
 
-
 for (let letter in DISTRIBUTION_OF_LETTERS) {
   availableLetters.push(letter);
 }
@@ -110,15 +109,27 @@ export const scoreWord = (word) => {
 };
 
 
-
-
-
-
-
-
-
-
-
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  let highestScore = 0;
+  let highestWord = "";
+
+  for (let word of words) {
+    let score = scoreWord(word);
+
+    if (score > highestScore) {
+      highestScore = score;
+      highestWord = word;
+    } else if (score === highestScore) {
+      if (word.length === highestWord.length) {
+        continue;
+      } else if (word.length === 10) {
+        highestWord = word;
+      } else if (word.length < highestWord.length && highestWord.length !== 10) {
+        highestWord = word;
+      }
+    }
+  }
+
+  let wordAndScore = {"score": highestScore, "word": highestWord};
+  return wordAndScore;
 };
