@@ -129,20 +129,32 @@ export const highestScoreFrom = (words) => {
   // for of loop
   let highestScore = 0;
   let highestWord = "";
+  let ties = [];
   for (let word of words){
     let currentScore = scoreWord(word);
-    if (currentScore == highestScore && word.length == 10){
-        if (word[0] > highestWord[0]){
-        highestScore = currentScore;
-        highestWord = word;}
-      else if (word.length < highestWord.length){
-        highestScore = currentScore;
-        highestWord = word;
+    if (currentScore == highestScore){
+        ties.push(word);
       }
-    }
     else if (currentScore > highestScore){
       highestScore = currentScore;
       highestWord = word;
+    }
+  }
+  if (ties){
+    for (let word of ties){
+      let wordLen = word.length;
+      let highLen = highestWord.length;
+      if (wordLen == highestWord.length){
+        if (word > highestWord){
+          highestWord = word;
+        }
+      }
+      else if (wordLen == 10){
+        highestWord = word;
+      }
+      else if (highLen > wordLen && highLen != 10){
+        highestWord = word;
+      }
     }
   }
   return { word: highestWord, score: highestScore };
