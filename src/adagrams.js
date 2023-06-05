@@ -46,34 +46,41 @@ export const scoreWord = (word) => {
   return score;
 };
 
+
 export const highestScoreFrom = (words) => {
   const scoreLog = {};
   let winningWord, maxScore = 0
 
   for (const word of words) {
     const score = scoreWord(word);
-    scoreLog[word] = score 
-  }
+    if (score > maxScore) {
+      winningWord = word;
+      maxScore = score;
+    } else if (score == maxScore) {
+      scoreLog[winningWord] = maxScore;
+      scoreLog[word] = score;
+    }
   // console.log(scoreLog);
-  // return scoreLog;
-
-  for (const [key,value] of Object.entries(scoreLog)) {
-    if (value > maxScore) {
-      winningWord = key;
-      maxScore = value;
-    } else if (value == maxScore) {
-        if (key.length == 10) {
-          // console.log({word: winningWord, score: maxScore});
-          return {word: winningWord, score: maxScore};
-        } else if (key.length < winningWord.length) {
-          winningWord = key;
-          maxScore = value;
-        }
-    } 
+  // console.log(winningWord);
   }
-  // console.log({word: winningWord, score: maxScore});
-  return {word: winningWord, score: maxScore};
 
+  for (let [word,score] of Object.entries(scoreLog)) {
+    // console.log(word.length)
+    if (word.length === 10) {
+        console.log({word: word, score: score});
+        // console.log(word, score)
+        return {word: word, score: score};
+    } else if (word.length < winningWord.length) {
+        winningWord = word;
+        maxScore = score;
+    }
+  }
+  // console.log(winningWord);
+  console.log({word: winningWord, score: maxScore});
+  return {word: winningWord, score: maxScore};
 };
 
 // highestScoreFrom(['cat', 'family'])
+// highestScoreFrom(['AAAAAAAAAA', 'BBBBBB'])
+// highestScoreFrom(['BBBBBB', 'AAAAAAAAAA', 'C'])
+highestScoreFrom(["X", "XX", "XXX", "XXXX"])
