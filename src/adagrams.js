@@ -106,6 +106,13 @@ export const highestScoreFrom = (words) => {
     if (wordScore > highestScore) {
       highestScoreWord = word;
       highestScore = wordScore;
+
+    } else if (wordScore === highestScore) {
+      if (word.length === 10 && highestScoreWord.length !== 10) {
+        highestScoreWord = word;
+      } else if (word.length < highestScoreWord.length && highestScoreWord.length < 10) {
+        highestScoreWord = word;
+      }
     }
   } return {'word': highestScoreWord, 'score': highestScore};
 };
