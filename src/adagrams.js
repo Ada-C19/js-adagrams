@@ -27,7 +27,7 @@ const letterPool = {
     'Z': 1
 }
 
-const LETTER_SCORES = {
+const letterScores = {
     'A': 1, 
     'B': 3, 
     'C': 3, 
@@ -56,52 +56,47 @@ const LETTER_SCORES = {
     'Z': 10
 }
 
+function countLetters(dealtHand) {
+  const counter = {};
+
+  for (const element of dealtHand) {
+    counter[element] = (counter[element] || 0) + 1;
+  }
+
+  return counter;
+}
+
 export const drawLetters = () => {
   // Implement this method for wave 1
-  const usedLetters = {};
-  const lettersHand = [];
-  const possibleLetters = [];
+const letterList = []
 
-  for (let [key, value] of Object.entries(letterPool)) {
-    for (let i = 0; i < value; i++) {
-      possibleLetters.push(key);
+  while (letterList.length < 10) {
+    const letterArray = Object.keys(letterPool);
+    const letter = letterArray[Math.floor(Math.random() * letterArray.length)];
+
+    const letterCounts = countLetters(letterList);
+
+    if (!letterList.includes(letter)) {
+      letterList.push(letter);
+    } else if (letterCounts[letter] < letterPool[letter]) {
+      letterList.push(letter);
     }
   }
 
-  while (lettersHand.length <= 9) {
-    let randomInt = Math.floor(Math.random() * possibleLetters.length);
-    let chosenLetter = possibleLetters[randomInt];
-    lettersHand.push(chosenLetter);
-    possibleLetters.splice(randomInt, 1);
-  }
-  
-  return lettersHand;
-};
+  return letterList;
+}
+
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
-    const letterObj = {};
-    const inputObj = {};
-  
-    for (let i = 0; i < lettersInHand.length; i++) {
-      const letter = lettersInHand[i];
-      letterObj[letter] = (letterObj[letter] || 0) + 1;
+  const handLetterCount = countLetters(lettersInHand);
+  const wordLetterCount = countLetters(Array.from(input.toUpperCase()));
+  for (const char of Object.keys(wordLetterCount)) {
+    if (!handLetterCount[char] || wordLetterCount[char] > handLetterCount[char]) {
+      return false
     }
-  
-    for (let i = 0; i < input.length; i++) {
-      const letter = input[i].toUpperCase();
-      inputObj[letter] = (inputObj[letter] || 0) + 1;
-    }
-  
-    for (let char in inputObj) {
-      if (inputObj[char] <= (letterObj[char] || 0)) {
-        continue;
-      } else {
-        return false;
-      }
-    }
-  
-    return true;
+  }
+  return true
   };
 
 export const scoreWord = (word) => {
