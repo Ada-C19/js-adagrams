@@ -42,7 +42,12 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 export const scoreWord = word => {
-  // Implement this method for wave 3
+  let score = 0;
+  for (let letter of word.toUpperCase().trim()) {
+    if (letter in LETTER_COST) score += LETTER_COST[letter];
+  }
+  if (word.length >= 7) score += 8;
+  return score;
 };
 
 export const highestScoreFrom = words => {
