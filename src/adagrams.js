@@ -1,5 +1,4 @@
-// export 
-const drawLetters = () => {
+export const drawLetters = () => {
   const letterPool = {
     A : 9,
     B : 2,
