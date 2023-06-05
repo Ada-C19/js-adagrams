@@ -79,23 +79,28 @@ return lettersDrawn
 };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  input = input.toUpperCase();
+  
+  for (let letter of input) {
+    letter = letter.toUpperCase();
+    let frequencyInWord = input.split('').filter(l => l == letter).length;
+    let frequencyInBank = lettersInHand.filter(l => l === letter).length;
+
+    if (frequencyInBank < frequencyInWord) {
+      return false;
+    }
+  }
+  
+  return true;
 };
+
+
+
+
+
+
+
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
