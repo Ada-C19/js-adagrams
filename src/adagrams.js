@@ -12,7 +12,7 @@ export const drawLetters = () => {
   const hand = [];
   const usedIndices = new Set();
 
-  for (let i = 0; i < 10; i++) {
+  while (hand.length !== 10) {
     const randIndex = Math.floor(Math.random() * lettersArr.length);
     if (!usedIndices.has(randIndex)) {
       hand.push(lettersArr[randIndex]);
@@ -64,7 +64,7 @@ export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
   const wordObj = {};
   const matching = [];
-  
+
   words.forEach((word) => wordObj[word] = scoreWord(word));
   
   const maxScore = Math.max(...Object.values(wordObj));
