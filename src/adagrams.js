@@ -91,7 +91,7 @@ const letterPool = {
     return true;
   };
 
-
+// Wave 3
 export const scoreWord = (word) => {
   let score = 0;
   for (let letter of word.toUpperCase()) {
@@ -103,15 +103,59 @@ export const scoreWord = (word) => {
   return score;
 };
 
-
-// score = 0
-// for letter in word.upper():
-//     score += letter_score[letter]
-
-// if len(word) >= 7 and len(word) <= 10:
-//     return score + 8
-// return score
-
+// Wave 4
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  let highestScore = 0;
+  let numerOfTies = 0;
+  const result = { word: '', score: 0 };
+  const wordsAndScores = {};
+
+
+  for (let word of words) {
+    wordsAndScores[word] = scoreWord(word);
+  }
+  
+  for (let [i, j] of Object.entries(wordsAndScores)) {
+    if (j > highestScore) {
+      highestScore = j;
+    } else if (j === highestScore) {
+      numerOfTies++;
+    }
+  }
+
+  if (numerOfTies === 0) {
+    for (let [i,j] of Object.entries(wordsAndScores)) {
+      if (j === highestScore) {
+        result['word'] = i;
+        result['score'] = j;
+        return result;
+      }
+    }
+  } else {
+    const ties = [];
+    for (let [i] of Object.entries(wordsAndScores)) {
+      ties.push(i);
+    }
+    for (let tie of ties) {
+      if (tie.length === 10) {
+        result['word'] = tie;
+        result['score'] = wordsAndScores[tie];
+        return result;
+      }
+    }
+
+    let shortestLength = 10;
+    let shortestWord = '';
+
+    for (let i = 0; i < ties.length; i++) {
+      if (ties[i].length < shortestLength) {
+        shortestLength = ties[i].length;
+        shortestWord = ties[i];
+      }
+    }
+    result['word'] = shortestWord;
+    result['score'] = wordsAndScores[shortestWord];
+    return result;
+  }
 };
+
