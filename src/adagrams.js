@@ -1,8 +1,4 @@
 import { LETTER_POOL, LETTER_COST } from './letter-bank-cost';
-/*const m = require('./letter-bank-cost');
-const LETTER_COST = m.LETTER_COST;
-const LETTER_POOL = m.LETTER_POOL;
-*/
 
 const randomLetters = letters => {
   const letterBank = [];
