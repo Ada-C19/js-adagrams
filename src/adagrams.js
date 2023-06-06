@@ -32,14 +32,31 @@ function randomChoiceWeighted(items, weights) {
       return items[i];
     }
   }
-}
+};
 
 export const usesAvailableLetters = (input, lettersInHand) => {
+  const word = input.toUpperCase();
+  const hand = lettersInHand.map(letter => letter.toUpperCase());
 
+  if (word.length > hand.length) {
+    return false;
+  }
+
+  const handCopy = [...hand];
+
+  for (let letter of word) {
+    if (!handCopy.includes(letter)) {
+      return false;
+    }
+
+    handCopy.splice(handCopy.indexOf(letter), 1);
+  }
+
+  return true;
 };
 
 export const scoreWord = (word) => {
-  
+
 };
 
 export const highestScoreFrom = (words) => {
