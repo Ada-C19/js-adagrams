@@ -1,5 +1,7 @@
 export const WORD_LENGTH_BONUS_THRESHOLD = 7;
+
 export const WORD_LENGTH_BONUS_POINTS = 8;
+
 export const LETTER_POOL = {
     'A': 9,
     'B': 2, 
@@ -28,6 +30,7 @@ export const LETTER_POOL = {
     'Y': 2, 
     'Z': 1
 };
+
 export const POINT_VALUES = {
     'A': 1, 
     'B': 3, 
