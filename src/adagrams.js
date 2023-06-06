@@ -34,7 +34,7 @@ export const drawLetters = () => {
   const tenLetters = [];
 
   while (tenLetters.length < 10) {
-    let randomNum = Math.floor(Math.random() * Object.keys(copy).length) + 1;
+    let randomNum = Math.floor(Math.random() * Object.keys(copy).length + 1);
     let randomLetter = Object.keys(copy)[randomNum];
 
     if (copy[randomLetter] > 0) {
