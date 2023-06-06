@@ -38,12 +38,16 @@ export const drawLetters = () => {
   }
 
   for (let i = 0; i < 10; i++) {
-    let randomLetter = letterPoolArray[Math.floor(Math.random() * letterPoolArray.length)]
-    lettersInHand.push(randomLetter);
+    // let randomLetter = letterPoolArray[Math.floor(Math.random() * letterPoolArray.length)];
+    let randomNumber = [Math.floor(Math.random() * letterPoolArray.length)];
+    lettersInHand.push(letterPoolArray[randomNumber]);
+    letterPoolArray.splice(randomNumber, 1);
   }
 
   return lettersInHand
 };
+
+console.log(drawLetters())
 
 // export const usesAvailableLetters = (input, lettersInHand) => {
 //   // Implement this method for wave 2
