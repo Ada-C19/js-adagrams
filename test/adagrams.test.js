@@ -146,7 +146,8 @@ describe("Adagrams", () => {
       const words = ["XXX", "XXXX", "X", "XX"];
       const correct = { word: "XXXX", score: scoreWord("XXXX") };
 
-      throw "Complete test by adding an assertion";
+      // throw "Complete test by adding an assertion";
+      expect(highestScoreFrom(words)).toEqual(correct);
     });
 
     describe("in case of tied score", () => {
@@ -175,7 +176,7 @@ describe("Adagrams", () => {
         const words = ["MMMM", "WWW"];
         const correct = { word: "WWW", score: scoreWord("WWW") };
         expectTie(words);
-
+        
         expect(highestScoreFrom(words)).toEqual(correct);
         expect(highestScoreFrom(words.reverse())).toEqual(correct);
       });
