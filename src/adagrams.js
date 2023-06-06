@@ -15,16 +15,16 @@ export const drawLetters = () => {
     // to letterPool array
     for (let i = 0; i < letters.length; i++) {
       for (let j = 1; j <= weights[i]; j++) {
-        letterPool.push(letters[i])
+        letterPool.push(letters[i]);
       }
     } 
     
     // build hand of 10 letters per specs
     while (hand.length < 10) {
       const randomIndex = Math.floor(Math.random() * letterPool.length);
-      const randomLetter = letterPool[randomIndex]
-      hand.push(randomLetter)
-      letterPool.splice(randomIndex, 1)
+      const randomLetter = letterPool[randomIndex];
+      hand.push(randomLetter);
+      letterPool.splice(randomIndex, 1);
     }
 
     // return hand of 10 letters
