@@ -69,7 +69,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 export const scoreWord = (word) => {
-    const score_chart = {
+    const scoreChart = {
         A: 1,
         B: 3,
         C: 3,
@@ -111,8 +111,8 @@ export const scoreWord = (word) => {
                 points = 0
             }
             for (let letter of word){
-                let letter_value = score_chart[letter]
-                points += letter_value
+                let letterValue = scoreChart[letter]
+                points += letterValue
             }  
         return points 
         }
@@ -121,5 +121,33 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-	// Implement this method for wave 4
+    const wordScores = []
+    const result = {}
+
+    for (let word of words){
+        const score = scoreWord(word);
+        wordScores.push(score)
+    }
+    const highestScore = Math.max.apply(Math, wordScores)
+
+    for (let word of words){
+        if (word.length === 10 && scoreWord(word) === highestScore){
+            const winningWord = word;
+            result["word"] = winningWord;
+            result["score"] = highestScore;
+            { break; }
+        } else {
+            const sortedWordList = words.sort(function(a, b){return a.length - b.length});
+            for (let word of sortedWordList){
+                if (scoreWord(word) === highestScore){
+                    const winningWord = word;
+                    result["word"] = winningWord;
+                    result["score"] = highestScore;
+                    { break; }
+                }
+            }
+        }   
+    }
+    return result
 };
+
