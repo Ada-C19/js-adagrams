@@ -5,6 +5,7 @@ import {
   POINT_VALUES
 } from 'constants';
 
+
 export const drawLetters = () => {
   let letterPoolList = generateLetterPool();
   let letterBank = [];
@@ -15,6 +16,7 @@ export const drawLetters = () => {
   }
   return letterBank;
 };
+
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   let letterCounts = countAvailableLetters(lettersInHand);
@@ -28,6 +30,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return true;
 };
 
+
 export const scoreWord = (word) => {
   let score = 0;
   if (word.length >= WORD_LENGTH_BONUS_THRESHOLD) {
@@ -38,6 +41,7 @@ export const scoreWord = (word) => {
   }
   return score;
 };
+
 
 export const highestScoreFrom = (words) => {
   let wordsToCompareAndBestScore = findTopScoreAndBestWords(words);
@@ -53,8 +57,6 @@ export const highestScoreFrom = (words) => {
 };
 
 
-
-
 // Helper Functions
 const generateLetterPool = () => {
   let letterPoolList = [];
@@ -68,6 +70,7 @@ const generateLetterPool = () => {
   return letterPoolList;
 };
 
+
 const countAvailableLetters = letterBank => {
   let letterCounts = {};
   for (let letter of letterBank) {
@@ -78,6 +81,7 @@ const countAvailableLetters = letterBank => {
   }
   return letterCounts;
 };
+
 
 const makeScoresAndWordsObject = wordList => {
   let scoresAndWords = {};
@@ -90,6 +94,7 @@ const makeScoresAndWordsObject = wordList => {
   }
   return scoresAndWords;
 };
+
 
 const findTopScoreAndBestWords = wordList => {
   let scoresAndWords = makeScoresAndWordsObject(wordList);
