@@ -23,7 +23,18 @@ Note there are a handful of incomplete tests that currently throw exceptions. Yo
 After forking and cloning this repo you should `cd` to the project directory and run:
 
 ```bash
+$ brew install yarn
+```
+```bash
+$ yarn install
+```
+
+```bash
 $ yarn add
+```
+
+```bash
+$ yarn add --dev eslint eslint-plugin-jest
 ```
 
 Similar to using virtual environments in Python projects, this makes the yarn package manager download and install any dependencies for the project (such as Jest).
