@@ -117,39 +117,6 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   //Implement this method for wave 4
-  // let wordsPoints = {};
-  // let winners = [];
-  // let result = {};
-
-  // for (let word of words) {
-  //   wordsPoints[word] = scoreWord(word);
-  // }
-
-  // let scores = Object.values(wordsPoints);
-
-  // let max = scores[0];
-  // for (let i = 0; i < scores.length; i++) {
-  //   if (scores[i] > max) { max = scores[i]; }
-  // }
-
-  // for (const [word, score] of Object.entries(wordsPoints)) {
-  //   if (score === max) {
-  //     winners.push(word);
-  //   }
-  // }
-  
-  // if (winners.length >= 1) {
-  //   for (let word of winners) {
-  //     if (word.length === 10){
-  //       result[word] = scoreWord(word);
-  //       return result;
-  //     }
-  //   }
-  // }
-
-  // else {
-  //   result[w]
-  // }
 
     const pairWordPoints = {};
     let maxScore = 0;
