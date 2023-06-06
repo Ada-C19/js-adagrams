@@ -38,7 +38,6 @@ export const drawLetters = () => {
   }
 
   for (let i = 0; i < 10; i++) {
-    // let randomLetter = letterPoolArray[Math.floor(Math.random() * letterPoolArray.length)];
     let randomNumber = [Math.floor(Math.random() * letterPoolArray.length)];
     lettersInHand.push(letterPoolArray[randomNumber]);
     letterPoolArray.splice(randomNumber, 1);
@@ -47,11 +46,18 @@ export const drawLetters = () => {
   return lettersInHand
 };
 
-console.log(drawLetters())
+export const usesAvailableLetters = (input, lettersInHand) => {
+  for (let letter of input) {
+    if (lettersInHand.includes(letter)) {
+      let letterInstance = lettersInHand.indexOf(letter);
+      lettersInHand.splice(letterInstance, 1);
+    } else {
+        return false;
+    }
+  }
 
-// export const usesAvailableLetters = (input, lettersInHand) => {
-//   // Implement this method for wave 2
-// };
+  return true;
+};
 
 // export const scoreWord = (word) => {
 //   // Implement this method for wave 3
