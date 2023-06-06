@@ -26,7 +26,7 @@ export const drawLetters = () => {
     X: 1,
     Y: 2,
     Z: 1
-  }
+  };
   
   const letterPoolArray = []
   const lettersInHand = []
@@ -35,13 +35,13 @@ export const drawLetters = () => {
     for (let i = 0; i < letterPool[letter]; i++) {
       letterPoolArray.push(letter);
     }
-  }
+  };
 
   for (let i = 0; i < 10; i++) {
     let randomNumber = [Math.floor(Math.random() * letterPoolArray.length)];
     lettersInHand.push(letterPoolArray[randomNumber]);
     letterPoolArray.splice(randomNumber, 1);
-  }
+  };
 
   return lettersInHand
 };
@@ -54,7 +54,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
     } else {
         return false;
     }
-  }
+  };
 
   return true;
 };
@@ -105,25 +105,52 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
+  const wordScoreDict = {};
+  // const tiebreak = []
   let highestScore = 0;
-  let highestWordIndex = 0;
+  // let highestWordIndex = 0;
   
   for (let i = 0; i < words.length; i++) {
-    if (scoreWord(words[i]) > highestScore) {
-      highestScore = scoreWord(words[i]);
-      highestWordIndex = i;
-      console.log(`highest score: ${highestScore}, highest score word: ${words[i]}`)
+    console.log('current word:', words[i])
+    if (scoreWord(words[i]) in wordScoreDict) {
+      wordScoreDict[scoreWord(words[i])].push(words[i]);
+    } else {
+      wordScoreDict[scoreWord(words[i])] = [words[i]]
     }
+
+    if (scoreWord(words[i]) > highestScore) {
+      highestScore = scoreWord(words[i])
+    }
+    console.log('dict:', wordScoreDict, '; high score:', highestScore)
   }
 
-  console.log({
-    'return': 'yes',
-    'word': words[highestWordIndex],
-    'score': scoreWord(words[highestWordIndex])
-  })
+  let shortestWord = 'XXXXXXXXXX'
+
+  console.log('highest score word(s):', wordScoreDict[highestScore], '; list length', wordScoreDict[highestScore].length)
+
+  if (wordScoreDict[highestScore].length > 1) {
+    for (let word of wordScoreDict[highestScore]) {
+      console.log('tiebreaking list:', wordScoreDict[highestScore], '; current word:', word)
+      if (word.length == 10) {
+        return {
+          'word': word,
+          'score': highestScore
+        }
+      } else {
+        if (word.length < shortestWord.length) {
+          shortestWord = word;
+        }
+      }
+
+    return {
+      'word': shortestWord,
+      'score': highestScore
+    }
+  }
+}
 
   return {
-    'word': words[highestWordIndex],
-    'score': scoreWord(words[highestWordIndex])
+    'word': wordScoreDict[highestScore][0],
+    'score': highestScore
   };
-};
+}
