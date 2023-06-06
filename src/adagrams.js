@@ -1,35 +1,35 @@
 const letterPool = {
-  "A": 9,
-  "B": 2,
-  "C": 2,
-  "D": 2,
-  "E": 12,
-  "F": 2,
-  "G": 3,
-  "H": 2,
-  "I": 9,
-  "J": 1,
-  "K": 1,
-  "L": 4,
-  "M": 2,
-  "N": 6,
-  "O": 8,
-  "P": 2,
-  "Q": 1,
-  "R": 6,
-  "S": 4,
-  "T": 6,
-  "U": 4,
-  "V": 2,
-  "W": 2,
-  "X": 1,
-  "Y": 2,
-  "Z": 1
-}
+  A: 9,
+  B: 2,
+  C: 2,
+  D: 2,
+  E: 12,
+  F: 2,
+  G: 3,
+  H: 2,
+  I: 9,
+  J: 1,
+  K: 1,
+  L: 4,
+  M: 2,
+  N: 6,
+  O: 8,
+  P: 2,
+  Q: 1,
+  R: 6,
+  S: 4,
+  T: 6,
+  U: 4,
+  V: 2,
+  W: 2,
+  X: 1,
+  Y: 2,
+  Z: 1,
+};
 
 export const drawLetters = () => {
   const generatedPool = generatePool();
-  const hand = []
+  const hand = [];
 
   function generatePool() {
     const newArr = [];
@@ -44,20 +44,31 @@ export const drawLetters = () => {
   }
 
   function drawLetter() {
-    let randomNumber = Math.floor(Math.random() * generatedPool.length)
-    hand.push(generatedPool[randomNumber])
-    generatedPool.splice(randomNumber, 1)
+    let randomNumber = Math.floor(Math.random() * generatedPool.length);
+    hand.push(generatedPool[randomNumber]);
+    generatedPool.splice(randomNumber, 1);
   }
 
   while (hand.length < 10) {
-    drawLetter()
+    drawLetter();
   }
-  
-  return hand
+
+  return hand;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  const copyLettersInHand = [...lettersInHand];
+  for (let letter of input) {
+    const indexToRemove = copyLettersInHand.indexOf(letter);
+    if (indexToRemove === -1) {
+      return false;
+    }
+    const removedValue = copyLettersInHand.splice(indexToRemove, 1);
+    if (removedValue.length === 0) {
+      return false;
+    }
+  }
+  return true;
 };
 
 export const scoreWord = (word) => {
