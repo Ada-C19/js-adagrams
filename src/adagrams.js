@@ -1,3 +1,4 @@
+// an array prototype to return a count of how many times an item occurs in an array
 Array.prototype.count = function(value) {
   let count = 0;
 
@@ -8,7 +9,24 @@ Array.prototype.count = function(value) {
   });
 
   return count;
-}
+};
+
+// an array prototype to find the shortest string in an array and return it
+Array.prototype.findShortestString = function() {
+  if (this.length === 0) {
+    return null; // Return null if the array is empty
+  }
+
+  let shortestString = this[0];
+  for (let i = 1; i < this.length; i++) {
+    const currentString = this[i];
+    if (currentString.length < shortestString.length) {
+      shortestString = currentString;
+    }
+  }
+
+  return shortestString;
+};
 
 export const drawLetters = () => {
 
@@ -88,16 +106,16 @@ export const scoreWord = (word) => {
   // minimum required length of word to qualify for a long word bonus:
   const bonusPointMinLength = 7;
   // bonus points to be awarded for words that meet the bonus minimum length:
-    const bonusPoints = 8;
+  const bonusPoints = 8;
 
-    const letterValues = {
-      'AEIOULNRST': 1,
-      'DG': 2,
-      'BCMP': 3,
-      'FHVWY': 4,
-      'K': 5,
-      'JX': 8,
-      'QZ': 10
+  const letterValues = {
+    'AEIOULNRST': 1,
+    'DG': 2,
+    'BCMP': 3,
+    'FHVWY': 4,
+    'K': 5,
+    'JX': 8,
+    'QZ': 10
   };
 
   let score = 0
@@ -120,6 +138,37 @@ export const scoreWord = (word) => {
   return score;
 };
 
-// export const highestScoreFrom = (words) => {
-//   // Implement this method for wave 4
-// };
+export const highestScoreFrom = (words) => {
+  const maxLetterLength = 10;
+  const wordScores = {};
+  let highScore = 0;
+
+  // compile the word scores for each word in words into an object
+  for (let word of words) {
+    let score = scoreWord(word);
+    wordScores[word] = score;
+    if (score > highScore) {
+      highScore = score;
+    }
+  }
+
+  // compile the words with the same high score into an array
+  const highScoreWords = [];
+
+  for (let word in wordScores) {
+    if (wordScores[word] === highScore) {
+      highScoreWords.push(word);
+    }
+  }
+
+  // tie breaking logic: word equal to 10 letters
+  for (let word of highScoreWords) {
+    if (word.length === maxLetterLength) {
+      return { 'word': word, 'score': wordScores[word]}
+    }
+  }
+
+  // tie breaking logic: finding the shortest string and returning it
+  const shortestWord = highScoreWords.findShortestString()
+  return {'word': shortestWord, 'score': wordScores[shortestWord]}
+};
