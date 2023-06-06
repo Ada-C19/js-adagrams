@@ -1,5 +1,6 @@
 import { _ } from "core-js";
 
+
 const LETTER_POOL = {
   A: 9, 
   B: 2, 
@@ -100,9 +101,9 @@ export const scoreWord = (word) => {
   const upperCaseWord = word.toUpperCase();
 
   for (const letter of upperCaseWord) {
-    for (const [x, y] of Object.entries(POINTS)) {
-      if (y.includes(letter)) {
-        points += parseInt(x);
+    for (const [score, singleLetter] of Object.entries(POINTS)) {
+      if (singleLetter.includes(letter)) {
+        points += parseInt(score);
       }
     }
   }
@@ -115,6 +116,94 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  //Implement this method for wave 4
+  // let wordsPoints = {};
+  // let winners = [];
+  // let result = {};
+
+  // for (let word of words) {
+  //   wordsPoints[word] = scoreWord(word);
+  // }
+
+  // let scores = Object.values(wordsPoints);
+
+  // let max = scores[0];
+  // for (let i = 0; i < scores.length; i++) {
+  //   if (scores[i] > max) { max = scores[i]; }
+  // }
+
+  // for (const [word, score] of Object.entries(wordsPoints)) {
+  //   if (score === max) {
+  //     winners.push(word);
+  //   }
+  // }
   
+  // if (winners.length >= 1) {
+  //   for (let word of winners) {
+  //     if (word.length === 10){
+  //       result[word] = scoreWord(word);
+  //       return result;
+  //     }
+  //   }
+  // }
+
+  // else {
+  //   result[w]
+  // }
+
+    const pairWordPoints = {};
+    let maxScore = 0;
+    const semifinalist = {};
+    let winner = {};
+  
+    for (const word of words) {
+      pairWordPoints[word] = scoreWord(word);
+    }
+  
+    maxScore = Math.max(...Object.values(pairWordPoints));
+  
+    for (const word in pairWordPoints) {
+      if (pairWordPoints[word] === maxScore) {
+        semifinalist[word] = pairWordPoints[word];
+      }
+    }
+  
+    for (const [word, score] of Object.entries(semifinalist)) {
+      if (word.length === 10) {
+        winner = {
+          word : word, 
+          score : score
+        };
+      return winner;
+      }
+    }
+  
+    winner = {
+      word : min(Object.keys(semifinalist), word => word.length),
+      score: semifinalist[min(Object.keys(semifinalist), word => word.length)]
+    };
+    
+  return winner;
 };
+
+const min = (arr, getKey) => {
+  if (arr.length === 0) {
+    return undefined;
+  }
+
+  let minValue = arr[0];
+  let minKey = getKey(minValue);
+
+  for (let i = 1; i < arr.length; i++) {
+    const currentValue = arr[i];
+    const currentKey = getKey(currentValue);
+
+    if (currentKey < minKey) {
+      minValue = currentValue;
+      minKey = currentKey;
+    }
+  }
+
+  return minValue;
+};
+  
