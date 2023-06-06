@@ -103,15 +103,39 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 export const scoreWord = (word) => {
   let wordScore = 0;
   word = word.toUpperCase();
-  if (word.length > 0) {
-    for (let letter of word) {
-      wordScore += scoringSystem[letter];
-    }
+  for (let letter of word) {
+    wordScore += scoringSystem[letter];
   }
   wordScore = word.length >= 7 ? (wordScore += 8) : wordScore;
   return wordScore;
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  const wordObjects = words.map((word) => ({
+    word: word,
+    score: scoreWord(word),
+    wordLength: word.length,
+  }));
+  const wordScores = words.map((word) => scoreWord(word));
+  const maxScore = Math.max(...wordScores);
+  const filteredScores = wordObjects.filter((obj) => obj["score"] == maxScore);
+  const shortestWord = filteredScores.reduce((a, b) =>
+    a.wordLength <= b.wordLength ? a.wordLength : b.wordLength
+  );
+
+  function winnerCalculator(arr, shortestWord) {
+    if (arr.some((word) => word.wordLength === 10)) {
+      let wordObject = arr.find((word) => word.wordLength === 10);
+      return { word: wordObject.word, score: wordObject.score };
+    } else {
+      let wordObject = arr.find(word => word.wordLength <= shortestWord)
+      return { word: wordObject.word, score: wordObject.score };
+    }
+    }
+
+  if (filteredScores.length > 1) {
+    return winnerCalculator(filteredScores, shortestWord);
+  } else {
+    return { word: filteredScores[0].word, score: filteredScores[0].score };
+  }
 };
