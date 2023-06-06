@@ -107,7 +107,7 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  const result = { word: "", score: 0 };
+  const result = { word: '', score: 0 };
   const wordsAndScores = {};
   let highestScore = 0;
   let ties = 0;
@@ -127,8 +127,8 @@ export const highestScoreFrom = (words) => {
   if (ties === 0) {
     for (let [k, v] of Object.entries(wordsAndScores)) {
       if (v === highestScore) {
-        result["word"] = k;
-        result["score"] = v;
+        result['word'] = k;
+        result['score'] = v;
         return result;
       }
     }
@@ -139,14 +139,14 @@ export const highestScoreFrom = (words) => {
     }
     for (let tiedWord of tiedWords) {
       if (tiedWord.length === 10) {
-        result["word"] = tiedWord;
-        result["score"] = wordsAndScores[tiedWord];
+        result['word'] = tiedWord;
+        result['score'] = wordsAndScores[tiedWord];
         return result;
       }
     }
 
     let shortestLength = 10;
-    let shortestWord = "";
+    let shortestWord = '';
 
     for (let i = 0; i < tiedWords.length; i++) {
       if (tiedWords[i].length < shortestLength) {
@@ -154,8 +154,8 @@ export const highestScoreFrom = (words) => {
         shortestWord = tiedWords[i];
       }
     }
-    result["word"] = shortestWord;
-    result["score"] = wordsAndScores[shortestWord];
+    result['word'] = shortestWord;
+    result['score'] = wordsAndScores[shortestWord];
     return result;
   }
 };
