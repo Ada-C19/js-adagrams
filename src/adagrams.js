@@ -11,7 +11,6 @@ export const drawLetters = () => {
   const playerLetters = [];
   const keys = Object.keys(LETTER_POOL);
   const keysLength = keys.length;
-
   while (playerLetters.length < 10) {
     const randomIndex = Math.floor(Math.random() * keysLength);
     let randomLetter = keys[randomIndex];
@@ -20,7 +19,6 @@ export const drawLetters = () => {
       playerLetters.push(randomLetter);
     }
   }
-
   return playerLetters;
 };
 
@@ -33,10 +31,9 @@ export const usesAvailableLetters = (input, lettersInHand) => {
     }
     lettersInHand.splice(lettersInHand.indexOf(letter), 1);
   }
-
   return true;
-
 };
+
 export const scoreWord = (word) => {
   // Implement this method for wave 3
   word = word.toUpperCase();
