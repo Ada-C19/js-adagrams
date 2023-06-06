@@ -31,23 +31,23 @@ const LETTER_POOL = {
 };
 
 // Implement this method for wave 1
-// export const drawLetters = () => {
-//   let tenLetters = [];
-//   while (tenLetters.length < 10) {
-//     const keys = Object.keys(LETTER_POOL)
-//     let randomLetter = keys[Math.floor(Math.random() * keys.length)];
+export const drawLetters = () => {
+  const copyOfLetters = JSON.parse(JSON.stringify(LETTER_POOL))
+  let tenLetters = [];
+  while (tenLetters.length < 10) {
+    const keys = Object.keys(copyOfLetters)
+    let randomLetter = keys[Math.floor(Math.random() * keys.length)];
     
-//     tenLetters.push(randomLetter);  
-//     for (let letter in tenLetters) {
-//       if (LETTER_POOL[letter] > 0) {
-//         LETTER_POOL[letter] -= 1;
-//       } else {
-//         tenLetters.splice(tenLetters[letter],1);
-//       }
-//       }
-//     }
-//   return tenLetters;
-// }
+    if (copyOfLetters[randomLetter] > 0) {
+      tenLetters.push(randomLetter); 
+      copyOfLetters[randomLetter] -= 1;
+    }
+    if (tenLetters.length === 10) {
+      break;
+    }
+  }
+  return tenLetters;
+}
 
 
 // Implement this method for wave 2
