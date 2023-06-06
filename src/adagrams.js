@@ -30,7 +30,7 @@ export const drawLetters = () => {
     Z: 1,
   };
 
-  let copy = { ...LETTER_POOL }
+  const copy = { ...LETTER_POOL }
   const tenLetters = [];
 
   while (tenLetters.length < 10) {
