@@ -51,8 +51,22 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-	
+	let word = input.toUpperCase();
+    let result = true;
+    // let letterBank = [...lettersInHand];
 
+    for (const letter of word){
+        if (lettersInHand.includes(letter)) {
+            // if (letterBank.includes(letter)){
+            let removeLetter = lettersInHand.indexOf(letter);
+            lettersInHand.splice(removeLetter, 1);
+        } else {
+            result = false;
+            }
+    }        
+    return result
+    
+    
 
 };
 
