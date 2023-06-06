@@ -42,7 +42,26 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-    
+    let letterBank = {};
+    input = input.toUpperCase();
+
+    for (let i = 0; i < lettersInHand.length; i++) {
+        if (!(lettersInHand[i] in letterBank)) {
+            letterBank[lettersInHand[i]] = 1;
+        } else {
+            letterBank[lettersInHand[i]]++;
+        }
+    }
+
+    for (let i = 0; i < input.length; i++) {
+        if (!(input.charAt(i) in letterBank) || letterBank[input.charAt(i)] == 0) {
+            return false;
+        }
+
+        letterBank[input.charAt(i)]--;
+    }
+
+    return true;
 };
 
 export const scoreWord = (word) => {
