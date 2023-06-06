@@ -28,11 +28,17 @@ export const drawLetters = () => {
     Y: 2,
     Z: 1,
   };
+  let weightedList = []
+  for (let key of Object.keys(LETTER_POOL)) {
+      const letterList = new Array(LETTER_POOL[key])
+      letterList.fill(key,0)
+      weightedList.push(...letterList)
+  }
   const lettersList = [];
   const letterDrawn = {};
-  const keys = Object.keys(LETTER_POOL)
+
   while (lettersList.length <10) {
-    let randomNum = keys[Math.floor(Math.random()*keys.length)];
+    let randomNum = weightedList[Math.floor(Math.random()*weightedList.length)];
     if (randomNum in letterDrawn){
       if (letterDrawn[randomNum] < LETTER_POOL[randomNum]) {
         letterDrawn[randomNum] +=1
