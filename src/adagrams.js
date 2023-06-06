@@ -1,7 +1,7 @@
 // import { random } from "core-js/core/number";
 
 export const drawLetters = () => {
-  const letterPool = {
+  const LETTER_POOL = {
     A: 9,
     B: 2,
     C: 2,
@@ -30,7 +30,7 @@ export const drawLetters = () => {
     Z: 1,
   };
 
-  let copy = { ...letterPool }
+  let copy = { ...LETTER_POOL }
   const tenLetters = [];
 
   while (tenLetters.length < 10) {
@@ -95,6 +95,7 @@ export const scoreWord = (word) => {
     Y: 4,
     Z: 10,
   };
+
   let score = 0;
   for (let letter of word.toUpperCase()) {
     score += scoreChart[letter];
@@ -106,25 +107,29 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  let targetWord;
-  const scores = words.map(word => scoreWord(word));
-  const highestScore = scores.reduce((max, score) => max > score ? max : score);
+  let winner;
+  let score;
+  let highestScore = 0;
+  let winningWords = []
 
-  const highestScoreWords = [];
   for (let word of words) {
-    if (scoreWord(word) === highestScore) {
-      highestScoreWords.push(word);
+    score = scoreWord(word);
+
+    if (score > highestScore) {
+      highestScore = score;
+      winningWords = [word];
+    } else if (score === highestScore) {
+      winningWords.push(word);
     }
   }
 
-  for (let word of highestScoreWords) {
+  for (let word of winningWords) {
     if (word.length === 10) {
-      targetWord = word;
+      winner = word;
       break
     } else {
-      targetWord = highestScoreWords.reduce((target, word) => target.length < word.length ? target : word)
+      winner = winningWords.reduce((shortest, word) => shortest.length < word.length ? shortest : word);
     }
   }
-  return { word: targetWord, score: highestScore }
-
-};
+  return { word: winner, score: scoreWord(winner) }
+}
