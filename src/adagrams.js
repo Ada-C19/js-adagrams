@@ -42,15 +42,16 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
   for (let letter in input) {
     let currentLetter = input[letter];
-    if (letterHashTable[currentLetter] === 0){
-      return false;
-    } else if (!(currentLetter in letterHashTable)) {
+    
+    const letterIsUnavailable = (letterHashTable[currentLetter] === 0) 
+    || !(currentLetter in letterHashTable);
+    
+    if (letterIsUnavailable) {
       return false;
     } else {
       --letterHashTable[currentLetter];
     }
   }
-
   return true;
 }
 
