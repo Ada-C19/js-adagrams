@@ -78,7 +78,7 @@ export const drawLetters = () => {
       cloneLetterPool[randomLetter] -= 1;
     }
   }
-
+  console.log(`These are your letters: ${drawnLetters}`)
   return drawnLetters
 };
 
@@ -136,33 +136,28 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
-  // best_score = ('', 0)
-    
-  //   for word in word_list:
-  //       calculated_score = score_word(word)
-        
-  //       if (best_score[1] < calculated_score or
-  //           (best_score[1] == calculated_score and len(best_score[0]) > len(word))
-  //       ):
-  //           best_score = word, calculated_score
-
-  //       if len(word) == 10 and calculated_score == best_score[1]:
-  //           best_score = word, calculated_score
-  //           break
-
-  //   return best_score
   
   let bestScore = {
-    'word': '',
-    'score': 0,
-}
-  for (let word in words) {
-    let calculatedScore = scoreWord(word)
+    word: '',
+    score: 0,
+};
 
-    if (bestScore['score'] < calculatedScore) {
-      bestScore['word'] =  word;
-      bestScore['score'] = calculatedScore
+  for (let input of words) {
+    let calculatedScore = scoreWord(input)
+    
+    if (input.length === 10) {
+      bestScore.word = input;
+      bestScore.score = calculatedScore;
+      break;
+    } 
+    
+    if ((bestScore.score < calculatedScore) 
+        || (bestScore.score === calculatedScore 
+        && bestScore.word.length > input.length)) {
+          bestScore.word = input;
+          bestScore.score = calculatedScore
     }
+
   }
   
   return bestScore
