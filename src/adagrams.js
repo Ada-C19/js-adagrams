@@ -42,9 +42,6 @@ export const drawLetters = () => {
       tenLetters.push(randomLetter); 
       copyOfLetters[randomLetter] -= 1;
     }
-    if (tenLetters.length === 10) {
-      break;
-    }
   }
   return tenLetters;
 }
