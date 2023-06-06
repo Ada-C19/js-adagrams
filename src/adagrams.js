@@ -1,3 +1,5 @@
+import { _ } from "core-js";
+
 const LETTER_POOL = {
   A: 9, 
   B: 2, 
@@ -37,16 +39,9 @@ const POINTS = {
   10:['Q','Z'],
 }
 
-const ADD_EIGHT_IF_LENGHT = [7, 8, 9, 10]
+const ADD_EIGHT_IF_LENGTH = [7, 8, 9, 10]
 
 const buildPileOfLetters = (dictionary) => {
-  //   pile = []
-  //   if dictionary == []:
-  //       return None
-  //   for x,y in dictionary.items():
-  //       for i in range(0,y):
-  //           pile.append(x)
-  //   return pile
   let pile = [];
   if (Object.keys(dictionary)===0) {
     return null;
@@ -56,23 +51,70 @@ const buildPileOfLetters = (dictionary) => {
       pile.push(x);
     }
   }
-
+  return pile;
 };
 
 export const drawLetters = () => {
   // Implement this method for wave 1
-  let hand = _.sample(buildPileOfLetters(LETTER_POOL), 10);
+  let hand = []
+  let pile = buildPileOfLetters(LETTER_POOL);
+  const random = Math.floor(Math.random() * pile.length);
+  for (let i = 0; i < 10; i++) {
+    hand.push(pile[random]);
+  }
   return hand;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+
+  const hash = {};
+
+  for (let letter of lettersInHand) {
+    if (hash[letter]) {
+      hash[letter] += 1;
+    } else {
+      hash[letter] = 1;
+    }
+  }
+
+  const word = Array.from(input.toUpperCase());
+
+  for (const letter of word) {
+    if (hash[letter]) {
+      hash[letter] -= 1;
+    } else {
+      return false;
+    }
+  }
+
+  return true;
+
 };
 
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  
+  if (word.length === 0){
+    return 0
+  }
+  let points = 0;
+  const upperCaseWord = word.toUpperCase();
+
+  for (const letter of upperCaseWord) {
+    for (const [x, y] of Object.entries(POINTS)) {
+      if (y.includes(letter)) {
+        points += parseInt(x);
+      }
+    }
+  }
+
+  if (ADD_EIGHT_IF_LENGTH.includes(word.length)) {
+    points += 8;
+  }
+
+  return points;
 };
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  
 };
