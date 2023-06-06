@@ -27,6 +27,16 @@ const LETTER_POOL = {
   'Z': 1
 }
 
+const SCORES = {
+  1: 'AEIOULNRST',
+  2: 'DG',
+  3: 'BCMP',
+  4: 'FHVWY',
+  5: 'K',
+  8: 'JX',
+  10: 'Q',
+}
+
 export const drawLetters = () => {
   // Implement this method for wave 1
   const hand = []
@@ -43,7 +53,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
   const map = {}
   const handMap = {}
-  
+
   for (const letter of input.toUpperCase()) {
     if(map[letter]) map[letter]++; 
     else map[letter] = 1; 
@@ -62,6 +72,20 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
+  let score = 0
+  if (word) {
+    const scoreMap = {}
+    for (const key in SCORES) {
+      for (const letter of SCORES[key]) {
+        scoreMap[letter] = Number(key)
+      }
+    }        
+    for (const letter of word.toUpperCase()) {
+      score += scoreMap[letter]
+    }
+    if (6 < word.length && word.length < 11) score += 8
+  }
+  return score
 };
 
 export const highestScoreFrom = (words) => {
