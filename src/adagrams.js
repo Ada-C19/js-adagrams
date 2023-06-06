@@ -106,9 +106,7 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   const wordScoreDict = {};
-  // const tiebreak = []
   let highestScore = 0;
-  // let highestWordIndex = 0;
   
   for (let i = 0; i < words.length; i++) {
     console.log('current word:', words[i])
@@ -124,14 +122,14 @@ export const highestScoreFrom = (words) => {
     console.log('dict:', wordScoreDict, '; high score:', highestScore)
   }
 
-  let shortestWord = 'XXXXXXXXXX'
+  let shortestWord = 'XXXXXXXXXX';
 
   console.log('highest score word(s):', wordScoreDict[highestScore], '; list length', wordScoreDict[highestScore].length)
 
   if (wordScoreDict[highestScore].length > 1) {
     for (let word of wordScoreDict[highestScore]) {
       console.log('tiebreaking list:', wordScoreDict[highestScore], '; current word:', word)
-      if (word.length == 10) {
+      if (word.length === 10) {
         return {
           'word': word,
           'score': highestScore
@@ -141,13 +139,12 @@ export const highestScoreFrom = (words) => {
           shortestWord = word;
         }
       }
-
+    }
     return {
       'word': shortestWord,
       'score': highestScore
     }
   }
-}
 
   return {
     'word': wordScoreDict[highestScore][0],
