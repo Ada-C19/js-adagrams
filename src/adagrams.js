@@ -89,7 +89,6 @@ export const scoreWord = (word) => {
     'Z': 10
   };
   let score = 0;
-  console.log('word:', word)
 
   if (word.length == 0) {
     return score
@@ -105,6 +104,26 @@ export const scoreWord = (word) => {
   return score;
 };
 
-// export const highestScoreFrom = (words) => {
-//   // Implement this method for wave 4
-// };
+export const highestScoreFrom = (words) => {
+  let highestScore = 0;
+  let highestWordIndex = 0;
+  
+  for (let i = 0; i < words.length; i++) {
+    if (scoreWord(words[i]) > highestScore) {
+      highestScore = scoreWord(words[i]);
+      highestWordIndex = i;
+      console.log(`highest score: ${highestScore}, highest score word: ${words[i]}`)
+    }
+  }
+
+  console.log({
+    'return': 'yes',
+    'word': words[highestWordIndex],
+    'score': scoreWord(words[highestWordIndex])
+  })
+
+  return {
+    'word': words[highestWordIndex],
+    'score': scoreWord(words[highestWordIndex])
+  };
+};
