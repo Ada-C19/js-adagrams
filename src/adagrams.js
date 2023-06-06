@@ -11,6 +11,53 @@ Array.prototype.count = function(value) {
   return count;
 };
 
+const createLetterBowl = (letterFrequencyObj) => {
+  const letterBowl = [];
+  for (let letter in letterFrequencyObj) {
+    for (let i = 0; i < letterFrequencyObj[letter]; i++) {
+      letterBowl.push(letter);
+    }
+  }
+
+  return letterBowl;
+};
+
+const createWordScoresObj = (wordsArr) => {
+  const wordScores = {};
+
+  for (let word of wordsArr) {
+    let score = scoreWord(word);
+    wordScores[word] = score;
+  }
+
+  return wordScores;
+};
+
+const findHighScore = (wordScoresObj) => {
+  let highScore = 0;
+
+  for (let word in wordScoresObj) {
+    if (wordScoresObj[word] > highScore) {
+        highScore = wordScoresObj[word];
+    }
+  }
+
+  return highScore;
+};
+
+const createHighScoreWordsArray = (wordScoresObj, highScore) => {
+  let highScoreWords = [];
+
+  for (let word in wordScoresObj) {
+    if (wordScoresObj[word] === highScore) {
+      highScoreWords.push(word);
+    }
+  }
+
+  return highScoreWords;
+};
+
+
 // an array prototype to find the shortest string in an array and return it
 Array.prototype.findShortestString = function() {
   if (this.length === 0) {
@@ -32,7 +79,7 @@ export const drawLetters = () => {
 
   const maxLettersInHand = 10;
 
-  const letterPool = {
+  const letterFrequency = {
     'A': 9,
     'B': 2,
     'C': 2,
@@ -61,14 +108,8 @@ export const drawLetters = () => {
     'Z': 1
   };
 
-  // Create a letter pool list to emulate a pile of letters to choose from:
-  const letterPoolList = [];
-
-  for (let letter in letterPool) {
-    for (let i = 0; i < letterPool[letter]; i++) {
-      letterPoolList.push(letter);
-    }
-  }
+  // Create a letter "bowl" in an array to emulate a bowl of letters to choose from:
+  const letterBowl = createLetterBowl(letterFrequency);
   
   // build the player's hand using the count function
   const hand = [];
@@ -76,9 +117,9 @@ export const drawLetters = () => {
   let num = 0;
   while (num < maxLettersInHand) {
     // choose a random number from 0-97
-    let i = Math.floor(Math.random() * letterPoolList.length)
-    let letter = letterPoolList[i]
-    if (hand.count(letter) < letterPool[letter]) {
+    let i = Math.floor(Math.random() * letterBowl.length)
+    let letter = letterBowl[i]
+    if (hand.count(letter) < letterFrequency[letter]) {
       hand.push(letter);
       num++;
     }
@@ -140,26 +181,15 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   const maxLetterLength = 10;
-  const wordScores = {};
-  let highScore = 0;
 
   // compile the word scores for each word in words into an object
-  for (let word of words) {
-    let score = scoreWord(word);
-    wordScores[word] = score;
-    if (score > highScore) {
-      highScore = score;
-    }
-  }
+  const wordScores = createWordScoresObj(words);
+
+  // find the high score
+  const highScore = findHighScore(wordScores);
 
   // compile the words with the same high score into an array
-  const highScoreWords = [];
-
-  for (let word in wordScores) {
-    if (wordScores[word] === highScore) {
-      highScoreWords.push(word);
-    }
-  }
+  const highScoreWords = createHighScoreWordsArray(wordScores, highScore);
 
   // tie breaking logic: word equal to 10 letters
   for (let word of highScoreWords) {
