@@ -56,7 +56,6 @@ const SCORE_BOARD = {
   Z: 10,
 };
 
-
 export const drawLetters = () => {
   let letterArray = Object.keys(LETTER_POOL)
   let tempLetters = {}
@@ -85,6 +84,8 @@ export const drawLetters = () => {
   return lettersInHand
 };
 
+
+
 export const usesAvailableLetters = (input, lettersInHand) => {
   let tempLetters = getLettersInHandObject(lettersInHand);
   let inputObject = getInputObject(input);
@@ -104,32 +105,6 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   }
   return true;
 };
-
-export const scoreWord = (word) => {
-  let score = 0;
-  let capsWord = word.toUpperCase();
-  
-  for (let i = 0; i < word.length; i++) {
-    let currentLetter = capsWord[i];
-    score += SCORE_BOARD[currentLetter];
-  }
-  if (word.length >= 7) {
-    score += 8;
-  }
-  return score
-};
-
-export const highestScoreFrom = (words) => {
-  let scoreArray = getScoreArray(words);
-  let highScore = getHighScore(scoreArray);
-  let potentialWinners = getHighValuePairs(words, scoreArray, highScore);
-  let lengthArray = getLengths(potentialWinners);
-  let tieBreaker = getTieBreaker(potentialWinners, lengthArray);
-  return {"word": tieBreaker, "score": highScore};
-};
-
-
-
 
 const getLettersInHandObject = (lettersInHand) => {
   let tempLetters = {};
@@ -160,6 +135,36 @@ const getInputObject = (input) => {
   return inputObject
 };
 
+
+export const scoreWord = (word) => {
+  let score = 0;
+  let capsWord = word.toUpperCase();
+  
+  for (let i = 0; i < word.length; i++) {
+    let currentLetter = capsWord[i];
+    score += SCORE_BOARD[currentLetter];
+  }
+  if (word.length >= 7) {
+    score += 8;
+  }
+  return score
+};
+
+export const highestScoreFrom = (words) => {
+  let scoreArray = getScoreArray(words);
+  let highScore = getHighScore(scoreArray);
+  let potentialWinners = getHighValuePairs(words, scoreArray, highScore);
+  let tenLetterWinner = checkForTen(potentialWinners);
+  if (tenLetterWinner) {
+    return {"word": tenLetterWinner, "score": highScore};
+  }
+  else {
+    let lengthArray = getLengths(potentialWinners);
+    let tieBreaker = getTieBreaker(potentialWinners, lengthArray);
+    return {"word": tieBreaker, "score": highScore};
+  }
+};
+
 const getScoreArray = (words) => {
   let scoreArray = []
   for (let i = 0; i < words.length; i++) {
@@ -187,6 +192,14 @@ const getHighValuePairs = (words, scoreArray, highScore) => {
   return potentialWinners;
 };
 
+const checkForTen = (potentialWinners) => {
+  for (let i = 0; i < potentialWinners.length; i++) {
+    let currentWord = potentialWinners[i];
+    if (currentWord.length === 10) {
+      return currentWord;
+    }
+  }
+};
 
 const getLengths = (potentialWinners) => {
   let lengthArray = []
@@ -197,18 +210,171 @@ const getLengths = (potentialWinners) => {
   return lengthArray
 };
 
+
 const getTieBreaker = (potentialWinners, lengthArray) => {
   for (let i = 0; i < lengthArray.length; i++) {
     let currentWord = potentialWinners[i];
-
+    // let currentLength = lengthArray[i];
     let shortestLength = Math.min(...lengthArray);
-    if (currentWord.length === 10) {
+    if (currentWord.length === shortestLength) {
       return currentWord;
-      break;
-    }
-    else if (currentWord.length === shortestLength) {
-      return currentWord;
-      // break;
     }
   }
 };
+
+
+// export const drawLetters = () => {
+//   let letterArray = Object.keys(LETTER_POOL)
+//   let tempLetters = {}
+//   let lettersInHand = []
+
+//   while (lettersInHand.length < 10) {
+//     let newNum = Math.floor(Math.random() * (26 + 1));
+//     let currentLetter = letterArray[newNum];
+//     if (currentLetter === undefined) {
+//       continue;
+//     }
+//     else if (!(currentLetter in tempLetters)) {
+//       tempLetters[currentLetter] = 1;
+//       lettersInHand.push(currentLetter);
+//     }
+//     else if (currentLetter in tempLetters) {
+//       if (tempLetters[currentLetter] < LETTER_POOL[currentLetter]) {
+//         tempLetters[currentLetter] += 1;
+//         lettersInHand.push(currentLetter);
+//       }
+//     }
+//     else {
+//       continue;
+//     }
+//   }
+//   return lettersInHand
+// };
+
+// export const usesAvailableLetters = (input, lettersInHand) => {
+//   let tempLetters = getLettersInHandObject(lettersInHand);
+//   let inputObject = getInputObject(input);
+//   for (let n = 0; n < input.length; n++) {
+//     let currentLetter = input[n];
+//     if (currentLetter in tempLetters) {
+//       if (inputObject[currentLetter] <= tempLetters[currentLetter]) {
+//         continue;
+//       }
+//       else {
+//         return false;
+//       }
+//     }
+//     else {
+//       return false;
+//     }
+//   }
+//   return true;
+// };
+
+// export const scoreWord = (word) => {
+//   let score = 0;
+//   let capsWord = word.toUpperCase();
+  
+//   for (let i = 0; i < word.length; i++) {
+//     let currentLetter = capsWord[i];
+//     score += SCORE_BOARD[currentLetter];
+//   }
+//   if (word.length >= 7) {
+//     score += 8;
+//   }
+//   return score
+// };
+
+// export const highestScoreFrom = (words) => {
+//   let scoreArray = getScoreArray(words);
+//   let highScore = getHighScore(scoreArray);
+//   let potentialWinners = getHighValuePairs(words, scoreArray, highScore);
+//   let lengthArray = getLengths(potentialWinners);
+//   let tieBreaker = getTieBreaker(potentialWinners, lengthArray);
+//   return {"word": tieBreaker, "score": highScore};
+// };
+
+
+
+
+// const getLettersInHandObject = (lettersInHand) => {
+//   let tempLetters = {};
+//   for (let i = 0; i < lettersInHand.length; i++) {
+//     let letter = lettersInHand[i];
+//     if (!(letter in tempLetters)) {
+//       tempLetters[letter] = 1;
+//     }
+//     else {
+//       tempLetters[letter] += 1;
+//     }
+//   }
+//   return tempLetters;
+// };
+
+// const getInputObject = (input) => {
+//   let capsInput = input.toUpperCase();
+//   let inputObject = {}
+//   for (let n = 0; n < capsInput.length; n++) {
+//     let currentLetter = capsInput[n];
+//     if (!(currentLetter in inputObject)) {
+//       inputObject[currentLetter] = 1;
+//     }
+//     else {
+//       inputObject[currentLetter] += 1;
+//     }
+//   }
+//   return inputObject
+// };
+
+// const getScoreArray = (words) => {
+//   let scoreArray = []
+//   for (let i = 0; i < words.length; i++) {
+//     let currentWord = words[i];
+//     let currentScore = scoreWord(currentWord);
+//     scoreArray.push(currentScore)
+//   }
+//   return scoreArray;
+// };
+
+// const getHighScore = (scoreArray) => {
+//   let highScore = Math.max(...scoreArray)
+//   return highScore;
+// };
+
+// const getHighValuePairs = (words, scoreArray, highScore) => {
+//   let potentialWinners = [];
+//   for (let i = 0; i < scoreArray.length; i++) {
+//     let winner = scoreArray[i];
+//     let winningWord = words[i];
+//     if (winner === highScore) {
+//       potentialWinners.push(winningWord);
+//     }
+//   }
+//   return potentialWinners;
+// };
+
+
+// const getLengths = (potentialWinners) => {
+//   let lengthArray = []
+//   for (let i = 0; i < potentialWinners.length; i++) {
+//     let currentWord = potentialWinners[i].length;
+//     lengthArray.push(currentWord);
+//   }
+//   return lengthArray
+// };
+
+// const getTieBreaker = (potentialWinners, lengthArray) => {
+//   for (let i = 0; i < lengthArray.length; i++) {
+//     let currentWord = potentialWinners[i];
+
+//     let shortestLength = Math.min(...lengthArray);
+//     if (currentWord.length === 10) {
+//       return currentWord;
+//       break;
+//     }
+//     else if (currentWord.length === shortestLength) {
+//       return currentWord;
+//       // break;
+//     }
+//   }
+// };
