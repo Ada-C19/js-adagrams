@@ -1,38 +1,38 @@
 const LETTER_POOL = {
-	A: 9, 
-    B: 2, 
-    C: 2, 
-    D: 4, 
-    E: 12, 
-    F: 2, 
-    G: 3, 
-    H: 2, 
-    I: 9, 
-    J: 1, 
-    K: 1, 
-    L: 4, 
-    M: 2, 
-    N: 6, 
-    O: 8, 
-    P: 2, 
-    Q: 1, 
-    R: 6, 
-    S: 4, 
-    T: 6, 
-    U: 4, 
-    V: 2, 
-    W: 2, 
-    X: 1, 
-    Y: 2, 
-    Z: 1
-}
+	A: 9,
+	B: 2,
+	C: 2,
+	D: 4,
+	E: 12,
+	F: 2,
+	G: 3,
+	H: 2,
+	I: 9,
+	J: 1,
+	K: 1,
+	L: 4,
+	M: 2,
+	N: 6,
+	O: 8,
+	P: 2,
+	Q: 1,
+	R: 6,
+	S: 4,
+	T: 6,
+	U: 4,
+	V: 2,
+	W: 2,
+	X: 1,
+	Y: 2,
+	Z: 1,
+};
 
 export const drawLetters = () => {
-	const playersHand = []
-	const letterBag = []
+	const playersHand = [];
+	const letterBag = [];
 
-	for (const [key, value] of Object.entries(LETTER_POOL)){
-		for (let i = 0; i < value; i++){
+	for (const [key, value] of Object.entries(LETTER_POOL)) {
+		for (let i = 0; i < value; i++) {
 			letterBag.push(key);
 		}
 	}
@@ -42,112 +42,115 @@ export const drawLetters = () => {
 		let letterForHand = letterBag[randomNum];
 		playersHand.push(letterForHand);
 		letterBag.splice(randomNum, 1);
-	
 	}
 
 	console.log(playersHand);
 	return playersHand;
-
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
 	let word = input.toUpperCase();
-    let result = true;
+	let result = true;
+	let lettersInHandCopy = [...lettersInHand];
 
-    for (const letter of word){
-        if (lettersInHand.includes(letter)) {
-            let removeLetter = lettersInHand.indexOf(letter);
-            lettersInHand.splice(removeLetter, 1);
-        } else {
-            result = false;
-            }
-    }        
-    return result
-    
-    
-
+	for (const letter of word) {
+		if (lettersInHand.includes(letter)) {
+			if (lettersInHandCopy.includes(letter)) {
+				let removeLetter = lettersInHandCopy.indexOf(letter);
+				lettersInHandCopy.splice(removeLetter, 1);
+			} else {
+				result = false;
+			}
+		} else {
+			result = false;
+		}
+	}
+	return result;
 };
 
 export const scoreWord = (word) => {
-    const scoreChart = {
-        A: 1,
-        B: 3,
-        C: 3,
-        D: 2,
-        E: 1, 
-        F: 4, 
-        G: 2, 
-        H: 4, 
-        I: 1, 
-        J: 8, 
-        K: 5, 
-        L: 1, 
-        M: 3, 
-        N: 1, 
-        O: 1, 
-        P: 3, 
-        Q: 10, 
-        R: 1, 
-        S: 1, 
-        T: 1, 
-        U: 1, 
-        V: 4, 
-        W: 4, 
-        X: 8, 
-        Y: 4, 
-        Z: 10
-        
-    }
+	const scoreChart = {
+		A: 1,
+		B: 3,
+		C: 3,
+		D: 2,
+		E: 1,
+		F: 4,
+		G: 2,
+		H: 4,
+		I: 1,
+		J: 8,
+		K: 5,
+		L: 1,
+		M: 3,
+		N: 1,
+		O: 1,
+		P: 3,
+		Q: 10,
+		R: 1,
+		S: 1,
+		T: 1,
+		U: 1,
+		V: 4,
+		W: 4,
+		X: 8,
+		Y: 4,
+		Z: 10,
+	};
 
-    let points = 0 ;
-    if (word.length === 0){
-        return 0
-    } else {
-        for (let i = 0; i < word.length; i++){
-            word = word.toUpperCase()
-            if (word.length > 6){
-                points = 8 
-            } else {
-                points = 0
-            }
-            for (let letter of word){
-                let letterValue = scoreChart[letter]
-                points += letterValue
-            }  
-        return points 
-        }
-    }
-
+	let points = 0;
+	if (word.length === 0) {
+		return 0;
+	} else {
+		for (let i = 0; i < word.length; i++) {
+			word = word.toUpperCase();
+			if (word.length > 6) {
+				points = 8;
+			} else {
+				points = 0;
+			}
+			for (let letter of word) {
+				let letterValue = scoreChart[letter];
+				points += letterValue;
+			}
+			return points;
+		}
+	}
 };
 
 export const highestScoreFrom = (words) => {
-    const wordScores = []
-    const result = {}
+	const wordScores = [];
+	const result = {};
 
-    for (let word of words){
-        const score = scoreWord(word);
-        wordScores.push(score)
-    }
-    const highestScore = Math.max.apply(Math, wordScores)
+	for (let word of words) {
+		const score = scoreWord(word);
+		wordScores.push(score);
+	}
+	const highestScore = Math.max.apply(Math, wordScores);
 
-    for (let word of words){
-        if (word.length === 10 && scoreWord(word) === highestScore){
-            const winningWord = word;
-            result["word"] = winningWord;
-            result["score"] = highestScore;
-            { break; }
-        } else {
-            const sortedWordList = words.sort(function(a, b){return a.length - b.length});
-            for (let word of sortedWordList){
-                if (scoreWord(word) === highestScore){
-                    const winningWord = word;
-                    result["word"] = winningWord;
-                    result["score"] = highestScore;
-                    { break; }
-                }
-            }
-        }   
-    }
-    return result
+	for (let word of words) {
+		if (word.length === 10 && scoreWord(word) === highestScore) {
+			const winningWord = word;
+			result["word"] = winningWord;
+			result["score"] = highestScore;
+			{
+				break;
+			}
+		} else {
+			const sortedWordList = words.sort(function (a, b) {
+				return a.length - b.length;
+			});
+			for (let word of sortedWordList) {
+				if (scoreWord(word) === highestScore) {
+					const winningWord = word;
+					result["word"] = winningWord;
+					result["score"] = highestScore;
+					{
+						break;
+					}
+				}
+			}
+		}
+	}
+	return result;
 };
-
