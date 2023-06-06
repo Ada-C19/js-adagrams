@@ -41,6 +41,23 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
+  const map = {}
+  const handMap = {}
+  
+  for (const letter of input.toUpperCase()) {
+    if(map[letter]) map[letter]++; 
+    else map[letter] = 1; 
+  }
+
+  lettersInHand.forEach((letter) => {
+    if(handMap[letter]) handMap[letter]++; 
+    else handMap[letter] = 1; 
+  })
+
+  for (const key in map) {
+    if (!handMap[key] || map[key] > handMap[key]) return false 
+  }
+  return true
 };
 
 export const scoreWord = (word) => {
