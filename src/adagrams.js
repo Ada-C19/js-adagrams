@@ -28,6 +28,33 @@ export const drawLetters = () => {
   return playerHand;
 }
 
+export const usesAvailableLetters = (input, lettersInHand) => {
+  let letterHashTable = {};
+
+  for (let letter in lettersInHand) {
+    let currentLetter = lettersInHand[letter];
+    if (currentLetter in letterHashTable){
+      ++letterHashTable[letter];
+    } else {
+      letterHashTable[currentLetter] = 1;
+    }
+  }
+
+  for (let letter in input) {
+    let currentLetter = input[letter];
+    if (letterHashTable[currentLetter] === 0){
+      return false;
+    } else if (!(currentLetter in letterHashTable)) {
+      return false;
+    } else {
+      --letterHashTable[currentLetter];
+    }
+  }
+
+  return true;
+}
+
+
 export const scoreWord = (word) => {
   // Implement this method for wave 3
 };
