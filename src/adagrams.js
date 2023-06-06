@@ -52,14 +52,40 @@ export const scoreWord = (word) => {
   for (const letter of input) {
     score += scoreChart[letter];
   }
-
   if (input.length > 6) {
     score += 8;
   }
-
   return score
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  let bestWords = [];
+  let maxScore = 0;
+  for (let word of words) {
+    let score = scoreWord(word);
+    if (score > maxScore) {
+      bestWords = [word];
+      maxScore = score;
+    } else if (score === maxScore) {
+      bestWords.push(word);
+    } 
+  }
+
+  let winner = bestWords[0];
+
+  if (bestWords.length === 1) {
+    return {word:winner, score:maxScore};
+  } else {
+    let fewestLetters = winner.length;
+    for (let word of bestWords) {
+      if (word.length === 10) {
+        winner = word
+        return {word:winner, score:maxScore};
+      } else if (word.length < fewestLetters) {
+          winner = word;
+          fewestLetters = word.length;
+      }
+    }
+  }
+  return {word:winner, score:maxScore}
 };
