@@ -114,28 +114,25 @@ export const highestScoreFrom = (words) => {
   const wordObjects = words.map((word) => ({
     word: word,
     score: scoreWord(word),
-    wordLength: word.length,
   }));
   const wordScores = words.map((word) => scoreWord(word));
   const maxScore = Math.max(...wordScores);
-  const filteredScores = wordObjects.filter((obj) => obj["score"] == maxScore);
-  const shortestWord = filteredScores.reduce((a, b) =>
-    a.wordLength <= b.wordLength ? a.wordLength : b.wordLength
+  const highScoreObjects = wordObjects.filter((obj) => obj.score == maxScore);
+  const shortestWord = highScoreObjects.reduce((a, b) =>
+    a.word.length <= b.word.length ? a.word.length : b.word.length
   );
 
   function winnerCalculator(arr, shortestWord) {
-    if (arr.some((word) => word.wordLength === 10)) {
-      let wordObject = arr.find((word) => word.wordLength === 10);
-      return { word: wordObject.word, score: wordObject.score };
+    if (arr.some((word) => word.word.length === 10)) {
+      return arr.find((word) => word.word.length === 10);
     } else {
-      let wordObject = arr.find(word => word.wordLength <= shortestWord)
-      return { word: wordObject.word, score: wordObject.score };
+      return arr.find((word) => word.word.length <= shortestWord);
     }
-    }
+  }
 
-  if (filteredScores.length > 1) {
-    return winnerCalculator(filteredScores, shortestWord);
+  if (highScoreObjects.length > 1) {
+    return winnerCalculator(highScoreObjects, shortestWord);
   } else {
-    return { word: filteredScores[0].word, score: filteredScores[0].score };
+    return highScoreObjects[0];
   }
 };
