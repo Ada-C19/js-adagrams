@@ -97,7 +97,6 @@ export const scoreWord = (word) => {
 
   let score = 0;
   for(let letter of word) {
-    // const upperCaseLetter = letter.toUpperCase();
     const points = letterValue[letter.toUpperCase()];
     score += points; 
   }
@@ -108,5 +107,22 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  let highest_score = 0;
+  let longest_word = ""
+
+  for (let word of words) {
+    const score = scoreWord(word)
+
+    if (score > highest_score) {
+      highest_score = score;
+      longest_word = word;
+    } else if (score === highest_score) {
+      if (word.length === 10 && longest_word.length !== 10) {
+        longest_word = word;
+      } else if (word.length < longest_word.length && longest_word.length !== 10) {
+        longest_word = word;
+      }
+    }
+  }
+  return { word: longest_word, score: highest_score };
 };
