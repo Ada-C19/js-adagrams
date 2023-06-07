@@ -71,6 +71,10 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
+  if (!word) {
+    return 0;
+  }
+
   const scoreChart = {
     1: ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"],
     2: ["D", "G"],
