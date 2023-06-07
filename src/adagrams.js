@@ -109,32 +109,37 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
+  // initiate object to hold top word and score properties
+  // set values for property to the first word in the words array and score
   const topWord = {
     word: words[0],
     score: scoreWord(words[0])
   };
 
+  // Create for loop to iterate through rest of words array 
   for(let i=1; i < words.length; ++i){
     let nextScore = scoreWord(words[i]);
+    // conditional to compare top word and next word in place
     if(topWord.score < nextScore){
       topWord.word = words[i];
       topWord.score = nextScore;
-  }else if(topWord.score > nextScore){
+    }else if(topWord.score > nextScore){
       continue;
-  }else{
-    if(topWord.word.length >= 10){
-      continue;
-    }else if(words[i].length >= 10){
-      topWord.word = words[i];
-      topWord.score = nextScore; 
-    }else if(words[i].length < topWord.word.length){
-      topWord.word = words[i];
-      topWord.score = nextScore; 
     }else{
-      continue;
+      // logic that will run when there is a tie
+      if(topWord.word.length >= 10){
+        continue;
+      }else if(words[i].length >= 10){
+        topWord.word = words[i];
+        topWord.score = nextScore; 
+      }else if(words[i].length < topWord.word.length){
+        topWord.word = words[i];
+        topWord.score = nextScore; 
+      }else{
+        continue;
+      }
     }
   }
-  }
-  
+  // return top word and highest score object
   return topWord;
 };
