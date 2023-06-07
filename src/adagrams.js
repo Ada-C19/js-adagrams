@@ -153,6 +153,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 export const scoreWord = (word) => {
   // minimum required length of word to qualify for a long word bonus:
   const bonusPointMinLength = 7;
+  
   // bonus points to be awarded for words that meet the bonus minimum length:
   const bonusPoints = 8;
 
