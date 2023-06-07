@@ -69,9 +69,13 @@ export const scoreWord = (word) => {
 
   let score = 0;
 
-  for (let letter of word.toUpperCase()) {
+  [...word.toUpperCase()].forEach(letter => {
     score += scoreChart[letter];
-  }
+  })
+
+  // for (let letter of word.toUpperCase()) {
+  //   score += scoreChart[letter];
+  // }
 
   if (word.length >= 7) {
     score += 8;
