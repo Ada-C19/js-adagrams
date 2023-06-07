@@ -14,7 +14,7 @@ Array.prototype.count = function(value) {
 // helper function for drawLetters to create the letter bowl 
 const createLetterBowl = (letterFrequencyObj) => {
   const letterBowl = [];
-  for (let letter in letterFrequencyObj) {
+  for (const letter in letterFrequencyObj) {
     for (let i = 0; i < letterFrequencyObj[letter]; i++) {
       letterBowl.push(letter);
     }
@@ -28,8 +28,8 @@ const createLetterBowl = (letterFrequencyObj) => {
 const createWordScoresObj = (wordsArr) => {
   const wordScores = {};
 
-  for (let word of wordsArr) {
-    let score = scoreWord(word);
+  for (const word of wordsArr) {
+    const score = scoreWord(word);
     wordScores[word] = score;
   }
 
@@ -40,7 +40,7 @@ const createWordScoresObj = (wordsArr) => {
 const findHighScore = (wordScoresObj) => {
   let highScore = 0;
 
-  for (let word in wordScoresObj) {
+  for (const word in wordScoresObj) {
     if (wordScoresObj[word] > highScore) {
         highScore = wordScoresObj[word];
     }
@@ -54,7 +54,7 @@ const findHighScore = (wordScoresObj) => {
 const createHighScoreWordsArray = (wordScoresObj, highScore) => {
   let highScoreWords = [];
 
-  for (let word in wordScoresObj) {
+  for (const word in wordScoresObj) {
     if (wordScoresObj[word] === highScore) {
       highScoreWords.push(word);
     }
@@ -142,7 +142,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   input = input.toUpperCase().split('');
 
   // to ensure each letter is in lettersInHand and does not occur too frequently:
-  for (let letter of input) {
+  for (const letter of input) {
     if ((lettersInHand.indexOf(letter) === -1) || (input.count(letter) > lettersInHand.count(letter))) {
       return false;
     }
@@ -177,8 +177,8 @@ export const scoreWord = (word) => {
     score += bonusPoints;
   }
 
-  for (let letter of word) {
-    for (let tier in letterValues) {
+  for (const letter of word) {
+    for (const tier in letterValues) {
         if (tier.indexOf(letter) !== -1) {
           score += letterValues[tier];
         }
@@ -200,7 +200,7 @@ export const highestScoreFrom = (words) => {
   const highScoreWords = createHighScoreWordsArray(wordScores, highScore);
 
   // tie breaking logic: word equal to 10 letters
-  for (let word of highScoreWords) {
+  for (const word of highScoreWords) {
     if (word.length === maxLetterLength) {
       return { 'word': word, 'score': wordScores[word]}
     }
