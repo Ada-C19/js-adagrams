@@ -29,11 +29,13 @@ const LETTER_POOL = {
 
 export const drawLetters = () => {
 	// Implement this method for wave 1
-
+	const LETTER_POOL_COPY = {
+		...LETTER_POOL,
+	};
 	// Creates array to hold 10 letters
 	let handArray = [];
 	// letterKeys will hold an array of all of the available letters
-	let letterKeys = Object.keys(LETTER_POOL);
+	let letterKeys = Object.keys(LETTER_POOL_COPY);
 
 	for (let i = 0; i < 10; i++) {
 		// Get random letter from letterKeys array and add to handArray
@@ -41,13 +43,13 @@ export const drawLetters = () => {
 		let randomLetter = letterKeys[randomIndex];
 		handArray.push(randomLetter);
 
-		// Decrease the count of letter from hash map LETTER_POOL
-		LETTER_POOL[randomLetter]--;
+		// Decrease the count of letter from hash map LETTER_POOL_COPY
+		LETTER_POOL_COPY[randomLetter]--;
 
 		// Checks if letter count is 0
-		if (LETTER_POOL[randomLetter] === 0) {
+		if (LETTER_POOL_COPY[randomLetter] === 0) {
 			// Delete letter key from hash map and remove letter from letterKeys
-			delete LETTER_POOL[randomLetter];
+			delete LETTER_POOL_COPY[randomLetter];
 			letterKeys.splice(randomIndex, 1);
 		}
 	}
@@ -56,6 +58,21 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
 	// Implement this method for wave 2
+
+	// Makes a copy array of lettersInHand
+	let lettersInHandCOPY = [...lettersInHand];
+
+	// Iterates over the input string
+	for (const letter of input) {
+		// Checks if each letter is valid against the draw letters
+		if (lettersInHandCOPY.includes(letter)) {
+			let letterIndex = lettersInHandCOPY.indexOf(letter);
+			lettersInHandCOPY.splice(letterIndex, 1);
+		} else {
+			return false;
+		}
+	}
+	return true;
 };
 
 export const scoreWord = (word) => {
