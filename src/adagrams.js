@@ -1,101 +1,118 @@
-const LETTER_POOL = {
-  A: 9,
-  B: 2,
-  C: 2,
-  D: 4,
-  E: 12,
-  F: 2,
-  G: 3,
-  H: 2,
-  I: 9,
-  J: 1,
-  K: 1,
-  L: 4,
-  M: 2,
-  N: 6,
-  O: 8,
-  P: 2,
-  Q: 1,
-  R: 6,
-  S: 4,
-  T: 6,
-  U: 4,
-  V: 2,
-  W: 2,
-  X: 1,
-  Y: 2,
-  Z: 1,
-};
+  const LETTER_POOL = {
+    A: 9,
+    B: 2,
+    C: 2,
+    D: 4,
+    E: 12,
+    F: 2,
+    G: 3,
+    H: 2,
+    I: 9,
+    J: 1,
+    K: 1,
+    L: 4,
+    M: 2,
+    N: 6,
+    O: 8,
+    P: 2,
+    Q: 1,
+    R: 6,
+    S: 4,
+    T: 6,
+    U: 4,
+    V: 2,
+    W: 2,
+    X: 1,
+    Y: 2,
+    Z: 1,
+  };
 export const drawLetters = () => {
-let lettersList = [];
-let letterPool = { ...LETTER_POOL };
+  let lettersList = [];
+  let letterFreq = {};
 
-while (lettersList.length < 10) {
 
-const weightedLetters = [];
-for (const [letter, count] of Object.entries(letterPool)) {
-for (let i = 0; i < count; i++) {
-        weightedLetters.push(letter)
-      }
+    while (lettersList.length < 10) {
+      let randomLetter = Object.keys(LETTER_POOL)[Math.floor(Math.random() * Object.keys(LETTER_POOL).length)];
+
+    if (randomLetter in letterFreq) {
+      letterFreq[randomLetter] += 1;
+
+    if (letterFreq[randomLetter] < LETTER_POOL[randomLetter]) {
+      lettersList.push(randomLetter);
     }
-const selectedLetter = weightedLetters[Math.floor(Math.random() * weightedLetters.length)];
-    letterPool[selectedLetter] -= 1
-
-if (letterPool[selectedLetter] == 0) {
-delete letterPool[selectedLetter]
-    }
-    lettersList.push(selectedLetter)
+  } else {
+    letterFreq[randomLetter] = 1;
+    lettersList.push(randomLetter)
   }
-  return lettersList
+}
+
+return lettersList;
+
 };
-
-
 
 export const usesAvailableLetters = (word, letterBank) => {
 
-let bankCopy = letterBank.slice();
-let wordUpper = word.toUpperCase();
-
-  for (let i = 0; i < wordUpper.length; i++) {
-  let letter = wordUpper[i];
-  if (!bankCopy.includes(letter) || bankCopy.indexOf(letter) === -1) {
-  return false;
-          } else {
-            bankCopy.splice(bankCopy.indexOf(letter), 1);
+  let bankCopy = letterBank.slice();
+  let wordUpper = word.toUpperCase();
+  
+    for (let i = 0; i < wordUpper.length; i++) {
+    let letter = wordUpper[i];
+    if (!bankCopy.includes(letter) || bankCopy.indexOf(letter) === -1) {
+    return false;
+            } else {
+              bankCopy.splice(bankCopy.indexOf(letter), 1);
+            }
           }
-        }
-  return true;
-      };
+    return true;
+        };
 
-      export const scoreWord = (word) => {
-let points = 0;
-let uppercaseWord = word.toUpperCase();
+export const scoreWord = (word) => {
+let upperCaseWord = word.toUpperCase();
+let total = 0;
+let scoreChart = {
+  A: 1,
+  B: 3,
+  C: 3,
+  D: 2,
+  E: 1,
+  F: 4,
+  G: 2,
+  H: 4,
+  I: 1,
+  J: 8,
+  K: 5,
+  L: 1,
+  M: 3,
+  N: 1,
+  O: 1,
+  P: 3,
+  Q: 10,
+  R: 1,
+  S: 1,
+  T: 1,
+  U: 1,
+  V: 4,
+  W: 4,
+  X: 8,
+  Y: 4,
+  Z: 10
+};
 
-for (let i = 0; i < uppercaseWord.length; i++) {
-let letter = uppercaseWord[i];
-if (['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'].includes(letter)) {
-        points += 1;
-      } else if (['D', 'G'].includes(letter)) {
-        points += 2;
-      } else if (['B', 'C', 'M', 'P'].includes(letter)) {
-        points += 3;
-      } else if (['F', 'H', 'V', 'W', 'Y'].includes(letter)) {
-        points += 4;
-      } else if (letter === 'K') {
-        points += 5;
-      } else if (['J', 'X'].includes(letter)) {
-        points += 8;
-      } else if (['Q', 'Z'].includes(letter)) {
-        points += 10;
-      }
-    }
+if (word.length === 0) {
+  // throw 'Complete test';
+  return 0;
+}
 
-if ([7, 8, 9, 10].includes(word.length)) {
-      points += 8;
-    }
+for (let letter of upperCaseWord) {
+  total += scoreChart[letter]
+}
 
-return points;
-  };
+if (word.length >= 7) {
+  total += 8
+}
+
+return total;
+};
 
 export const highestScoreFrom = (words) => {
   let highestScore = 0;
