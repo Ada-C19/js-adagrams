@@ -38,6 +38,7 @@ describe("Adagrams", () => {
   describe("drawLetters", () => {
     it("draws ten letters from the letter pool", () => {
       const drawn = drawLetters();
+      
 
       expect(drawn).toHaveLength(10);
     });
@@ -133,7 +134,7 @@ describe("Adagrams", () => {
     });
   });
 
-  describe.skip("highestScoreFrom", () => {
+  describe("highestScoreFrom", () => {
     it("returns a hash that contains the word and score of best word in an array", () => {
       const words = ["X", "XX", "XXX", "XXXX"];
       const correct = { word: "XXXX", score: scoreWord("XXXX") };
