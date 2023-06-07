@@ -59,14 +59,14 @@ export const highestScoreFrom = (words) => {
       bestWord = word;
       highestWordScore = score;
     } else if (score === highestWordScore) {
-      if (highestWordScore.length > word.length) {
+      if (bestWord.length > word.length) {
         if (bestWord.length !== 10) {
           bestWord = word;
         }
       } else if (bestWord.length < word.length) {
         if (word.length === 10) {
           bestWord = word;
-        }
+        } 
       }
     }
   }
