@@ -1,6 +1,6 @@
 export const drawLetters = () => {
   // Implement this method for wave 1
-  const letterPool = {
+  const letterPoolFreqs = {
     A: 9,
     B: 2,
     C: 2,
@@ -29,11 +29,15 @@ export const drawLetters = () => {
     Z: 1,
   };
 
-  // const hand = []
+  const letterPool = [];
 
-  for (const [key, value] of Object.entries(letterPool)) {
-    console.log(`${key} has ${value} entries`);
+  for (const [key, value] of Object.entries(letterPoolFreqs)) {
+    for (let i = 1; i < value; i++) {
+      letterPool.push(key);
+    }
   }
+
+  // console.log(hand);
 };
 
 // drawLetters();
