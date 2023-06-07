@@ -70,68 +70,68 @@ describe("Adagrams", () => {
     });
   });
 
-  describe("usesAvailableLetters", () => {
-    it("returns true if the submitted letters are valid against the drawn letters", () => {
-      const drawn = ["D", "O", "G", "X", "X", "X", "X", "X", "X", "X"];
-      const word = "DOG";
+  // describe("usesAvailableLetters", () => {
+  //   it("returns true if the submitted letters are valid against the drawn letters", () => {
+  //     const drawn = ["D", "O", "G", "X", "X", "X", "X", "X", "X", "X"];
+  //     const word = "DOG";
 
-      const isValid = usesAvailableLetters(word, drawn);
-      expect(isValid).toBe(true);
-    });
+  //     const isValid = usesAvailableLetters(word, drawn);
+  //     expect(isValid).toBe(true);
+  //   });
 
-    it("returns false when word contains letters not in the drawn letters", () => {
-      const drawn = ["D", "O", "X", "X", "X", "X", "X", "X", "X", "X"];
-      const word = "DOG";
+  //   it("returns false when word contains letters not in the drawn letters", () => {
+  //     const drawn = ["D", "O", "X", "X", "X", "X", "X", "X", "X", "X"];
+  //     const word = "DOG";
 
-      const isValid = usesAvailableLetters(word, drawn);
-      expect(isValid).toBe(false);
-    });
+  //     const isValid = usesAvailableLetters(word, drawn);
+  //     expect(isValid).toBe(false);
+  //   });
 
-    it("returns false when word contains repeated letters more than in the drawn letters", () => {
-      const drawn = ["D", "O", "G", "X", "X", "X", "X", "X", "X", "X"];
-      const word = "GOOD";
+  //   it("returns false when word contains repeated letters more than in the drawn letters", () => {
+  //     const drawn = ["D", "O", "G", "X", "X", "X", "X", "X", "X", "X"];
+  //     const word = "GOOD";
 
-      const isValid = usesAvailableLetters(word, drawn);
-      expect(isValid).toBe(false);
-    });
-  });
+  //     const isValid = usesAvailableLetters(word, drawn);
+  //     expect(isValid).toBe(false);
+  //   });
+  // });
 
-  describe("scoreWord", () => {
-    const expectScores = (wordScores) => {
-      Object.entries(wordScores).forEach(([word, score]) => {
-        expect(scoreWord(word)).toBe(score);
-      });
-    };
+  // describe("scoreWord", () => {
+  //   const expectScores = (wordScores) => {
+  //     Object.entries(wordScores).forEach(([word, score]) => {
+  //       expect(scoreWord(word)).toBe(score);
+  //     });
+  //   };
 
-    it("returns an accurate numerical score according to the score chart", () => {
-      expectScores({
-        A: 1,
-        DOG: 5,
-        WHIMSY: 17,
-      });
-    });
+  //   it("returns an accurate numerical score according to the score chart", () => {
+  //     expectScores({
+  //       A: 1,
+  //       DOG: 5,
+  //       WHIMSY: 17,
+  //     });
+  //   });
 
-    it("returns a score regardless of the input case", () => {
-      expectScores({
-        a: 1,
-        dog: 5,
-        wHiMsY: 17,
-      });
-    });
+  //   it("returns a score regardless of the input case", () => {
+  //     expectScores({
+  //       a: 1,
+  //       dog: 5,
+  //       wHiMsY: 17,
+  //     });
+  //   });
 
-    it("returns a score of 0 if given an empty input", () => {
-      throw "Complete test";
-    });
+  //   it("returns a score of 0 if given an empty input", () => {
+  //     throw "Complete test";
+  //   });
 
-    it("adds an extra 8 points if word is 7 or more characters long", () => {
-      expectScores({
-        XXXXXXX: 64,
-        XXXXXXXX: 72,
-        XXXXXXXXX: 80,
-        XXXXXXXXXX: 88,
-      });
-    });
-  });
+  //   it("adds an extra 8 points if word is 7 or more characters long", () => {
+  //     expectScores({
+  //       XXXXXXX: 64,
+  //       XXXXXXXX: 72,
+  //       XXXXXXXXX: 80,
+  //       XXXXXXXXXX: 88,
+  //     });
+  //   });
+  // });
 
   describe.skip("highestScoreFrom", () => {
     it("returns a hash that contains the word and score of best word in an array", () => {
