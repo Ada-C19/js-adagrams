@@ -26,28 +26,27 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Ensure function is case insensitive
-  const word = input.toUpperCase()
+  // const word = input.toUpperCase()
   const handCopy = [...lettersInHand]
   
   // Loop through each char in word to check presence in hand
-  for (const char of word) {
-    if (! handCopy.includes(char)) {
+  for (const char of input) {
+    if (! handCopy.includes(char.toUpperCase())) {
       return false;
     }
     // Update hand to reflect available letters remaining
-    handCopy.splice(handCopy.indexOf(char), 1);
+    handCopy.splice(handCopy.indexOf(char.toUpperCase()), 1);
   }
   return true;
 };
 
 export const scoreWord = (word) => {
   const scoreChart = {A:1, B:3, C:3, D:2, E:1, F:4, G:2, H:4, I:1, J:8, K:5, L:1, M:3, N:1, O:1, P:3, Q:10, R:1, S:1, T:1, U:1, V:4, W:4, X:8, Y:4, Z:10};
-  //Ensure case insensitive
-  const input = word.toUpperCase()
 
-  let score = [...input].reduce((score, letter) => score + scoreChart[letter], 0);
+  // Sum letter scores of the word
+  let score = [...word].reduce((score, letter) => score + scoreChart[letter.toUpperCase()], 0);
 
-  if (input.length > 6) {
+  if (word.length > 6) {
     score += 8;
   }
   return score
@@ -57,7 +56,7 @@ export const highestScoreFrom = (words) => {
   let bestWords = [];
   let maxScore = 0;
   for (let word of words) {
-    let score = scoreWord(word);
+    const score = scoreWord(word);
     if (score > maxScore) {
       bestWords = [word];
       maxScore = score;
@@ -72,7 +71,7 @@ export const highestScoreFrom = (words) => {
     return {word:winner, score:maxScore};
   } else {
     let fewestLetters = winner.length;
-    for (let word of bestWords) {
+    for (const word of bestWords) {
       if (word.length === 10) {
         winner = word
         return {word:winner, score:maxScore};
