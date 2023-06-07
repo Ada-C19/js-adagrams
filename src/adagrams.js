@@ -114,10 +114,11 @@ export const drawLetters = () => {
     'Z': 1
   };
 
-  // Create a letter "bowl" in an array to emulate a bowl of letters to choose from:
+  // Create a letter "bowl" in an array to emulate a bowl of letters to choose from
+  // based on likelihood from letterFrequency
   const letterBowl = createLetterBowl(letterFrequency);
   
-  // build the player's hand using the count function
+  // build the player's hand using the count prototype
   const hand = [];
 
   let num = 0;
