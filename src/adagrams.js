@@ -1,6 +1,6 @@
 export const drawLetters = () => {
-  // Implement this method for wave 1
-  const letterPoolFreqs = {
+  // initialize object to hold letter frequency table
+  const letterFreqs = {
     A: 9,
     B: 2,
     C: 2,
@@ -31,13 +31,26 @@ export const drawLetters = () => {
 
   const letterPool = [];
 
-  for (const [key, value] of Object.entries(letterPoolFreqs)) {
+  // fill letterPool array with all the letters
+  for (const [key, value] of Object.entries(letterFreqs)) {
     for (let i = 1; i < value; i++) {
       letterPool.push(key);
     }
   }
 
-  // console.log(hand);
+  let hand = [];
+
+  let len = letterPool.length;
+
+  // draw letters
+  for (let i = 0; i < 10; i++) {
+    let selector = Math.random() * len;
+
+    let letter = letterPool.splice(selector, 1);
+    hand.push(letter);
+  }
+
+  console.log(hand);
 };
 
 // drawLetters();
