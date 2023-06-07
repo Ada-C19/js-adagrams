@@ -11,7 +11,6 @@ export const drawLetters = () => {
       LETTER_POOL.pop(letter);
     };
     
-    console.log(lettersDrawn)
     return lettersDrawn
 };
 
@@ -19,24 +18,80 @@ export const drawLetters = () => {
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
   // if the letter in input is in lettersInHand pop that letter out else return false
-  letter_frequency = [];
-  for (letter of lettersInHand){
+  let letter_frequency = [];
+  for (let letter of lettersInHand){
     letter_frequency.push(letter);
   };
-  for (letter of input){
+  for (let letter of input){
     if (letter_frequency.includes(letter)){
       letter_frequency.pop(letter);
     } else {
       return false;
     };
   };
+
   return true;
 };
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
+  let score = 0;
+
+  if (word === false){
+    return score;
+  }
+
+  if (word.length >= 7) {
+    score += 8;
+  };
+  for (let letter of word.toUpperCase()) {
+    switch (letter) {
+      case "A":
+      case "E":
+      case "I":
+      case "O":
+      case "U":
+      case "L":
+      case "N":
+      case "R":
+      case "S":
+      case "T":
+        score += 1
+        break;
+      case "D":
+      case "G":
+        score += 2
+        break;
+      case "B":
+      case "C":
+      case "M":
+      case "P":
+        score += 3
+        break;
+      case "F":
+      case "H":
+      case "V":
+      case "W":
+      case "Y":
+        score += 4
+        break;
+      case "K":
+        score += 5
+        break;
+      case "J":
+      case "X":
+        score += 8
+        break;
+      case "Q":
+      case "Z":
+        score += 10
+        break;
+    };
+  };
+  return score
 };
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  //
 };
