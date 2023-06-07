@@ -102,4 +102,35 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  let highScore = 0;
+  let winningWord = '';
+  let ties = [];
+
+  for (const word of words) {
+    // Get score for each word
+    const score = scoreWord(word);
+    // If this word's score is higher than highScore, update highScore and winning word 
+    if (score > highScore) {
+      highScore = score
+      winningWord = word
+      ties.push(winningWord)
+    } else if (score === highScore) {
+        ties.push(word)
+    }
+  }
+
+  let longestWord = ''
+  for (const word of ties) {
+    if (word.length > longestWord.length) {
+      longestWord = word;
+    } else {
+      winningWord = word;
+    }
+    if (longestWord.length === 10) {
+      winningWord = longestWord;
+    }
+  }
+
+  return {'score': highScore, 'word': winningWord}
+
 };
