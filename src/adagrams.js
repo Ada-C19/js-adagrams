@@ -31,9 +31,10 @@ export const drawLetters = () => {
   return gameHand;
 };
 
+
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
-    let isValid = true;
+
+  let isValid = true;
 
   const countLetter = (word, letterToCount) => {
     let count = 0;
@@ -54,8 +55,8 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return isValid;
 };
 
+
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
 
   const scoreChart = {
     'A': 1, 'E': 1, 'I': 1, 'O': 1, 'U': 1, 'L': 1, 'N': 1, 'R': 1, 'S': 1, 'T': 1,
@@ -80,11 +81,12 @@ export const scoreWord = (word) => {
 
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
-
+  
   words.sort((a, b) => a.length - b.length);
-  const getScores = words.map(word => scoreWord(word));
-  const highScore = getScores.reduce((accumulator, current) => Math.max(accumulator, current));
+  // const getScores = words.map(word => scoreWord(word));
+  const highScore = words
+                    .map(word => scoreWord(word))
+                    .reduce((accumulator, current) => Math.max(accumulator, current));
 
   const findHighestScoringWord = (words) => {
     for (const word of words) {
@@ -94,12 +96,9 @@ export const highestScoreFrom = (words) => {
     }
     for (const word of words) {
       if (scoreWord(word) === highScore) {
-          return word;
+        return word;
       }
     }
   };
   return {'word': findHighestScoringWord(words), 'score': highScore};
   };
-
-  
-  
