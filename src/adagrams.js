@@ -26,7 +26,7 @@ export const drawLetters = () => {
     X: 1,
     Y: 2,
     Z: 1
-  };
+  }
   
   const letterPoolArray = []
   const lettersInHand = []
@@ -35,13 +35,13 @@ export const drawLetters = () => {
     for (let i = 0; i < letterPool[letter]; i++) {
       letterPoolArray.push(letter);
     }
-  };
+  }
 
   for (let i = 0; i < 10; i++) {
     let randomNumber = [Math.floor(Math.random() * letterPoolArray.length)];
     lettersInHand.push(letterPoolArray[randomNumber]);
     letterPoolArray.splice(randomNumber, 1);
-  };
+  }
 
   return lettersInHand
 };
@@ -54,7 +54,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
     } else {
         return false;
     }
-  };
+  }
 
   return true;
 };
@@ -87,11 +87,11 @@ export const scoreWord = (word) => {
     'X': 8,
     'Q': 10,
     'Z': 10
-  };
+  }
   let score = 0;
 
   if (word.length == 0) {
-    return score
+    return score;
   } else {
     for (let letter of word.toUpperCase()) {
       score += letterValue[letter];
@@ -149,5 +149,5 @@ export const highestScoreFrom = (words) => {
   return {
     'word': wordScoreDict[highestScore][0],
     'score': highestScore
-  };
-}
+  }
+};
