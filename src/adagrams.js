@@ -91,18 +91,7 @@ export const scoreWord = (word) => {
   return score
 };
 
-
-const getTiedResult = (length1, length2) => {
-
-}
-
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
-  // use scoreWord to get the score of word in words 
-  // loop through each word in words and make an obj with the word and score as keys 
-  // if statement 
-// i could make words_and_scores an object then access the objects scores in a for in loop
-
   let words_and_scores = [];
   let scores = [];
   let count_of_highscores = 0;
@@ -134,21 +123,18 @@ export const highestScoreFrom = (words) => {
       return words_and_scores[first_index];
     };
 
-    if (length_of_first_word !== 10 && length_of_second_word !== 10 && length_of_first_word > length_of_second_word){
-      console.log(words_and_scores[second_index])
+    // if (length_of_first_word !== 10 && length_of_second_word !== 10 && length_of_first_word > length_of_second_word){
+      if (length_of_first_word > length_of_second_word > 10) {
       return words_and_scores[second_index];
     } else if (length_of_first_word !== 10 && length_of_second_word !== 10 && length_of_first_word < length_of_second_word){
-      console.log(words_and_scores[first_index]);
       return words_and_scores[first_index];
     };
 
     if (length_of_first_word === 10) {
-      console.log(words_and_scores[first_index]);
       return words_and_scores[first_index];
     } else {
-      console.log(words_and_scores[second_index]);
       return words_and_scores[second_index];
     };
   };
-  
+
 };
