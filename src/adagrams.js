@@ -96,7 +96,7 @@ export const scoreWord = (word) => {
     for (const [key, value] of Object.entries(scoreChart)) {
       if (value.includes(letter.toUpperCase())) {
         score += parseInt(key);
-        console.log(score);
+        // console.log(score);
       }
     }
   }
