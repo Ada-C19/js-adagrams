@@ -12,7 +12,8 @@ export const drawLetters = () => {
  
   // Draw letters from the pile
   const hand = [];
-  for (let i = 98; i > 88; i--) {
+  let numTiles = drawPile.length
+  for (let i = numTiles; i > numTiles - 10; i--) {
     // Generate a random number as index
     const randIdx = Math.floor(Math.random() * i);
     // Select the letter at randIdx and remove from drawPile
