@@ -53,12 +53,12 @@ const SCORE_CHART={
   X: 8,
   Q: 10,
   Z: 10,
-}
+};
 export const drawLetters = () => {
   // Implement this method for wave 1
   const letterMap = {...LETTER_POOL};
   let drawn = new Array();
-  // use a list of possible letters outside the for loop to avoid create such list mutiple times
+  // use a list of possible letters outside the for loop to avoid creating this list mutiple times
   let letterBank = Object.keys(LETTER_POOL);
 
   for(let i = 0; i<10; i++){
@@ -91,7 +91,6 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   }
 
   return true;
-
 };
 
 export const scoreWord = (word) => {
@@ -118,7 +117,7 @@ export const highestScoreFrom = (words) => {
   let maxScore = 0;
   let winnerWord = new String();
   let result = {}
-  
+
   for(let word of words){
       let curScore = scoreWord(word)
       if(curScore > maxScore){
