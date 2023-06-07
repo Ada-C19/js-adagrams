@@ -91,7 +91,64 @@ export const scoreWord = (word) => {
   return score
 };
 
+
+const getTiedResult = (length1, length2) => {
+
+}
+
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
-  //
+  // use scoreWord to get the score of word in words 
+  // loop through each word in words and make an obj with the word and score as keys 
+  // if statement 
+// i could make words_and_scores an object then access the objects scores in a for in loop
+
+  let words_and_scores = [];
+  let scores = [];
+  let count_of_highscores = 0;
+
+  for (let word of words){
+    let score = scoreWord(word);
+    scores.push(score);
+    words_and_scores.push({word: word, score: score});
+  }
+
+  //getting max score and frequency of max score
+  let max_score = Math.max(...scores);
+  for (let score of scores){
+    if (max_score === score) {
+      count_of_highscores++;
+    }
+  }
+  
+  if (count_of_highscores === 1) {
+    return words_and_scores[scores.indexOf(max_score)];
+  };
+  if (count_of_highscores === 2) {
+    let first_index = scores.indexOf(max_score);
+    let second_index = 1;
+    let length_of_first_word = words_and_scores[first_index]['word'].length;
+    let length_of_second_word = words_and_scores[1]['word'].length;
+    
+    if (length_of_first_word === length_of_second_word){
+      return words_and_scores[first_index];
+    };
+
+    if (length_of_first_word !== 10 && length_of_second_word !== 10 && length_of_first_word > length_of_second_word){
+      console.log(words_and_scores[second_index])
+      return words_and_scores[second_index];
+    } else if (length_of_first_word !== 10 && length_of_second_word !== 10 && length_of_first_word < length_of_second_word){
+      console.log(words_and_scores[first_index]);
+      return words_and_scores[first_index];
+    };
+
+    if (length_of_first_word === 10) {
+      console.log(words_and_scores[first_index]);
+      return words_and_scores[first_index];
+    } else {
+      console.log(words_and_scores[second_index]);
+      return words_and_scores[second_index];
+    };
+  };
+  
 };
