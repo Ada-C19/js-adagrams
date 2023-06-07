@@ -18,7 +18,19 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
-  
+  // if the letter in input is in lettersInHand pop that letter out else return false
+  letter_frequency = [];
+  for (letter of lettersInHand){
+    letter_frequency.push(letter);
+  };
+  for (letter of input){
+    if (letter_frequency.includes(letter)){
+      letter_frequency.pop(letter);
+    } else {
+      return false;
+    };
+  };
+  return true;
 };
 
 export const scoreWord = (word) => {
