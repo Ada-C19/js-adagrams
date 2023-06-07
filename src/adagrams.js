@@ -123,7 +123,7 @@ export const drawLetters = () => {
 
   let num = 0;
   while (num < maxLettersInHand) {
-    // choose a random number from 0-97
+    // choose a random number from 0-97 (number of letters in letterBowl)
     let i = Math.floor(Math.random() * letterBowl.length)
     let letter = letterBowl[i]
     if (hand.count(letter) < letterFrequency[letter]) {
@@ -143,7 +143,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
   // to ensure each letter is in lettersInHand and does not occur too frequently:
   for (let letter of input) {
-    if (!(lettersInHand.indexOf(letter) !== -1) || (input.count(letter) > lettersInHand.count(letter))) {
+    if ((lettersInHand.indexOf(letter) === -1) || (input.count(letter) > lettersInHand.count(letter))) {
       return false;
     }
   }
