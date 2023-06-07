@@ -123,8 +123,7 @@ export const highestScoreFrom = (words) => {
       return words_and_scores[first_index];
     };
 
-    // if (length_of_first_word !== 10 && length_of_second_word !== 10 && length_of_first_word > length_of_second_word){
-      if (length_of_first_word > length_of_second_word > 10) {
+    if (length_of_first_word !== 10 && length_of_second_word !== 10 && length_of_first_word > length_of_second_word){
       return words_and_scores[second_index];
     } else if (length_of_first_word !== 10 && length_of_second_word !== 10 && length_of_first_word < length_of_second_word){
       return words_and_scores[first_index];
