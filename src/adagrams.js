@@ -15,7 +15,7 @@ export const drawLetters = () => {
   };
   
   while (gameHand.length < 10) {
-    const tempLetter = selectRandomLetter()
+    const tempLetter = selectRandomLetter();
     let tempLetterCount = 0; 
 
     gameHand.forEach(letter => {
@@ -68,21 +68,15 @@ export const scoreWord = (word) => {
   };
 
   let score = 0;
-
   [...word.toUpperCase()].forEach(letter => {
     score += scoreChart[letter];
-  })
-
-  // for (let letter of word.toUpperCase()) {
-  //   score += scoreChart[letter];
-  // }
+  });
 
   if (word.length >= 7) {
     score += 8;
   }
-
   return score;
-}
+};
 
 
 export const highestScoreFrom = (words) => {
@@ -93,20 +87,19 @@ export const highestScoreFrom = (words) => {
   const highScore = getScores.reduce((accumulator, current) => Math.max(accumulator, current));
 
   const findHighestScoringWord = (words) => {
-    for (let word of words) {
+    for (const word of words) {
       if (word.length === 10) {
         return word;
       } 
     }
-    for (let word of words) {
+    for (const word of words) {
       if (scoreWord(word) === highScore) {
           return word;
       }
     }
-  }
-
+  };
   return {'word': findHighestScoringWord(words), 'score': highScore};
-  }
+  };
 
   
   
