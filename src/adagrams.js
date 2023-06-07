@@ -27,7 +27,7 @@ const letterPool = {
   Z: 1,
 };
 
-class Adagrams {
+export class Adagrams {
     //helper function
     static randomSelectedLetter (){
         const lettersAlphabet = Object.keys(letterPool);
@@ -174,6 +174,7 @@ class Adagrams {
 }
 
 export default Adagrams;
+
 // //helper function
 // const randomSelectedLetter = () =>{
 //     const lettersAlphabet = Object.keys(letterPool);
