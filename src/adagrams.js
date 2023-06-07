@@ -26,6 +26,34 @@ const LETTER_POOL = {
   Y: 2,
   Z: 1,
 };
+const SCORE_CHART={
+  A: 1, 
+  E: 1, 
+  I: 1, 
+  O: 1, 
+  U: 1, 
+  L: 1, 
+  N: 1, 
+  R: 1, 
+  S: 1, 
+  T: 1,
+  D: 2,
+  G: 2,
+  B: 3,
+  C: 3,
+  M: 3,
+  P: 3,
+  F: 4, 
+  H: 4,
+  V: 4, 
+  W: 4, 
+  Y: 4,
+  K: 5,
+  J: 8,
+  X: 8,
+  Q: 10,
+  Z: 10,
+}
 export const drawLetters = () => {
   // Implement this method for wave 1
   const letterMap = {...LETTER_POOL};
@@ -46,18 +74,16 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
-  let map = new Map();
+  let letterMap = {};
   for(let i = 0; i< lettersInHand.length; i++){
-    let curHandLetter = lettersInHand[i]
-    map.set(curHandLetter, map.get(curHandLetter) + 1 || 1);
+    let curHandLetter = lettersInHand[i];
+    letterMap[curHandLetter] = (letterMap[curHandLetter]||0)+ 1;
   } 
   for(let i = 0; i<input.length; i++){
-    let curInputLetter = input[i]
-    if(!lettersInHand.includes(curInputLetter))
+    let curInputLetter = input[i];
+    if(!lettersInHand.includes(curInputLetter) || letterMap[curInputLetter]===0)
         return false;
-    map.set(curInputLetter, map.get(curInputLetter)-1)
-    if(map.get(curInputLetter) < 0)
-        return false;
+    letterMap[curInputLetter]--;
   }
   return true;
 
@@ -65,8 +91,43 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
+  if(word.length === 0){
+    return 0;
+  }
+  let point = 0;
+  word = word.toUpperCase();
+  for(let i = 0; i<word.length; i++){
+      let curLetter = word[i];
+      point += SCORE_CHART[curLetter];
+  }
+  if(word.length >= 7)
+      point += 8; 
+  return point;
 };
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  let maxScore = 0;
+  let winnerWord = new String();
+  let result = {}
+  for(let word of words){
+      let curScore = scoreWord(word)
+      if(curScore > maxScore){
+        maxScore = curScore;
+        winnerWord = word;
+      }
+      else if(curScore == maxScore){
+          if(winnerWord.length == 10)
+              continue;
+          else if(word.length == 10)
+              winnerWord = word
+          else if(word.length< winnerWord.length)
+              winnerWord = word
+          else if(word.length == winnerWord.length)
+              continue;
+        }
+    }
+  
+  result ={word: winnerWord, score: maxScore};
+  return result
 };
