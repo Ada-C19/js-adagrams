@@ -39,7 +39,7 @@ export const drawLetters = () => {
     }
     else if (!(currentLetter in tempLetters)) {
       tempLetters[currentLetter] = 1;
-      lettersInHand.push(currentLetter);
+      handSelection.push(currentLetter);
     }
     else if (currentLetter in tempLetters) {
       if (tempLetters[currentLetter] < LETTER_POOL[currentLetter]) {
@@ -103,6 +103,8 @@ const getInputObject = (input) => {
   return inputObject
 };
 
+export const usesAvailableLetters = (input, lettersInHand) => {
+};
 
 // export const scoreWord = (word) => {
   // Implement this method for wave 3
