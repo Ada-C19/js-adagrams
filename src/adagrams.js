@@ -105,44 +105,28 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave
-  // initialize variable largestWord = ""
   let largestWord = "";
-  // initialize variable largestWordScore = 0
+
   let largestWordScore = 0;
-  // for word in words:
+
   for (let i = 0; i < words.length; i++) {
-    //    wordScore = scoreWord(word)
     let word = words[i];
     let wordScore = scoreWord(word);
-    //    if wordScore > largestWordScore:
     if (wordScore > largestWordScore) {
-      //        largestWord = word
       largestWord = word;
-      //        largestWordScore = wordScore
       largestWordScore = wordScore;
-      //    elif wordScore == largestWordScore:
     } else if (wordScore === largestWordScore) {
-      //        if len(largestWord) == 10:
       if (largestWord.length === 10) {
-        //            largestWord = largestWord; (continue)
         largestWord = largestWord;
-        //        elif len(word) == 10:
       } else if (word.length === 10) {
-        //            largestWord = word;
         largestWord = word;
-        //        elif len(word) < len(largestWord):
       } else if (word.length < largestWord.length) {
-        //            largestWord = word;
         largestWord = word;
-        //        elif len(largestWord) < len(word):
       } else if (largestWord.length < word.length) {
-        //            largestWord = largestWord; (continue)
         largestWord = largestWord;
       }
     }
   }
-  //  return largestWord
   let result = { word: largestWord, score: largestWordScore };
   return result;
 };
