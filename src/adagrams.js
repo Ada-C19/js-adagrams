@@ -58,15 +58,17 @@ export const drawLetters = () => {
   // Implement this method for wave 1
   const letterMap = {...LETTER_POOL};
   let drawn = new Array();
+  // use a list of possible letters outside the for loop to avoid create such list mutiple times
+  let letterBank = Object.keys(LETTER_POOL);
 
   for(let i = 0; i<10; i++){
-      let letterBank = Object.keys(letterMap);
       let randomLetterIndex= Math.floor(Math.random()*letterBank.length);
       let randomLetter = letterBank[randomLetterIndex];
       drawn.push(randomLetter);
       letterMap[randomLetter] -= 1;
       if(letterMap[randomLetter] === 0){
-          delete letterMap[randomLetter];
+          let letterIndex = letterBank.indexOf(randomLetter);
+          letterBank.splice(letterIndex, 1);
       }
   }
   return drawn;
@@ -75,16 +77,19 @@ export const drawLetters = () => {
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
   let letterMap = {};
+
   for(let i = 0; i< lettersInHand.length; i++){
     let curHandLetter = lettersInHand[i];
     letterMap[curHandLetter] = (letterMap[curHandLetter]||0)+ 1;
   } 
+
   for(let i = 0; i<input.length; i++){
     let curInputLetter = input[i];
     if(!lettersInHand.includes(curInputLetter) || letterMap[curInputLetter]===0)
         return false;
     letterMap[curInputLetter]--;
   }
+
   return true;
 
 };
@@ -94,14 +99,17 @@ export const scoreWord = (word) => {
   if(word.length === 0){
     return 0;
   }
+
   let point = 0;
   word = word.toUpperCase();
   for(let i = 0; i<word.length; i++){
       let curLetter = word[i];
       point += SCORE_CHART[curLetter];
   }
+
   if(word.length >= 7)
       point += 8; 
+
   return point;
 };
 
@@ -110,6 +118,7 @@ export const highestScoreFrom = (words) => {
   let maxScore = 0;
   let winnerWord = new String();
   let result = {}
+  
   for(let word of words){
       let curScore = scoreWord(word)
       if(curScore > maxScore){
