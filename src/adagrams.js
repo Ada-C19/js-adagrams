@@ -33,38 +33,29 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
+    let isValid = true;
 
-  // let lettersInHandCopy = [...lettersInHand]
   const countLetter = (word, letterToCount) => {
-    let letterCount = 0;
-    for (const letter of word) {
-      if (letter === letterToCount) {
-        letterCount += 1;
-      }
-    return letterCount;
-    }
-  }
+    let count = 0;
 
-  input.forEach(letter => {
+    [...word].forEach(letter => {
+      if (letter === letterToCount) {
+        count += 1;
+      }
+    });
+    return count;
+  };
+
+  [...input].forEach(letter => {
     if (!(lettersInHand.includes(letter)) || countLetter(input, letter) > countLetter(lettersInHand, letter)) {
-      return false;
+      isValid = false;
     }});
 
-  // for (let i = 0; i < input.length; i++) {
-  //   if (!(lettersInHandCopy.includes(input[i]))) {
-  //     return false;
-  //   } else {
-  //     let tempIndex = lettersInHandCopy.indexOf(input[i])
-  //     lettersInHandCopy.splice(tempIndex, 1)
-  //   }
-  // }
-  return true;
+  return isValid;
 };
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
-
-  word = word.toUpperCase()
 
   const scoreChart = {
     'A': 1, 'E': 1, 'I': 1, 'O': 1, 'U': 1, 'L': 1, 'N': 1, 'R': 1, 'S': 1, 'T': 1,
@@ -78,7 +69,7 @@ export const scoreWord = (word) => {
 
   let score = 0;
 
-  for (let letter of word) {
+  for (let letter of word.toUpperCase()) {
     score += scoreChart[letter];
   }
 
