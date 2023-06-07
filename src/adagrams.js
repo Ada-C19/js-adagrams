@@ -31,7 +31,7 @@ export const drawLetters = () => {
   const handLetters = [];
   const letters = Object.keys(letterPool);
 
-  while (Object.keys(handLetters).length < 10) {
+  while (handLetters.length < 10) {
     let letterIndex = Math.floor((Math.random() * letters.length));
     let letter = letters[letterIndex];
     
@@ -115,10 +115,10 @@ export const highestScoreFrom = (words) => {
     wordsAndScores[word] = scoreWord(word);
   }
   
-  for (let [k,v] of Object.entries(wordsAndScores)) {
-    if (v > highestScore) {
-      highestScore = v;
-    } else if (v === highestScore) {
+  for (let score of Object.values(wordsAndScores)) {
+    if (score > highestScore) {
+      highestScore = score;
+    } else if (score === highestScore) {
       ties++;
     }
   }
@@ -133,8 +133,8 @@ export const highestScoreFrom = (words) => {
     }
   } else {
     const tiedWords = [];
-    for (let [k,v] of Object.entries(wordsAndScores)) {
-      tiedWords.push(k);
+    for (let word of Object.keys(wordsAndScores)) {
+      tiedWords.push(word);
     }
     for (let tiedWord of tiedWords) {
       if (tiedWord.length === 10) {
