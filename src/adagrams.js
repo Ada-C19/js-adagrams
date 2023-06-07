@@ -64,7 +64,7 @@ export const getRandomIndex = (letterPool) => {
 
 export const drawLetters = () => {
   const hand = [];
-  const copyLetterPool = Array.from(letterPool)
+  const copyLetterPool = Array.from(letterPool);
 
   for (let i=0; i < 10; ++i){
     let randomIndex = getRandomIndex(copyLetterPool);
@@ -76,7 +76,18 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  const copyLettersInHand = Array.from(lettersInHand);
+
+  for(let i = 0; i < input.length; ++i){
+    if (copyLettersInHand.includes(input[i])){
+      let index = copyLettersInHand.indexOf(input[i]);
+      copyLettersInHand.splice(index, 1);
+    } else{
+      return false;
+    }
+  }
+
+  return true;
 };
 
 export const scoreWord = (word) => {
