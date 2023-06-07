@@ -102,3 +102,26 @@ export const drawLetters = () => {
 
   return hand; 
   };
+
+  // --- Wave 2 --- 
+
+export const usesAvailableLetters = (input, lettersInHand) => {
+  const letterFreq = {}; 
+
+  for (const letter of lettersInHand){
+    if (letterFreq[letter]) {
+      letterFreq[letter]++; 
+    } else {
+      letterFreq[letter] = 1; 
+    }
+  }
+
+  for (const letter of input) {
+    if (!letterFreq[letter] || letterFreq[letter] === 0){
+      return false; 
+    }
+    letterFreq[letter]--;
+  }
+
+  return true; 
+}; 
