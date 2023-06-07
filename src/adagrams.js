@@ -64,12 +64,55 @@ export const scoreWord = (word) => {
     'M': 3, 'N': 1, 'O': 1, 'P': 3, 'Q': 10, 'R': 1, 'S': 1, 'T': 1, 'U': 1, 'V': 4, 'W': 4, 'X': 8, 'Y': 4, 'Z': 10
   };
 
-  const score = [...word.toUpperCase()].reduce((totalScore, letter) => 
-    totalScore + (scoreValueDict[letter] || 0), 0) + (word.lenth >= 7 ? 8 : 0);
-  
-  return score; 
+  let score = 0;
+
+  if (word === '') {
+    return score;
+  }
+
+  for (let letter of word.toUpperCase()){
+    if (letter in scoreValueDict){
+      score += scoreValueDict[letter];
+    } 
+  }
+
+  score += word.length >= 7 ? 8 : 0;
+
+  return score;
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  let highScore = 0;
+  let winningWord = "";
+  const wordsLenTen = [];
+
+  for (let word of words) {
+    const score = scoreWord(word);
+    
+    if (score === highScore) {
+      if (word.length === 10) {
+        wordsLenTen.push(word);
+      } else if (word.length < winningWord.length && winningWord.length !== 10) {
+        winningWord = word;
+      }
+    } else if (score > highScore) {
+      highScore = score;
+      winningWord = word;
+      if (word.length === 10) {
+        wordsLenTen.push(word);
+      }
+    }
+  }
+
+  if (wordsLenTen.length > 0) {
+    return {
+      word: wordsLenTen[0],
+      score: highScore,
+    };
+  } else {
+    return {
+      word: winningWord,
+      score: highScore,
+    };
+  }
 };
