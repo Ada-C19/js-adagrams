@@ -69,7 +69,7 @@ export const scoreWord = (word) => {
   for (let letter of word){
     score += LETTER_SCORE[letter];
   }
-  
+
   if (word.length >= 7) {
     score += 8;
   }
@@ -77,5 +77,27 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
-};
+  let winningWord = {
+    word: null,
+    score: null
+  }
+
+  for (let word of words){
+    let thisWord = {
+      word: word,
+      score: scoreWord(word)
+    }
+    
+    if (thisWord.score > winningWord.score){
+      winningWord = thisWord
+    } else if (thisWord.score === winningWord.score){
+      if (winningWord.word.length === 10){
+        continue;
+      } else if (thisWord.word.length === 10 
+        || thisWord.word.length < winningWord.word.length){
+        winningWord = thisWord;
+      }
+    }
+  }
+  return winningWord;
+}
