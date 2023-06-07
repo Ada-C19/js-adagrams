@@ -33,12 +33,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
       return false;
     }
     // Update hand to reflect available letters remaining
-    for (const idx in lettersInHand) {
-      if (lettersInHand[idx] === char) {
-        lettersInHand.splice(idx, 1);
-        break;
-      }
-    }
+    lettersInHand.splice(lettersInHand.indexOf(char), 1);
   }
   return true;
 };
