@@ -104,7 +104,7 @@ export const scoreWord = (word) => {
   for (const letter of word.toUpperCase()) {
     if (letter in LETTER_SCORES) {
       score += LETTER_SCORES[letter];
-      letterLength += 1
+      letterLength += 1;
     }
   }
 
@@ -121,8 +121,6 @@ export const highestScoreFrom = (words) => {
 
   for (const word of words) {
     let score = scoreWord(word)
-    console.log(word)
-    console.log(score)
     if (score > highestScore) {
       highestWord = word;
       highestScore = score;
