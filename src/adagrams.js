@@ -51,7 +51,27 @@ return lettersList;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+let upperCaseWord = input.toUpperCase();
+let letterCount = {};
+
+
+  for (let letter of lettersInHand) {
+    if (letter in letterCount) {
+      letterCount[letter] += 1;
+    } else {
+      letterCount[letter] = 1;
+    }
+  }
+
+  for (let letter of upperCaseWord) {
+    if (!(letter in lettersInHand) || letterCount[letter] === 0) {
+      return false;
+    } else if (letter in lettersInHand) {
+      letterCount[letter] -= 1;
+    }
+  }
+
+return true;
 };
 
 export const scoreWord = (word) => {
