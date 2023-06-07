@@ -82,6 +82,9 @@ export const scoreWord = (word) => {
   let capsWord = word.toUpperCase();
   
   for (let i = 0; i < word.length; i++) {
+    if (word === "") {
+      return 0;
+    }
     let currentLetter = capsWord[i];
     score += SCORE_BOARD[currentLetter];
   }
