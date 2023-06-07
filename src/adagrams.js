@@ -9,35 +9,36 @@ export const drawLetters = () => {
   let count = 98;
 
   for(let i = 0; i < 10; i++){
-    let rand_piece = Math.floor(Math.random() * count+1);
-    let key = weighted(letters, rand_piece);
+    let randPiece = Math.floor(Math.random() * count+1);
+    let key = weighted(letters, randPiece);
     pieces.push(key);
     
     letters[key] -=1;
     if (letters[key] == 0){
         delete letters[key];
     }
-    count -= 1
+    count -= 1;
   }
-  return pieces
+  return pieces;
 };
-const weighted = (dict, random_piece) => {
+
+const weighted = (dict, randomPiece) => {
   for (let [key, value] of Object.entries(dict)){
-    random_piece -= value;
-    if (random_piece <= 0){
+    randomPiece -= value;
+    if (randomPiece <= 0){
         return key;
     }
   }
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  let new_letter_bank = [];
-  for(let i = 0; i < lettersInHand.length; i++){
-    new_letter_bank.push(lettersInHand[i]);
+  let newLetterBank = [];
+  for(const letter of lettersInHand){
+    newLetterBank.push(letter);
   }
   for(const letter of input){
-    if(new_letter_bank.includes(letter)){
-      new_letter_bank.splice(new_letter_bank.indexOf(letter), 1);
+    if(newLetterBank.includes(letter)){
+      newLetterBank.splice(newLetterBank.indexOf(letter), 1);
     } else{
       return false;
     }
@@ -64,33 +65,30 @@ export const scoreWord = (word) => {
   for(const letter of word){  
     if(values[letter.toUpperCase()]){
       sum += values[letter.toUpperCase()];
-      continue;
     }
   }
   return sum;
-}
+};
 
 export const highestScoreFrom = (words) => {
-  let max_val = 0
-  let temp_score = 0
-  let max_word = ""
+  let maxVal = 0;
+  let tempScore = 0;
+  let maxWord = "";
 
   for(const word of words){
-    temp_score = scoreWord(word)
-    if(max_val < temp_score){
-        max_val = temp_score;
-        max_word = word;
+    tempScore = scoreWord(word)
+    if(maxVal < tempScore){
+        maxVal = tempScore;
+        maxWord = word;
     }
-      else if(max_val == temp_score){
-        if(word.length == 10 && max_word.length != 10){
-          max_word = word      
+      else if(maxVal == tempScore){
+        if(word.length == 10 && maxWord.length != 10){
+          maxWord = word;
         } 
-        else if(word.length < max_word.length && max_word.length != 10){
-          max_word = word
+        else if(word.length < maxWord.length && maxWord.length != 10){
+          maxWord = word;
         }
       }
-  };
-          
-  const val = {"word": max_word, "score": max_val}
-  return val
+  };    
+  return {"word": maxWord, "score": maxVal};
 };
