@@ -1,4 +1,4 @@
-const letterPool = {
+const LETTER_POOL = {
   A: 9,
   B: 2,
   C: 2,
@@ -27,7 +27,7 @@ const letterPool = {
   Z: 1,
 };
 
-const scoreChart = {
+const SCORE_CHART = {
   A: 1,
   E: 1,
   I: 1,
@@ -61,7 +61,7 @@ export const drawLetters = () => {
   let fullLetterBankList = [];
   let myLetterBankList = [];
 
-  for (const [letter, frequency] of Object.entries(letterPool)) {
+  for (const [letter, frequency] of Object.entries(LETTER_POOL)) {
     for (let i = 0; i < frequency; i++) {
       fullLetterBankList.push(letter);
     }
@@ -116,15 +116,40 @@ export const scoreWord = (word) => {
   }
 
   for (let letter of word) {
-    if (!Object.prototype.hasOwnProperty.call(scoreChart, letter)) {
+    if (!Object.prototype.hasOwnProperty.call(SCORE_CHART, letter)) {
       score += 0
     } else {
-      score += scoreChart[letter];
+      score += SCORE_CHART[letter];
     }
   }
   return score;
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
-};
+  let highestScore = 0;
+  let winningWord = '';
+
+  for (const word of words) {
+    let score = scoreWord(word);
+    if (score > highestScore) {
+      highestScore = score;
+      winningWord = word;
+    } else if (score === highestScore) {
+        if (winningWord.length === 10) {
+          continue;
+        } else if (word.length === 10) {
+          highestScore = score;
+          winningWord = word;
+        } else if (word.length < winningWord.length) {
+          highestScore = score;
+          winningWord = word;
+        }
+    }
+  }
+    const wordWithHighestScoreMap = {
+      word: winningWord,
+      score: highestScore,
+    };
+    return wordWithHighestScoreMap;
+  };
+  
