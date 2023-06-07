@@ -15,6 +15,7 @@ export const drawLetters = () => {
       array[i] = array[j];
       array[j] = temp;
     }
+    return array
   }
   
   let letterBag = [];
@@ -23,33 +24,29 @@ export const drawLetters = () => {
       letterBag.push(letter);
     }
   }
-  shuffleArray(letterBag);
+  letterBag = shuffleArray(letterBag);
   const playerHand = letterBag.slice(0, 10);
   return playerHand;
 }
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   let letterHashTable = {};
-
-  for (let letter in lettersInHand) {
-    let currentLetter = lettersInHand[letter];
-    if (currentLetter in letterHashTable){
+  for (let letter of lettersInHand) {
+    if (letter in letterHashTable){
       ++letterHashTable[letter];
     } else {
-      letterHashTable[currentLetter] = 1;
+      letterHashTable[letter] = 1;
     }
   }
 
-  for (let letter in input) {
-    let currentLetter = input[letter];
-    
-    const letterIsUnavailable = (letterHashTable[currentLetter] === 0) 
-    || !(currentLetter in letterHashTable);
+  for (let letter of input) {
+    const letterIsUnavailable = (letterHashTable[letter] === 0) 
+    || !(letter in letterHashTable);
     
     if (letterIsUnavailable) {
       return false;
     } else {
-      --letterHashTable[currentLetter];
+      --letterHashTable[letter];
     }
   }
   return true;
