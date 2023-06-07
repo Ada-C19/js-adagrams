@@ -106,7 +106,6 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   let largestWord = "";
-
   let largestWordScore = 0;
 
   for (let i = 0; i < words.length; i++) {
