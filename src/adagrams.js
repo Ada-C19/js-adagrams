@@ -16,9 +16,9 @@ const SCORE_BOARD = {
 
 
 export const drawLetters = () => {
-  let letterArray = Object.keys(LETTER_POOL)
-  let tempLetters = {}
-  let lettersInHand = []
+  let letterArray = Object.keys(LETTER_POOL);
+  let tempLetters = {};
+  let lettersInHand = [];
 
   while (lettersInHand.length < 10) {
     let newNum = Math.floor(Math.random() * (26 + 1));
@@ -40,7 +40,7 @@ export const drawLetters = () => {
       continue;
     }
   }
-  return lettersInHand
+  return lettersInHand;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
@@ -75,7 +75,7 @@ const getNewObject = (letters) => {
     }
   }
   return newObject;
-}
+};
 
 export const scoreWord = (word) => {
   let score = 0;
@@ -88,7 +88,7 @@ export const scoreWord = (word) => {
   if (word.length >= 7) {
     score += 8;
   }
-  return score
+  return score;
 };
 
 export const highestScoreFrom = (words) => {
@@ -111,13 +111,13 @@ const getScoreArray = (words) => {
   for (let i = 0; i < words.length; i++) {
     let currentWord = words[i];
     let currentScore = scoreWord(currentWord);
-    scoreArray.push(currentScore)
+    scoreArray.push(currentScore);
   }
   return scoreArray;
 };
 
 const getHighScore = (scoreArray) => {
-  let highScore = Math.max(...scoreArray)
+  let highScore = Math.max(...scoreArray);
   return highScore;
 };
 
@@ -148,7 +148,7 @@ const getLengthArray = (potentialWinners) => {
     let currentWord = potentialWinners[i].length;
     lengthArray.push(currentWord);
   }
-  return lengthArray
+  return lengthArray;
 };
 
 const getTieBreaker = (potentialWinners, lengthArray) => {
@@ -160,6 +160,3 @@ const getTieBreaker = (potentialWinners, lengthArray) => {
     }
   }
 };
-
-// Rename functions and variables whose purpose has changed
-// Let vs const usage
