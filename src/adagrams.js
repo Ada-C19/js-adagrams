@@ -31,10 +31,24 @@ const weighted = (dict, random_piece) => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
+  let new_letter_bank = [];
+  for(let i = 0; i < lettersInHand.length; i++){
+    new_letter_bank.push(lettersInHand[i]);
+  }
+  for(const letter of input){
+    if(new_letter_bank.includes(letter)){
+      new_letter_bank.splice(new_letter_bank.indexOf(letter), 1);
+    } else{
+      return false;
+    }
+  }
+  return true;
 };
 
 export const scoreWord = (word) => {
+  // Implement this method for wave 3
 }
 
 export const highestScoreFrom = (words) => {
+  // Implement this method for wave 4
 };
