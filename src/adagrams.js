@@ -11,6 +11,7 @@ Array.prototype.count = function(value) {
   return count;
 };
 
+// helper function for drawLetters to create the letter bowl 
 const createLetterBowl = (letterFrequencyObj) => {
   const letterBowl = [];
   for (let letter in letterFrequencyObj) {
@@ -22,6 +23,8 @@ const createLetterBowl = (letterFrequencyObj) => {
   return letterBowl;
 };
 
+// helper function for highestScoreFrom
+// to create an object of words and corresponding scores
 const createWordScoresObj = (wordsArr) => {
   const wordScores = {};
 
@@ -33,6 +36,7 @@ const createWordScoresObj = (wordsArr) => {
   return wordScores;
 };
 
+// helper function for highestScoreFrom to determine the high score
 const findHighScore = (wordScoresObj) => {
   let highScore = 0;
 
@@ -45,6 +49,8 @@ const findHighScore = (wordScoresObj) => {
   return highScore;
 };
 
+// helper function for highestScoreFrom
+// to create an array of high score words
 const createHighScoreWordsArray = (wordScoresObj, highScore) => {
   let highScoreWords = [];
 
