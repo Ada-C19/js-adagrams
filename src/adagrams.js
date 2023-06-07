@@ -25,11 +25,12 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
+  let lettersCopy = Array.from(lettersInHand)
   let correctLetters = true;
   for(let char of input){
-    let charIndex = lettersInHand.indexOf(char) ;
+    let charIndex = lettersCopy.indexOf(char) ;
     if(charIndex !== -1){
-      lettersInHand.splice(charIndex, 1)
+      lettersCopy.splice(charIndex, 1)
     }
     else{
       correctLetters = false;
