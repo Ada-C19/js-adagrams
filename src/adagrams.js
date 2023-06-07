@@ -7,7 +7,7 @@ const SCORE_CHART = {A:1, B:3, C:3, D:2, E:1, F:4, G:2, H:4, I:1, J:8, K:5,
 export const drawLetters = () => {
   const weightedPool = [];
 
-  for (const [key, value] of Object.entries(LETTER_POOL)) {
+  for (let [key, value] of Object.entries(LETTER_POOL)) {
     weightedPool.push(...Array(value).fill(key));
   }
   
@@ -21,7 +21,6 @@ export const drawLetters = () => {
   return hand;
 };
 
-
 export const usesAvailableLetters = (input, lettersInHand) => {
   const handCopy = [...lettersInHand];
   
@@ -34,24 +33,6 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   }
   return true;
 };
-//   const map = {};
-//   for (let char of lettersInHand) {
-//     if (char in map) {
-//       map[char] += 1;
-//     } else {
-//       map[char] = 1;
-//     }
-//   }
-  
-//   for (let char of input.toUpperCase()) {
-//     if((!(char in map)) || map[char] == 0) {
-//       return false;
-//     } else {
-//       map[char] -= 1;
-//     }
-//   }
-//   return true;
-// };
 
 export const scoreWord = (word) => {
   let score = 0;
@@ -70,7 +51,7 @@ export const highestScoreFrom = (words) => {
   let highestScore = 0;
   let topPlayers;
 
-  for (const word of words) {
+  for (let word of words) {
     let wordScore = scoreWord(word);
     if (wordScore > highestScore) {
       highestScore = wordScore;
@@ -82,7 +63,7 @@ export const highestScoreFrom = (words) => {
   }
 
   let winner = topPlayers[0]
-  for (const player of topPlayers) {
+  for (let player of topPlayers) {
     if (player['word'].length == 10) {
       winner = player;
       return winner;
@@ -93,3 +74,4 @@ export const highestScoreFrom = (words) => {
   }
   return winner;
 };
+
