@@ -115,11 +115,13 @@ export const highestScoreFrom = (words) => {
   //        largestWordScore = wordScore
   //    elif wordScore == largestWordScore:
   //        if len(largestWord) == 10:
-  //            largestWord = largestWord;
+  //            largestWord = largestWord; (continue)
   //        elif len(word) == 10:
   //            largestWord = word;
   //        elif len(word) < len(largestWord):
   //            largestWord = word;
   //        elif len(largestWord) < len(word):
-  //            largestWord = largestWord;
+  //            largestWord = largestWord; (continue)
+  //
+  //  return largestWord
 };
