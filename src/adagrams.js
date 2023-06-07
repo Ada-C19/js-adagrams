@@ -29,35 +29,26 @@ export const drawLetters = () => {
     Z: 1,
   };
 
-  const letterPool = [];
-  // letterPool.length = 0;
-
   // fill letterPool array with all the letters
+  const letterPool = [];
+
   for (const [key, value] of Object.entries(letterFreqs)) {
     for (let i = 1; i < value + 1; i++) {
       letterPool.push(key);
     }
   }
 
+  // draw letters into hand array
   let hand = [];
 
-  // let len = letterPool.length;
-
-  // draw letters
   for (let i = 0; i < 10; i++) {
     let selector = Math.random() * letterPool.length;
 
     let letter = letterPool.splice(selector, 1)[0];
 
-    console.log(
-      `letter spliced: ${letter}. resulting letterPool: ${letterPool}. letterPool length is now ${letterPool.length}`
-    );
-
     hand.push(letter);
   }
-  // console.log(letterPool);
-  // console.log(hand);
-  console.log(hand);
+
   return hand;
 };
 
