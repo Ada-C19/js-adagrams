@@ -107,8 +107,8 @@ let scoreChart = {
 };
 
 if (word.length === 0) {
-  throw 'Complete test';
-  // return 0;
+  // throw 'Complete test';
+  return 0;
 }
 
 for (let letter of upperCaseWord) {
@@ -123,5 +123,35 @@ return total;
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  let highestScore = 0;
+  let highScoringWords = [];
+
+  for (let i = 0; i < words.length; i++) {
+    let word = words[i];
+    let wordScore = scoreWord(word);
+
+    if (wordScore > highestScore) {
+      highestScore = wordScore;
+      highScoringWords = [word];
+    } else if (highestScore === wordScore) {
+      highScoringWords.push(word);
+    }
+  }
+  if (highScoringWords.length === 1) {
+    // return [highScoringWords[0], highestScore];
+    return { word: highScoringWords[0], score: highestScore };
+}
+
+let tenLetterWords = highScoringWords.filter(word => word.length === 10);
+
+if  (tenLetterWords.length === 1) {
+  return { word: tenLetterWords[0], score: highestScore };
+
+} else if (tenLetterWords.length > 1) {
+  tenLetterWords.sort((a, b) => a.length - b.length);
+  return { word: tenLetterWords[0], score: highestScore };
+}
+
+highScoringWords.sort((a, b) => a.length - b.length);
+return { word: highScoringWords[0], score: highestScore }
 };
