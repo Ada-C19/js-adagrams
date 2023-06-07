@@ -27,6 +27,16 @@ const LETTER_POOL = {
 	Z: 1,
 };
 
+const SCORE_CHART = {
+	AEIOULNRST: 1,
+	DG: 2,
+	BCMP: 3,
+	FHVWY: 4,
+	K: 5,
+	JX: 8,
+	QZ: 10,
+};
+
 export const drawLetters = () => {
 	// Implement this method for wave 1
 	const LETTER_POOL_COPY = {
@@ -76,7 +86,23 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 export const scoreWord = (word) => {
-	// Implement this method for wave 3
+	let score = 0;
+
+	// Iterating through word and SCORE_CHART, calculates score
+	for (const letter of word.toUpperCase()) {
+		for (const [keys, value] of Object.entries(SCORE_CHART)) {
+			if (keys.includes(letter)) {
+				score += value;
+			}
+		}
+	}
+	// Checks if the length of the word is between 7-10, adding 8 bonus points
+	const wordLength = word.length;
+	if (wordLength >= 7 && wordLength <= 10) {
+		score += 8;
+	}
+
+	return score;
 };
 
 export const highestScoreFrom = (words) => {
