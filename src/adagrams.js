@@ -52,7 +52,6 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return true;
 }
 
-
 export const scoreWord = (word) => {
   const LETTER_SCORE = {
     'A': 1, 'B': 3, 'C': 3, 'D': 2, 'E': 1, 
