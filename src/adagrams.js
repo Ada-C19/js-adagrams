@@ -37,13 +37,10 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 export const scoreWord = (word) => {
   let score = 0;
   for (let char of word.toUpperCase()) {
-    if (char in SCORE_CHART) {
-      score += SCORE_CHART[char];
-    }
+    if (char in SCORE_CHART) score += SCORE_CHART[char];
   }
-  if (word.length >= 7) {
-      score += 8;
-  }
+  if (word.length >= 7) score += 8;
+
   return score;
 };
 
