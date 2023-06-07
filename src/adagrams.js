@@ -87,6 +87,10 @@ export const scoreWord = (word) => {
 
   let score = 0;
 
+  if (word.length >= 7) {
+    score += 8;
+  }
+
   for (let i = 0; i < word.length; i++) {
     let letter = word[i];
     for (const [key, value] of Object.entries(scoreChart)) {
