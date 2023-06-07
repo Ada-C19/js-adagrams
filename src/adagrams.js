@@ -105,5 +105,21 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  // Implement this method for wave
+  // initialize variable largestWord = ""
+  // initialize variable largestWordScore = 0
+  // for word in words:
+  //    wordScore = scoreWord(word)
+  //    if wordScore > largestWordScore:
+  //        largestWord = word
+  //        largestWordScore = wordScore
+  //    elif wordScore == largestWordScore:
+  //        if len(largestWord) == 10:
+  //            largestWord = largestWord;
+  //        elif len(word) == 10:
+  //            largestWord = word;
+  //        elif len(word) < len(largestWord):
+  //            largestWord = word;
+  //        elif len(largestWord) < len(word):
+  //            largestWord = largestWord;
 };
