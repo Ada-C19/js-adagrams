@@ -46,7 +46,6 @@ export const drawLetters = () => {
 
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-    // Implement this method for wave 2
         for (let i in input) {
             if (!(lettersInHand.includes(input[i]))) {
                 return false;
@@ -59,7 +58,6 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   };
 
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
   const LETTER_POINTS = {
     'A': 1, 
     'B': 3, 
@@ -102,7 +100,6 @@ export const scoreWord = (word) => {
 
 
 export const highestScoreFrom = (words) => {
-    // Implement this method for wave 4
     let wordScores = [];
     let highScorers = [];
     let highScore = 0;
