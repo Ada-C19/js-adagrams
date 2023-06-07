@@ -6,7 +6,7 @@ export const drawLetters = () => {
   // Create an array of all available letters
   const drawPile = [];
   for (const letter in letterBank) {
-    let letters = Array(letterBank[letter]).fill(letter);
+    const letters = Array(letterBank[letter]).fill(letter);
     drawPile.push(...letters);
   }
  
@@ -27,14 +27,15 @@ export const drawLetters = () => {
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Ensure function is case insensitive
   const word = input.toUpperCase()
+  const handCopy = [...lettersInHand]
   
   // Loop through each char in word to check presence in hand
   for (const char of word) {
-    if (! lettersInHand.includes(char)) {
+    if (! handCopy.includes(char)) {
       return false;
     }
     // Update hand to reflect available letters remaining
-    lettersInHand.splice(lettersInHand.indexOf(char), 1);
+    handCopy.splice(handCopy.indexOf(char), 1);
   }
   return true;
 };
