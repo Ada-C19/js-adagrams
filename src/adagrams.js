@@ -125,3 +125,53 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
   return true; 
 }; 
+
+  // --- Wave 3 ---
+
+  export const scoreWord = (word) => {
+
+    let sumWord = 0;
+    const uppercaseWord = word.toUpperCase();
+    
+    if (word === '') {
+      return sumWord;
+    }
+  
+    if (uppercaseWord.length >= 7 && uppercaseWord.length <= 10){
+      sumWord += 8; 
+    }
+  
+    for (let i = 0; i < uppercaseWord.length; i++){
+      let character = uppercaseWord[i]; 
+      if(character in scoreChart) {
+        sumWord += scoreChart[character]; 
+      }
+    }
+  
+    return sumWord;
+  };
+  
+  // --- Wave 4 ---
+  
+  export const highestScoreFrom = (words) => {
+    let highestScore = 0; 
+    let highestWord = ''; 
+  
+    for (let i = 0; i < words.length; i++) {
+      const word = words[i]; 
+      const calculateScore = scoreWord(word); 
+  
+      if (calculateScore > highestScore) {
+        highestScore = calculateScore; 
+        highestWord = word; 
+      } else if (calculateScore === highestScore) {
+        if (word.length === 10 && highestWord.length !== 10) {
+          highestWord = word;
+        } else if (word.length < highestWord.length && highestWord.length !== 10){
+          highestWord = word;
+        }
+      }
+    }
+    
+    return {"score": highestScore, "word": highestWord}
+  };
