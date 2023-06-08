@@ -46,7 +46,7 @@ while (drawnHand.length < 10){
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
-  console.log(`input: ${input} lettersInHand ${lettersInHand}`)
+  // console.log(`input: ${input} lettersInHand ${lettersInHand}`)
   let letterCount = 0
   for (let i of lettersInHand){
     for (let j of input){
@@ -104,13 +104,38 @@ export const scoreWord = (word) => {
     if (word.length >= 7 && word.length <= 10) {
       sumPoint += 8;
     } 
-  console.log(`sumPoint ${sumPoint}`);
+  // console.log(`sumPoint ${sumPoint}`);
   return sumPoint;
 
 };
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  let winnerWord = "";
+  let winnerScore = 0;
+  let winner = {};
+
+  for (let word of words) {
+    let score = scoreWord(word);
+    winner[word] = score;
+  }
+
+  for (let [word,score] of Object.entries(winner)) {
+    if (winnerScore < score) {
+      winnerScore = score;
+      winnerWord = word;
+    } 
+    else if (winnerScore === score && word.length === 10 && winnerWord.length !== 10) {
+      winnerScore = score;
+      winnerWord = word;
+    }
+    else if (winnerScore === score && word.length < winnerWord.length && winnerWord.length !== 10) {
+      winnerScore = score;
+      winnerWord = word;
+    }
+  }
+  console.log({ score: winnerScore, word: winnerWord })
+  return { score: winnerScore, word: winnerWord };
 };
 
 
