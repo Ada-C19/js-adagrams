@@ -7,10 +7,14 @@ export const drawLetters = () => {
     // if letter.count < letter.count {add letter to lettersDrawn}
     while (lettersDrawn.length < 10) {
       let letter = LETTER_POOL[Math.floor(Math.random()*LETTER_POOL.length)];
-      lettersDrawn.push(letter);
-      LETTER_POOL.pop(letter);
+      let i = LETTER_POOL.indexOf(letter);
+      if (letter !== undefined){
+        lettersDrawn.push(letter);
+      }
+      delete LETTER_POOL[i];
+      // LETTER_POOL.pop(letter);
     };
-    
+    console.log(lettersDrawn)
     return lettersDrawn
 };
 
@@ -24,7 +28,8 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   };
   for (let letter of input){
     if (letter_frequency.includes(letter)){
-      letter_frequency.pop(letter);
+      let i = letter_frequency.indexOf(letter)
+      delete letter_frequency[i];
     } else {
       return false;
     };
