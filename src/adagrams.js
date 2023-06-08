@@ -12,7 +12,6 @@ export const drawLetters = () => {
         lettersDrawn.push(letter);
       }
       delete LETTER_POOL[i];
-      // LETTER_POOL.pop(letter);
     };
     console.log(lettersDrawn)
     return lettersDrawn
@@ -21,7 +20,6 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
-  // if the letter in input is in lettersInHand pop that letter out else return false
   let letter_frequency = [];
   for (let letter of lettersInHand){
     letter_frequency.push(letter);
@@ -107,7 +105,6 @@ export const highestScoreFrom = (words) => {
     words_and_scores.push({word: word, score: score});
   }
 
-  //getting max score and frequency of max score
   let max_score = Math.max(...scores);
   for (let score of scores){
     if (max_score === score) {
