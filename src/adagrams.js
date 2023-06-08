@@ -13,7 +13,6 @@ export const drawLetters = () => {
       }
       delete LETTER_POOL[i];
     };
-    console.log(lettersDrawn)
     return lettersDrawn
 };
 
