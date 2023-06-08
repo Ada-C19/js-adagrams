@@ -110,5 +110,41 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  let wordDict = {};
+  let winnersList= {};
+  let lengthList = {};
+
+  for (let letter of words){
+    let score = scoreWord(letter);
+    wordDict[letter] = score;
+    if (letter.length === 10){
+      return (letter, score);
+    } else{
+      continue;
+    }
+  }
+
+  const maxValue = wordDict.reduce();
+  
+  for (let key of wordDict){
+    if (wordDict[key] === (key, maxValue)){
+      let draft = (key, maxValue);
+      winnersList.push(draft);
+    }
+  }
+
+  for (let [key, value] in Object.entries(winnersList)){
+    let len = key.length;
+    lengthList.push(len)
+  }
+
+  let tieBreaker = Math.min(lengthList);
+
+  if (winnersList.length > 0){
+    for (let winner of winnersList){
+      if (winner[0].length === tieBreaker){
+        return winner;
+      }
+    }
+  }
 };
