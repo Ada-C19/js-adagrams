@@ -38,42 +38,18 @@ lettersArr.forEach((letter) => {
 console.log(lettersPool);
 
 export const drawLetters = () => {
-  const hand = [];
-
+  let hand = [];
+  let letterPoolCopy = [...lettersPool];
   for (let i = 0; i < 10; i++) {
-    // Create a list from the keys of our letter pool
-    // as long as there are letters
-
-    if (lettersPool.length > 0) {
-      // Create a random index
-      let randomIndex = Math.floor(
-        Math.random() * Object.keys(letterPool).length
-      );
-      // Create a random letter from the list of letters
-      // using the random index
-      let selectedLetter = lettersPool[randomIndex];
-
-      // take the randomly selected letter and add to our hand
-      if (letterPool[selectedLetter] > 0) {
-        hand.push(selectedLetter);
-        // subtract the letter from our letter pool, decreasing count of letters
-        letterPool[selectedLetter] -= 1;
-      } else if (letterPool[selectedLetter] === 0) {
-        delete letterPool[selectedLetter];
-      }
-    }
-
-    // for (const letter in letterPool) {
-    //   randomIndex -= letterPool[letter];
-    //   if (randomIndex <= 0) {
-    //     selectedLetter = letter;
-    //     break;
-    //   }
-    // }
-
-    // hand.push(selectedLetter);
+    let randomIndex = Math.floor(
+      Math.random() * Object.keys(letterPool).length
+    );
+    // Create a random letter from the list of letters
+    // using the random index
+    let selectedLetter = letterPoolCopy[randomIndex];
+    hand.push(selectedLetter);
+    letterPoolCopy.splice(randomIndex, 1);
   }
-
   return hand;
 };
 
