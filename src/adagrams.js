@@ -98,19 +98,26 @@ export const scoreWord = (word) => {
     Z : 10
 }
 
-for (const letter of word){
-  if (scoreChart.includes(letter)){
-    points.push(scoreChart[letter])
-  } let total = points.reduce((a,b)=> a + b, 0);
-  if (word.length >= 7){
-    (total += 8);
-  }
-  return total;
+if (!word){
+   points.push(0)
 }
 
+let newWord = word.toUpperCase();
 
-
+for (const letter of newWord){
+  if (letter in scoreChart){
+    points.push(scoreChart[letter])
+  } 
 };
+  console.log(points)
+let total = points.reduce((sum, num) => sum + num);
+console.log(total);
+if (word.length >= 7){
+  (total += 8);
+  }
+
+  return total;
+}
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
