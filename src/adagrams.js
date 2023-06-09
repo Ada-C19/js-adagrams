@@ -117,6 +117,7 @@ export const scoreWord = (word) => {
     score += 8;
   }
 
+
   return score;
 };
 
