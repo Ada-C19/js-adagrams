@@ -108,7 +108,7 @@ for (const letter of newWord){
   if (letter in scoreChart){
     points.push(scoreChart[letter])
   } 
-};
+}
   console.log(points)
 let total = points.reduce((sum, num) => sum + num);
 console.log(total);
@@ -121,4 +121,28 @@ if (word.length >= 7){
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  const scoresDict = {};
+  let maximum = 0;
+  let maxKey = null;
+  let score = 0;
+
+  words.sort((a, b) => a.length - b.length);
+  for (const word of words) {
+      score = scoreWord(word);
+      scoresDict[word] = score;
+  }
+  
+  for (const scores in scoresDict) {
+      if (scoresDict[scores] > maximum) {
+          maximum = scoresDict[scores];
+          maxKey = scores;
+      } else if (words[words.length - 1].length === words[words.length - 2].length && score === maximum) {
+          maxKey = words[words.length - 2];
+      } else if (words[words.length - 1].length === 10 && score=== maximum) {
+          maxKey = words[words.length - 1];
+      }
+  }
+  return {word:maxKey, score:maximum};
+
 };
+
