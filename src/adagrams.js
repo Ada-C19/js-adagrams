@@ -1,5 +1,5 @@
 export const drawLetters = () => {
-  const LETTER_POOL = {
+  const letterPool = {
     'A': 9, 'B': 2, 'C': 2, 'D': 4, 'E': 12, 
     'F': 2, 'G': 3, 'H': 2, 'I': 9, 'J': 1, 
     'K': 1, 'L': 4, 'M': 2, 'N': 6, 'O': 8, 
@@ -19,14 +19,13 @@ export const drawLetters = () => {
   }
   
   let letterBag = [];
-  for (const letter in LETTER_POOL) {
-    for (let i = 0; i < LETTER_POOL[letter]; i++) {
+  for (const letter in letterPool) {
+    for (let i = 0; i < letterPool[letter]; i++) {
       letterBag.push(letter);
     }
   }
   letterBag = shuffleArray(letterBag);
-  const playerHand = letterBag.slice(0, 10);
-  return playerHand;
+  return letterBag.slice(0, 10);
 }
 
 export const usesAvailableLetters = (input, lettersInHand) => {
@@ -41,8 +40,8 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
   for (let letter of input) {
     const letterIsUnavailable = (letterHashTable[letter] === 0) 
-    || !(letter in letterHashTable);
-    
+        || !(letter in letterHashTable);
+
     if (letterIsUnavailable) {
       return false;
     } else {
@@ -53,7 +52,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 }
 
 export const scoreWord = (word) => {
-  const LETTER_SCORE = {
+  const letterScore = {
     'A': 1, 'B': 3, 'C': 3, 'D': 2, 'E': 1, 
     'F': 4, 'G': 2, 'H': 4, 'I': 1, 'J': 8, 
     'K': 5, 'L': 1, 'M': 3, 'N': 1, 'O': 1, 
@@ -66,12 +65,11 @@ export const scoreWord = (word) => {
   let score = 0;
   
   for (let letter of word){
-    score += LETTER_SCORE[letter];
+    score += letterScore[letter];
   }
 
-  if (word.length >= 7) {
-    score += 8;
-  }
+  score = (word.length >= 7) ? (score + 8) : score;
+
   return score;
 };
 
@@ -90,10 +88,11 @@ export const highestScoreFrom = (words) => {
     if (thisWord.score > winningWord.score){
       winningWord = thisWord
     } else if (thisWord.score === winningWord.score){
-      if (winningWord.word.length === 10){
-        continue;
-      } else if (thisWord.word.length === 10 
-        || thisWord.word.length < winningWord.word.length){
+      const isBestTen = winningWord.word.length === 10;
+      const isWordTen = thisWord.word.length === 10;
+      const isWordShorter = thisWord.word.length < winningWord.word.length;
+
+      if ((isWordTen && !isBestTen) || (isWordShorter && !isBestTen)){
         winningWord = thisWord;
       }
     }
