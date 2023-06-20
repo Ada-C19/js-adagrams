@@ -89,4 +89,33 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  let winningWord = '';
+  let topScore = 0;
+  let wordsWithScores = [];
+
+  for (let word of words) {
+    let score = scoreWord(word);
+    wordsWithScores.push({'word': word, 'score': score})
+  }
+
+  for (let wordSet of wordsWithScores) {
+    let currentWord = wordSet['word'];
+    let currentScore = wordSet['score'];
+
+    if (currentScore > topScore) {
+      topScore = currentScore;
+      winningWord = currentWord;
+    } else if (currentScore === topScore) {
+      if (winningWord.length === 10) {
+        continue
+      } else if (currentWord.length === 10) {
+        topScore = currentScore;
+        winningWord = currentWord;
+      } else if (currentWord.length < winningWord.length) {
+        topScore = currentScore;
+        winningWord = currentWord;
+      }
+    }
+  }
+  return {'word': winningWord, 'score': topScore};
 };
