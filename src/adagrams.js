@@ -1,4 +1,5 @@
-export const drawLetters = () => {
+class Adagrams {
+  drawLetters = () => {
   // Implement this method for wave 1
   const letter_pool = {
         "A": 9,
@@ -43,7 +44,7 @@ export const drawLetters = () => {
   return letter_bank;
 };
 
-export const usesAvailableLetters = (input, lettersInHand) => {
+usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
   const handCopy = [...lettersInHand];
   for (let i = 0; i < input.length; i++){
@@ -56,7 +57,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return true;
 };
 
-export const scoreWord = (word) => {
+scoreWord = (word) => {
   // Implement this method for wave 3
   const SCORE_DICT = {
     'A': 1,
@@ -99,13 +100,13 @@ export const scoreWord = (word) => {
   return score;
 };
 
-export const highestScoreFrom = (words) => {
+highestScoreFrom = (words) => {
   // Implement this method for wave 4
   let highestWord = "";
   let highestScore = 0;
 
   for (const word of words){
-    const score = scoreWord(word);
+    const score = this.scoreWord(word);
     if (score > highestScore){
       highestWord = word;
       highestScore = score;
@@ -122,3 +123,52 @@ export const highestScoreFrom = (words) => {
 
   return {'word': highestWord, 'score': highestScore};
 };
+
+}
+
+drawLetters = () => {
+  // Implement this method for wave 1
+  const letter_pool = {
+        "A": 9,
+        "B": 2,
+        "C": 2,
+        "D": 4,
+        "E": 12,
+        "F": 2,
+        "G": 3,
+        "H": 2,
+        "I": 9,
+        "J": 1,
+        "K": 1,
+        "L": 4,
+        "M": 2,
+        "N": 6,
+        "O": 8,
+        "P": 2,
+        "Q": 1,
+        "R": 6,
+        "S": 4,
+        "T": 6,
+        "U": 4,
+        "V": 2,
+        "W": 2,
+        "X": 1,
+        "Y": 2,
+        "Z": 1
+  };
+
+  const letter_bank = [];
+  let freq = 10;
+  while (freq > 0){
+    const letter = Object.keys(letter_pool)[Math.floor(Math.random()*Object.keys(letter_pool).length)];
+    if (letter_pool[letter] !== 0){
+      letter_bank.push(letter);
+      letter_pool[letter] -= 1;
+      freq -= 1;
+    };
+  };
+  
+  return letter_bank;
+};
+
+export default Adagrams;
