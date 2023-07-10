@@ -1,8 +1,4 @@
-``
 
-export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
-};
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
@@ -20,21 +16,40 @@ const letterDistribution = {
 };
 
 export const drawLetters = () => {
-  const letterPool = Object.keys(letterDistribution);
+  const availableLetters = Object.keys(letterDistribution);
   const hand = [];
 
   for (let count = 0; count < 10; count++) {
-    const randomIndex = Math.floor(Math.random() * letterPool.length);
-    const letter = letterPool[randomIndex];
+    const randomIndex = Math.floor(Math.random() * availableLetters.length);
+    const selectedLetter = availableLetters[randomIndex];
 
-    if (letterDistribution[letter] > 0) {
-      hand.push(letter);
-      letterDistribution[letter] -= 1;      
+    if (letterDistribution[selectedLetter] > 0) {
+      hand.push(selectedLetter);
+      letterDistribution[selectedLetter] -= 1;
     }
-    if (letterDistribution[letter] === 0) {
-      letterPool.splice(randomIndex, 1);
+    if (letterDistribution[selectedLetter] === 0) {
+      availableLetters.splice(randomIndex, 1);
     }
   }
 
   return hand;
+};
+
+export const usesAvailableLetters = (input, lettersInHand) => {
+  const inputWord = input.toUpperCase();
+  const inputLetters = inputWord.split('');
+  const letterCounts = {};
+  
+  for (let letter of lettersInHand) {
+    letterCounts[letter] = letterCounts[letter] ? letterCounts[letter] + 1 : 1;
+  }
+
+  for (let letter of inputLetters) {
+    if (!(letter in letterCounts) || letterCounts[letter] === 0) {
+      return false;
+    }
+    letterCounts[letter]--;
+  }
+
+  return true;
 };
