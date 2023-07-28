@@ -133,12 +133,13 @@ describe('Adagrams', () => {
     });
   });
 
-  describe.skip('highestScoreFrom', () => {
+  describe('highestScoreFrom', () => {
     it('returns a hash that contains the word and score of best word in an array', () => {
       const words = ['X', 'XX', 'XXX', 'XXXX'];
       const correct = { word: 'XXXX', score: scoreWord('XXXX') };
 
       expect(highestScoreFrom(words)).toEqual(correct);
+      
     });
 
     it('accurately finds best scoring word even if not sorted', () => {
